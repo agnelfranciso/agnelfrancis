@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
 import Protection from "@/components/Protection";
+import Preloader from "@/components/Preloader";
 
 export const metadata: Metadata = {
   title: "Agnel Francis | Designer & Developer",
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <Preloader />
         <Protection />
         <CustomCursor />
         <Navbar />

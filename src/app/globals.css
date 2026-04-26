@@ -1066,3 +1066,65 @@ button, .btn-primary, .btn-secondary {
     .project-hero-image { height: 300px !important; }
     .about-image-wrapper { height: auto; }
 }
+
+/* Preloader */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-color);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 1.2s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.preloader.fade-out {
+    transform: translateY(-100%);
+    pointer-events: none;
+}
+
+.preloader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preloader-logo {
+    font-family: 'IntraNet', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: var(--text-main);
+}
+
+.loading-bar-container {
+    width: 240px;
+    height: 3px;
+    background: rgba(0,0,0,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loading-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: var(--accent-primary);
+    width: 0%;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.loading-text {
+    margin-top: 1.5rem;
+    font-family: 'PPSupplyMono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+}
