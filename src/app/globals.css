@@ -1128,3 +1128,7 @@ button, .btn-primary, .btn-secondary {
     letter-spacing: 0.2em;
     color: var(--text-muted);
 }
+/* Preloader Skip Support */
+.skip-preloader .preloader {
+    display: none !important;
+}

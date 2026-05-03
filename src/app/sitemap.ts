@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://agnelfrancis.com'; // Replace with actual domain if different
-  
+  const baseUrl = 'https://agnel-francis.netlify.app/'; // Replace with actual domain if different
+
   return [
     {
       url: baseUrl,

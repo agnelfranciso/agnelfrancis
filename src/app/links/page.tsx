@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faGlobe, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faArrowUpRightFromSquare, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
@@ -41,6 +41,13 @@ export default function LinksPage() {
       url: "https://x.com/oslohaz_e", 
       icon: <FontAwesomeIcon icon={faTwitter} width={20} />, 
       external: true 
+    },
+    { 
+      name: "Download Resume", 
+      url: "/resume/resume.pdf", 
+      icon: <FontAwesomeIcon icon={faFilePdf} width={20} />, 
+      external: true,
+      download: true
     },
   ];
 
@@ -103,6 +110,7 @@ export default function LinksPage() {
               href={link.url}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
+              download={link.download ? "Agnel_Francis_Resume.pdf" : undefined}
               className="link-card"
               style={{
                 display: 'flex',

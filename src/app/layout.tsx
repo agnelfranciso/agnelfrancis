@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Protection from "@/components/Protection";
 import Preloader from "@/components/Preloader";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import ResumeFAB from "@/components/ResumeFAB";
 
 export const metadata: Metadata = {
   title: "Agnel Francis | Designer & Developer",
@@ -52,6 +53,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const alreadyLoaded = sessionStorage.getItem('hasLoaded') === 'true';
+                  const isLinksPage = window.location.pathname === '/links';
+                  if (alreadyLoaded || isLinksPage) {
+                    document.documentElement.classList.add('skip-preloader');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <Preloader />
         <Protection />
         <CustomCursor />
@@ -83,6 +99,7 @@ export default function RootLayout({
         <LayoutWrapper>
           {children}
         </LayoutWrapper>
+        <ResumeFAB />
         <Footer />
       </body>
     </html>

@@ -63,6 +63,7 @@ export default function Navbar() {
           <Link href="/work" onClick={() => setIsOpen(false)} className={pathname === "/work" ? "active" : ""}>Work</Link>
           <Link href="/about" onClick={() => setIsOpen(false)} className={pathname === "/about" ? "active" : ""}>About</Link>
           <Link href="/contact" onClick={() => setIsOpen(false)} className={pathname === "/contact" ? "active" : ""}>Contact</Link>
+          <Link href="/resume/resume.pdf" target="_blank" rel="noopener noreferrer" download="Agnel_Francis_Resume.pdf" onClick={() => setIsOpen(false)}>Resume</Link>
         </div>
       </div>
     </>

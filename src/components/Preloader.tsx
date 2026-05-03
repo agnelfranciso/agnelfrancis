@@ -1,11 +1,23 @@
 "use client";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Preloader() {
+  const pathname = usePathname();
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    const isClient = typeof window !== 'undefined';
+    const isLinksPage = pathname === "/links";
+    const alreadyLoaded = isClient && sessionStorage.getItem("hasLoaded") === "true";
+
+    if (isLinksPage || alreadyLoaded) {
+      setLoading(false);
+      setProgress(100);
+      return;
+    }
+
     // Artificial progress for better UX
     const interval = setInterval(() => {
       setProgress((prev) => {
@@ -19,33 +31,29 @@ export default function Preloader() {
 
     const handleLoad = () => {
       setProgress(100);
+      if (isClient) sessionStorage.setItem("hasLoaded", "true");
       setTimeout(() => {
         setLoading(false);
       }, 1000);
     };
 
-    // Also wait for fonts to be ready as requested
-    if (typeof document !== 'undefined') {
+    if (isClient) {
       if (document.readyState === "complete") {
         handleLoad();
       } else {
         window.addEventListener("load", handleLoad);
       }
-      
-      // Specifically check for fonts
-      if ("fonts" in document) {
-        document.fonts.ready.then(() => {
-          // We still want to ensure other assets are loaded too
-        });
-      }
     }
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener("load", handleLoad);
+      if (isClient) window.removeEventListener("load", handleLoad);
     };
-  }, []);
+  }, [pathname]);
 
+  // We still render the div to match SSR, but the skip-preloader CSS class 
+  // on the html element (from layout.tsx script) will hide it instantly 
+  // before hydration if needed.
   return (
     <div className={`preloader ${!loading ? "fade-out" : ""}`}>
       <div className="preloader-content">
