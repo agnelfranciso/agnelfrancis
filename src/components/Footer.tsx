@@ -1,4 +1,10 @@
+"use client";
+import { usePathname } from "next/navigation";
+
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname === "/links") return null;
+
   return (
     <section id="contact" className="footer">
       <div className="footer-content">

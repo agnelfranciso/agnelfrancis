@@ -24,6 +24,8 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  if (pathname === "/links") return null;
+
   return (
     <>
       <nav className={`navbar ${isOpen ? 'menu-open' : ''}`}>

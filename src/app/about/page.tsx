@@ -43,7 +43,7 @@ export default function AboutPage() {
         <div className="about-image-container">
           <div className="about-image-wrapper">
             <Image 
-              src="/images/agnel.png" 
+              src="/images/agnel_cropped.png" 
               alt="Agnel Francis Olakkengil" 
               width={500} 
               height={700} 

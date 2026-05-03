@@ -5,6 +5,7 @@ import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
 import Protection from "@/components/Protection";
 import Preloader from "@/components/Preloader";
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 export const metadata: Metadata = {
   title: "Agnel Francis | Designer & Developer",
@@ -79,9 +80,9 @@ export default function RootLayout({
             })
           }}
         />
-        <div className="main-layout">
+        <LayoutWrapper>
           {children}
-        </div>
+        </LayoutWrapper>
         <Footer />
       </body>
     </html>

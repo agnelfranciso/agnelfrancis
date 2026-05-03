@@ -45,45 +45,58 @@ export default function LinksPage() {
   ];
 
   return (
-    <main className="main-layout" style={{ 
+    <main style={{ 
       display: 'flex', 
       alignItems: 'center', 
       justifyContent: 'center', 
-      minHeight: '100vh', 
+      height: '100vh', 
+      width: '100vw',
       padding: '2rem',
-      background: 'radial-gradient(circle at top right, rgba(255,107,107,0.05), transparent), radial-gradient(circle at bottom left, rgba(78,205,196,0.05), transparent)'
+      background: 'radial-gradient(circle at top right, rgba(255,107,107,0.05), transparent), radial-gradient(circle at bottom left, rgba(78,205,196,0.05), transparent)',
+      position: 'relative',
+      zIndex: 10,
+      overflow: 'hidden'
     }}>
-      <div className="links-container" style={{ width: '100%', maxWidth: '440px', textAlign: 'center', position: 'relative', zIndex: 1 }}>
+      <div className="links-container" style={{ 
+        width: '100%', 
+        maxWidth: '400px', 
+        textAlign: 'center', 
+        position: 'relative', 
+        zIndex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}>
         
         {/* Profile Header */}
-        <div className="links-profile" style={{ marginBottom: '4rem' }}>
+        <div className="links-profile" style={{ marginBottom: '2.5rem', transition: 'all 0.4s ease' }}>
           <div style={{ 
-            width: '150px', 
-            height: '150px', 
-            margin: '0 auto 1.8rem', 
+            width: '120px', 
+            height: '120px', 
+            margin: '0 auto 1.4rem', 
             borderRadius: '50%', 
             overflow: 'hidden', 
-            border: '5px solid white',
-            boxShadow: '0 25px 60px rgba(0,0,0,0.12)',
+            border: '4px solid white',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.1)',
             background: 'linear-gradient(45deg, var(--accent-blue), var(--accent-pink))',
             position: 'relative'
           }}>
             <Image 
-              src="/images/agnel.png" 
+              src="/images/agnel_cropped.png" 
               alt="Agnel Francis Olakkengil" 
               fill
-              style={{ objectFit: 'cover', objectPosition: 'center 20%', transform: 'scale(1.3)' }}
+              style={{ objectFit: 'cover' }}
               priority
             />
           </div>
-          <h1 style={{ fontFamily: 'IntraNet', fontSize: '3.2rem', marginBottom: '0.6rem', letterSpacing: '-0.02em' }}>Agnel Francis</h1>
-          <p style={{ fontFamily: 'PPSupplyMono', fontSize: '0.85rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.2em', fontWeight: 'bold' }}>
+          <h1 style={{ fontFamily: 'IntraNet', fontSize: '2.5rem', marginBottom: '0.4rem', letterSpacing: '-0.02em' }}>Agnel Francis</h1>
+          <p style={{ fontFamily: 'PPSupplyMono', fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.2em', fontWeight: 'bold' }}>
             Designer & Developer
           </p>
         </div>
 
         {/* Links List */}
-        <div className="links-list" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+        <div className="links-list" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', width: '100%' }}>
           {links.map((link, index) => (
             <Link 
               key={index}
@@ -95,28 +108,28 @@ export default function LinksPage() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                padding: '1.4rem 2rem',
+                padding: '1.1rem 1.6rem',
                 background: 'rgba(255, 255, 255, 0.8)',
                 backdropFilter: 'blur(10px)',
-                borderRadius: '24px',
+                borderRadius: '20px',
                 textDecoration: 'none',
                 color: 'var(--text-main)',
                 fontFamily: 'Aise',
-                fontSize: '1.15rem',
+                fontSize: '1rem',
                 transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.02)',
                 border: '1px solid rgba(255,255,255,0.5)',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.4rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
                 <span className="link-icon" style={{ 
-                  width: '40px', 
-                  height: '40px', 
+                  width: '36px', 
+                  height: '36px', 
                   display: 'flex', 
                   alignItems: 'center', 
                   justifyContent: 'center',
                   background: 'rgba(0,0,0,0.03)',
-                  borderRadius: '12px',
+                  borderRadius: '10px',
                   transition: 'all 0.3s ease'
                 }}>
                   {link.icon}
@@ -124,15 +137,10 @@ export default function LinksPage() {
                 <span style={{ fontWeight: '600' }}>{link.name}</span>
               </div>
               <div className="arrow-icon" style={{ transition: 'all 0.3s ease' }}>
-                <FontAwesomeIcon icon={faArrowUpRightFromSquare} width={14} style={{ opacity: 0.2 }} />
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} width={12} style={{ opacity: 0.2 }} />
               </div>
             </Link>
           ))}
-        </div>
-
-        {/* Footer */}
-        <div style={{ marginTop: '6rem', opacity: 0.3, fontSize: '0.7rem', fontFamily: 'PPSupplyMono', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
-          © {new Date().getFullYear()} Agnel Francis Olakkengil
         </div>
       </div>
 
@@ -144,21 +152,52 @@ export default function LinksPage() {
       </div>
 
       <style jsx>{`
+        @media (min-width: 1024px) {
+          .links-container {
+            max-width: 850px !important;
+            flex-direction: row !important;
+            justify-content: center !important;
+            text-align: left !important;
+            gap: 6rem !important;
+            align-items: center !important;
+          }
+          .links-profile {
+            margin-bottom: 0 !important;
+            text-align: left !important;
+            flex: 1;
+          }
+          .links-profile div:first-child {
+            margin-left: 0 !important;
+            width: 180px !important;
+            height: 180px !important;
+          }
+          .links-profile h1 {
+            font-size: 3rem !important;
+          }
+          .links-list {
+            flex: 1;
+            max-width: 360px;
+          }
+        }
         .link-card:hover {
           transform: translateY(-5px) scale(1.02);
-          background: white;
-          border-color: var(--accent-primary);
-          box-shadow: 0 20px 40px rgba(255, 107, 107, 0.15);
+          background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1) !important;
+          border-color: transparent !important;
+          color: white !important;
+          box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2);
         }
         .link-card:hover .link-icon {
-          background: var(--accent-primary);
-          color: white;
+          background: rgba(255, 255, 255, 0.2) !important;
+          color: white !important;
           transform: rotate(-10deg);
         }
         .link-card:hover .arrow-icon {
           transform: translate(3px, -3px);
-          color: var(--accent-primary);
+          color: white !important;
           opacity: 1 !important;
+        }
+        .link-card:hover span {
+          color: white !important;
         }
         @keyframes float {
           0% { transform: translateY(0px); }
