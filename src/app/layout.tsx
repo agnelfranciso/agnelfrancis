@@ -9,6 +9,9 @@ import Preloader from "@/components/Preloader";
 export const metadata: Metadata = {
   title: "Agnel Francis | Designer & Developer",
   description: "Portfolio of Agnel Francis",
+  verification: {
+    google: "googlec8e2d91f96bcc759",
+  },
 };
 
 export default function RootLayout({

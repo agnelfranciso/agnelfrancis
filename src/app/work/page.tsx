@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import Projects from "@/components/Projects";
+
+export const metadata: Metadata = {
+  title: "Work | Agnel Francis",
+  description: "A curated collection of my recent projects, experiments, and open-source contributions.",
+};
 
 export default function WorkPage() {
   return (

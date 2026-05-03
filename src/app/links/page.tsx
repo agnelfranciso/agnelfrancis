@@ -1,38 +1,45 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Github, Instagram, Linkedin, Twitter, Globe, ExternalLink } from "lucide-react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faGlobe, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+
+// Prevent FontAwesome from adding its CSS since we did it manually above
+config.autoAddCss = false;
 
 export default function LinksPage() {
   const links = [
     { 
       name: "Main Portfolio", 
       url: "/", 
-      icon: <Globe size={20} />, 
+      icon: <FontAwesomeIcon icon={faGlobe} width={20} />, 
       external: false 
     },
     { 
       name: "GitHub", 
       url: "https://github.com/agnelfranciso", 
-      icon: <Github size={20} />, 
+      icon: <FontAwesomeIcon icon={faGithub} width={20} />, 
       external: true 
     },
     { 
       name: "LinkedIn", 
       url: "https://www.linkedin.com/in/agnel-francis-olakkengil/", 
-      icon: <Linkedin size={20} />, 
+      icon: <FontAwesomeIcon icon={faLinkedin} width={20} />, 
       external: true 
     },
     { 
       name: "Instagram", 
       url: "https://www.instagram.com/oslohaz_e/", 
-      icon: <Instagram size={20} />, 
+      icon: <FontAwesomeIcon icon={faInstagram} width={20} />, 
       external: true 
     },
     { 
       name: "Twitter / X", 
       url: "https://x.com/oslohaz_e", 
-      icon: <Twitter size={20} />, 
+      icon: <FontAwesomeIcon icon={faTwitter} width={20} />, 
       external: true 
     },
   ];
@@ -97,7 +104,7 @@ export default function LinksPage() {
                 <span className="link-icon" style={{ opacity: 0.8 }}>{link.icon}</span>
                 <span style={{ fontWeight: '500' }}>{link.name}</span>
               </div>
-              {link.external && <ExternalLink size={16} style={{ opacity: 0.3 }} />}
+              {link.external && <FontAwesomeIcon icon={faArrowUpRightFromSquare} width={16} style={{ opacity: 0.3 }} />}
             </Link>
           ))}
         </div>

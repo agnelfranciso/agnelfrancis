@@ -1,7 +1,23 @@
+import type { Metadata } from "next";
 import { projectsData } from "../../../data/projects";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const project = projectsData.find(p => p.id === id);
+  
+  if (!project) {
+    return {
+      title: "Project Not Found | Agnel Francis",
+    };
+  }
+
+  return {
+    title: `${project.title} | Agnel Francis`,
+    description: project.description,
+  };
+}
 
 export default async function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
