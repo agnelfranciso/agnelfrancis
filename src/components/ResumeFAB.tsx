@@ -2,12 +2,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 export default function ResumeFAB() {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
 
-  // Don't show on the links page or the actual resume page if it existed as a route
-  if (pathname === '/links') return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Don't show on the links page or until mounted to prevent hydration mismatch
+  if (!mounted || pathname === '/links') return null;
 
   return (
     <a 
@@ -88,8 +94,8 @@ export default function ResumeFAB() {
 
         @media (max-width: 768px) {
           .resume-fab {
-            bottom: 20px;
-            right: 20px;
+            bottom: 25px;
+            right: 25px;
           }
           /* Keep it as a simple circle on mobile for better UX */
           .resume-fab:hover {

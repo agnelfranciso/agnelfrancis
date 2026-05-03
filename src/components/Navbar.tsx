@@ -63,7 +63,32 @@ export default function Navbar() {
           <Link href="/work" onClick={() => setIsOpen(false)} className={pathname === "/work" ? "active" : ""}>Work</Link>
           <Link href="/about" onClick={() => setIsOpen(false)} className={pathname === "/about" ? "active" : ""}>About</Link>
           <Link href="/contact" onClick={() => setIsOpen(false)} className={pathname === "/contact" ? "active" : ""}>Contact</Link>
-          <Link href="/resume/resume.pdf" target="_blank" rel="noopener noreferrer" download="Agnel_Francis_Resume.pdf" onClick={() => setIsOpen(false)}>Resume</Link>
+          <div style={{ marginTop: '1rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <Link 
+              href="/resume/resume.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              download="Agnel_Francis_Resume.pdf" 
+              onClick={() => setIsOpen(false)}
+              className="mobile-resume-btn"
+              style={{
+                background: 'var(--accent-primary, #FF5A5A)',
+                color: 'white',
+                padding: '12px 25px',
+                borderRadius: '12px',
+                fontSize: '0.9rem',
+                fontFamily: 'var(--font-mono)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                transition: 'transform 0.2s ease',
+                boxShadow: '0 10px 20px rgba(255, 90, 90, 0.2)'
+              }}
+            >
+              Download Resume
+            </Link>
+          </div>
         </div>
       </div>
     </>
