@@ -13,25 +13,30 @@ export default function AboutPage() {
         <div className="about-text">
           <h1 className="page-title">About Me</h1>
           <p className="about-description">
-            Hi, I&apos;m Agnel Francis Olakkengil, a full stack developer who mainly focuses on frontend development. I am a designer and developer, primarily building websites using modern coding practices and AI tools.
+            Hi, I&apos;m Agnel Francis Olakkengil, a full-stack developer, designer, and the <strong>CEO of FramePixel</strong>. I specialize in building modern digital solutions and interactive web-based games that blend clean UI with smart logic.
           </p>
           <p className="about-description">
-            I live in Velur, Thrissur. Currently, I am a first-year student pursuing Computer Science and Engineering (Cybersecurity) at Jyothi Engineering College (Autonomous), Cheruthuruthy. While I am learning core computer science right now, I am deeply passionate about expanding my expertise in the cybersecurity world.
+            Currently, I am a first-year student pursuing Computer Science and Engineering (Cybersecurity) at Jyothi Engineering College (Autonomous), Cheruthuruthy. My passion lies at the intersection of technology, creativity, and play.
           </p>
           
-          <h2 className="section-title" style={{marginTop: "3rem", fontSize: "2rem"}}>Experience & Projects</h2>
+          <h2 className="section-title" style={{marginTop: "3rem", fontSize: "2rem"}}>FramePixel</h2>
+          <p className="about-description" style={{fontSize: "1rem", color: "var(--text-muted)", marginBottom: "2rem"}}>
+            FramePixel is a digital solutions and web-based games studio focused on building experiences that actually matter. From scalable business platforms to multiplayer party games, we sit at the intersection of technology and engagement.
+          </p>
+
+          <h2 className="section-title" style={{marginTop: "3rem", fontSize: "2rem"}}>Experience & Focus</h2>
           <ul className="experience-list">
             <li>
-              <strong>Ente Nadu</strong>
-              <span>A collaborative project with my old school, Sarvodayam VHSS Aryampadam.</span>
+              <strong>FramePixel Studio</strong>
+              <span>Leading a digital solutions studio focused on custom websites, web apps, and interactive games.</span>
             </li>
             <li>
-              <strong>College Projects</strong>
-              <span>Various development projects for Jyothi Engineering College.</span>
+              <strong>Web-Based Gaming</strong>
+              <span>Developing multiplayer word battles, cooperative puzzle games, and interactive story experiences.</span>
             </li>
             <li>
-              <strong>Web Development & AI</strong>
-              <span>Continuous exploration of UI/UX design and frontend development utilizing AI tools.</span>
+              <strong>Cybersecurity</strong>
+              <span>First-year CSE student specializing in cybersecurity at Jyothi Engineering College.</span>
             </li>
           </ul>
         </div>

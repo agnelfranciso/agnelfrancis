@@ -10,14 +10,14 @@ export default function Hero() {
       </div>
       
       <div className="hero-content">
-        <p className="subtitle">Hello, I am Agnel Francis Olakkengil</p>
+        <p className="subtitle">CEO of FramePixel</p>
         <h1 className="hero-title">
-          <span className="line">FRONTEND</span>
-          <span className="line highlight">DEVELOPER</span>
-          <span className="line text-outline">& DESIGNER</span>
+          <span className="line">DESIGNER</span>
+          <span className="line highlight">& FULLSTACK</span>
+          <span className="line text-outline">DEVELOPER</span>
         </h1>
         <p className="description">
-          I build modern, beautiful websites using cutting-edge code and AI tools. Currently a first-year Computer Science & Cybersecurity student at Jyothi Engineering College in Velur, Thrissur.
+          I lead <strong>FramePixel</strong>, a digital studio focused on building web-based games and modern digital solutions that matter. Currently a first-year Computer Science & Cybersecurity student at Jyothi Engineering College.
         </p>
         <div className="hero-buttons">
           <Link href="/work" className="btn-primary">View My Work</Link>
