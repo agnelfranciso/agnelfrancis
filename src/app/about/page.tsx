@@ -18,13 +18,13 @@ export default function AboutPage() {
           <p className="about-description">
             Currently, I am a first-year student pursuing Computer Science and Engineering (Cybersecurity) at Jyothi Engineering College (Autonomous), Cheruthuruthy. My passion lies at the intersection of technology, creativity, and play.
           </p>
-          
-          <h2 className="section-title" style={{marginTop: "3rem", fontSize: "2rem"}}>FramePixel</h2>
-          <p className="about-description" style={{fontSize: "1rem", color: "var(--text-muted)", marginBottom: "2rem"}}>
+
+          <h2 className="section-title" style={{ marginTop: "3rem", fontSize: "2rem" }}>FramePixel</h2>
+          <p className="about-description" style={{ fontSize: "1rem", color: "var(--text-muted)", marginBottom: "2rem" }}>
             FramePixel is a digital solutions and web-based games studio focused on building experiences that actually matter. From scalable business platforms to multiplayer party games, we sit at the intersection of technology and engagement.
           </p>
 
-          <h2 className="section-title" style={{marginTop: "3rem", fontSize: "2rem"}}>Experience & Focus</h2>
+          <h2 className="section-title" style={{ marginTop: "3rem", fontSize: "2rem" }}>Experience & Focus</h2>
           <ul className="experience-list">
             <li>
               <strong>FramePixel Studio</strong>
@@ -42,11 +42,11 @@ export default function AboutPage() {
         </div>
         <div className="about-image-container">
           <div className="about-image-wrapper">
-            <Image 
-              src="/images/agnel_cropped.png" 
-              alt="Agnel Francis Olakkengil" 
-              width={500} 
-              height={700} 
+            <Image
+              src="/images/agnel.png"
+              alt="Agnel Francis Olakkengil"
+              width={500}
+              height={700}
               className="about-profile-image"
               priority
             />
