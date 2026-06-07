@@ -25,9 +25,46 @@ export interface Project {
   keyHighlightsTitle?: string;
   keyHighlights?: { title: string; description: string }[];
   liveLink?: string;
+  screenshots?: string[];
 }
 
 export const projectsData: Project[] = [
+  {
+    id: "aerisiq",
+    category: "Safety & AI Utility",
+    title: "AerisIQ",
+    description: "Privacy-first disaster risk intelligence and local safety utility for Android, featuring an offline LLM.",
+    image: "/images/projects/aerisiq/13.png",
+    bgClass: "bg-blue",
+    tags: ["Android", "Kotlin", "On-Device AI", "Jetpack Compose"],
+    size: "large",
+    liveLink: "https://github.com/agnelfranciso/AerisIQ",
+    screenshots: [
+      "/images/projects/aerisiq/13.png",
+      "/images/projects/aerisiq/15.png",
+      "/images/projects/aerisiq/16.png",
+      "/images/projects/aerisiq/14.png",
+      "/images/projects/aerisiq/17.png",
+      "/images/projects/aerisiq/18.png"
+    ],
+    
+    role: "Lead Developer",
+    timeline: "June 2026 (Made in 2 days)",
+    focus: "Privacy-first Disaster Risk Intelligence",
+    tech: "Kotlin, Jetpack Compose, LiteRT, MediaPipe, Qwen 2.5 0.5B",
+    
+    overview: "AerisIQ is a Free and Open Source Software (FOSS), privacy-first disaster risk intelligence and local safety utility application for Android. The app queries public warning feeds, parses raw disaster bulletins, combines them with live local weather telemetry, and processes the combined datasets using an offline Large Language Model (LLM) running securely in the device's sandbox.",
+    whyItExists: "Built to operate under strict user-sovereignty principles. 100% offline AI ensures safety summaries are executed client-side with no chat logs transmitted. It uses a zero-telemetry approach, meaning no analytical trackers or advertisement loggers.",
+    
+    keyHighlightsTitle: "Key Features",
+    keyHighlights: [
+      { title: "100% Offline AI", description: "Safety summaries are executed client-side using Qwen 2.5 0.5B Instruct model via MediaPipe LLM Inference APIs." },
+      { title: "Geocoding API", description: "Coordinates are resolved via client-side API requests. If location permissions are withheld, users can select regions manually." },
+      { title: "Safety Lock", description: "For extreme warnings, a 6-step checklist card is displayed. Users must check off all procedures before AI analysis is unlocked." },
+      { title: "Premium UI", description: "Features a premium dark glassmorphic design system using Google Sans Flex variable-axis typography and directional page-slide transitions." },
+      { title: "Zero Telemetry", description: "No trackers are present. Clearing app storage permanently deletes all local files and AI weights." }
+    ]
+  },
   {
     id: "semfolder",
     category: "Academic Productivity",

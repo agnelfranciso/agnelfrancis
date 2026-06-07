@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { projectsData } from "../../../data/projects";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import HorizontalScrollGallery from "../../../components/HorizontalScrollGallery";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
@@ -37,7 +38,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
         
         <div className="tags" style={{marginTop: "2.5rem"}}>
           {project.tags.map((tag) => (
-            <span key={tag} className="tag">{tag}</span>
+            <span key={tag} className="tag" style={{ padding: "clamp(0.3rem, 1.5vw, 0.5rem) clamp(0.8rem, 3vw, 1.5rem)", borderRadius: "var(--border-radius-pill)", border: "1px solid rgba(255,255,255,0.2)", fontSize: "clamp(0.7rem, 2.5vw, 1rem)", fontFamily: "PPSupplyMono, monospace", textTransform: "uppercase", letterSpacing: "0.05em" }}>{tag}</span>
           ))}
         </div>
       </div>
@@ -54,7 +55,35 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
         position: "relative",
         overflow: "hidden"
       }}>
-        {project.image ? (
+        {project.screenshots && project.screenshots.length > 1 ? (
+            <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {project.screenshots.slice(0, 3).map((src, idx) => {
+                    const transforms = [
+                        'scale(1) translateY(0) rotate(0deg)',
+                        'scale(0.9) translateX(85%) rotate(8deg)',
+                        'scale(0.9) translateX(-85%) rotate(-8deg)'
+                    ];
+                    return (
+                        <img 
+                            key={src}
+                            src={src} 
+                            alt={`${project.title} preview ${idx + 1}`} 
+                            style={{ 
+                                position: idx === 0 ? 'relative' : 'absolute',
+                                maxWidth: '28%', 
+                                maxHeight: '85%', 
+                                borderRadius: '24px', 
+                                boxShadow: '0 30px 60px rgba(0,0,0,0.2)', 
+                                display: 'block',
+                                transform: transforms[idx] || 'none',
+                                zIndex: 3 - idx,
+                                transition: 'transform 0.4s ease'
+                            }} 
+                        />
+                    );
+                })}
+            </div>
+        ) : project.image ? (
             <img 
                 src={project.image} 
                 alt={project.title} 
@@ -110,57 +139,61 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
         </div>
 
         {/* Content Body */}
-        <div className="project-content" style={{ fontSize: "1.25rem", lineHeight: "1.8", color: "var(--text-muted)", display: "flex", flexDirection: "column", gap: "3.5rem" }}>
+        <div className="project-content" style={{ fontSize: "clamp(1rem, 3.5vw, 1.25rem)", lineHeight: "1.8", color: "var(--text-muted)", display: "flex", flexDirection: "column", gap: "3.5rem" }}>
             
             {project.overview && (
                 <section>
-                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "2.5rem", color: "var(--text-main)", marginBottom: "1.5rem"}}>Overview</h2>
+                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.4rem, 6vw, 2.5rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>Overview</h2>
                     <p>{project.overview}</p>
                 </section>
             )}
 
             {project.challenge && (
                 <section>
-                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "2.5rem", color: "var(--text-main)", marginBottom: "1.5rem"}}>The Challenge</h2>
+                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.4rem, 6vw, 2.5rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>The Challenge</h2>
                     <p>{project.challenge}</p>
                 </section>
             )}
 
             {project.solution && (
                 <section>
-                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "2.5rem", color: "var(--text-main)", marginBottom: "1.5rem"}}>The Solution</h2>
+                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.4rem, 6vw, 2.5rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>The Solution</h2>
                     <p>{project.solution}</p>
                 </section>
             )}
 
             {project.whyItExists && (
                 <section>
-                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "2.5rem", color: "var(--text-main)", marginBottom: "1.5rem"}}>Why It Exists</h2>
+                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.4rem, 6vw, 2.5rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>Why It Exists</h2>
                     <p>{project.whyItExists}</p>
                 </section>
             )}
 
             {project.impactDesc && (
                 <section>
-                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "2.5rem", color: "var(--text-main)", marginBottom: "1.5rem"}}>Impact</h2>
+                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.4rem, 6vw, 2.5rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>Impact</h2>
                     <p>{project.impactDesc}</p>
                 </section>
             )}
 
             {project.keyHighlights && project.keyHighlights.length > 0 && (
                 <section>
-                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "2.5rem", color: "var(--text-main)", marginBottom: "2rem"}}>
+                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.4rem, 6vw, 2.5rem)", color: "var(--text-main)", marginBottom: "2rem"}}>
                         {project.keyHighlightsTitle || "Key Highlights"}
                     </h2>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "2rem" }}>
                         {project.keyHighlights.map((highlight, index) => (
-                            <div key={index} style={{ padding: "2rem", background: "white", borderRadius: "16px", border: "1px solid rgba(0,0,0,0.03)", boxShadow: "0 10px 30px rgba(0,0,0,0.02)"}}>
-                                <h3 style={{fontFamily: "IntraNet, sans-serif", fontSize: "1.6rem", color: "var(--text-main)", marginBottom: "0.8rem"}}>{highlight.title}</h3>
+                            <div key={index} style={{ padding: "1.5rem", background: "white", borderRadius: "16px", border: "1px solid rgba(0,0,0,0.03)", boxShadow: "0 10px 30px rgba(0,0,0,0.02)"}}>
+                                <h3 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.2rem, 5vw, 1.6rem)", color: "var(--text-main)", marginBottom: "0.8rem"}}>{highlight.title}</h3>
                                 <p style={{margin: 0}}>{highlight.description}</p>
                             </div>
                         ))}
                     </div>
                 </section>
+            )}
+
+            {project.screenshots && project.screenshots.length > 0 && (
+                <HorizontalScrollGallery images={[...project.screenshots].sort()} title={project.title} />
             )}
         </div>
       </div>
