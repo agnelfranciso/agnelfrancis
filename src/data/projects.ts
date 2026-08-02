@@ -7,7 +7,8 @@ export interface Project {
   bgClass: string;
   tags: string[];
   size: "normal" | "large";
-  
+  isMobileApp?: boolean;
+  links?: { url: string, label: string, type: 'live' | 'github' | 'fdroid' | 'playstore' }[];
   // Detail page specifics
   role?: string;
   timeline?: string;
@@ -38,7 +39,8 @@ export const projectsData: Project[] = [
     bgClass: "bg-blue",
     tags: ["Android", "Kotlin", "On-Device AI", "Jetpack Compose"],
     size: "large",
-    liveLink: "https://github.com/agnelfranciso/AerisIQ",
+    isMobileApp: true,
+    links: [{ url: "https://github.com/agnelfranciso/AerisIQ", label: "View Source Code", type: "github" }],
     screenshots: [
       "/images/projects/aerisiq/13.png",
       "/images/projects/aerisiq/15.png",
@@ -74,7 +76,7 @@ export const projectsData: Project[] = [
     bgClass: "bg-orange",
     tags: ["React", "PWA", "LocalStorage"],
     size: "large",
-    liveLink: "https://thesemfolder.netlify.app/",
+    links: [{ url: "https://thesemfolder.netlify.app/", label: "Visit Live Site", type: "live" }],
     
     role: "Web & Android",
     timeline: "2024",
@@ -103,7 +105,7 @@ export const projectsData: Project[] = [
     bgClass: "bg-blue",
     tags: ["HTML", "CSS", "JS"],
     size: "normal",
-    liveLink: "https://bussiler-app.netlify.app/",
+    links: [{ url: "https://bussiler-app.netlify.app/", label: "Visit Live Site", type: "live" }],
     
     role: "Full Stack Lead",
     timeline: "Aug 2024 - Present",
@@ -130,7 +132,7 @@ export const projectsData: Project[] = [
     bgClass: "bg-yellow",
     tags: ["React Native", "Firebase"],
     size: "normal",
-    liveLink: "https://sarvodayam.in/entenadu",
+    links: [{ url: "https://sarvodayam.in/entenadu", label: "Visit Live Site", type: "live" }],
     
     role: "Developer Intern",
     timeline: "2023 - 2024",
@@ -146,6 +148,122 @@ export const projectsData: Project[] = [
       { title: "Localized Content", description: "Tailored specifically for the needs of the village community." },
       { title: "Real-time Updates", description: "Live notifications for service availability and community news." }
     ]
+  },
+  {
+    id: "kochitransitgo",
+    category: "Public Transport",
+    title: "Kochi Transit Go",
+    description: "Offline Kochi Metro route planner and fare calculator. Fast, Free & Private.",
+    image: "/images/projects/kochi-transit-go/1.png",
+    bgClass: "bg-green",
+    tags: ["Android", "Kotlin", "Offline", "GTFS"],
+    size: "large",
+    isMobileApp: true,
+    links: [{ url: "https://f-droid.org/en/packages/app.agneldev.kochitransitgo/", label: "Download from F-Droid", type: "fdroid" }],
+    screenshots: [
+      "/images/projects/kochi-transit-go/1.png",
+      "/images/projects/kochi-transit-go/2.png",
+      "/images/projects/kochi-transit-go/3.png",
+      "/images/projects/kochi-transit-go/4.png"
+    ],
+    
+    role: "Sole Developer",
+    timeline: "June 2026",
+    focus: "Privacy-first Transit Companion",
+    tech: "Android, Kotlin, GTFS, SQLite",
+    
+    overview: "Kochi Transit Go is the definitive, privacy-respecting transit companion for the Kochi Metro system. Built from the ground up as a native Android app, it provides instantaneous access to train schedules, routes, and fare calculations without ever requiring an internet connection.",
+    whyItExists: "Privacy First: No analytics, no ad trackers, and no unnecessary permissions. Your location data stays on your device. The app operates fully offline with bundled GTFS schedules.",
+    
+    keyHighlightsTitle: "Features",
+    keyHighlights: [
+      { title: "Offline Mode", description: "All official GTFS schedules are bundled locally. Plan trips even deep underground." },
+      { title: "Instant Fare Calculator", description: "Know exactly how much your trip will cost before you reach the station." },
+      { title: "GPS Station Locator", description: "Automatically detects the nearest metro station using your device's location." },
+      { title: "Live Tracker", description: "See upcoming departures and platform directions." },
+      { title: "Open Source", description: "Fully open-source under the MIT License and uses official Kochi Metro Open GTFS data." }
+    ]
+  },
+  {
+    id: "ampa",
+    category: "Data Science & AI",
+    title: "AMPA Predictor",
+    description: "A Next-Generation Statistical Football Predictor for the 2026 FIFA World Cup.",
+    image: "/images/projects/ampa/1.png",
+    bgClass: "bg-purple",
+    tags: ["Python", "Pandas", "Statistics", "HTML/JS"],
+    size: "large",
+    links: [{ url: "https://github.com/agnelfranciso/AMPA-Predictor", label: "View Source Code", type: "github" }],
+    screenshots: [
+      "/images/projects/ampa/1.png"
+    ],
+    
+    role: "Creator",
+    timeline: "July 2026",
+    focus: "Probabilistic Simulations",
+    tech: "Python, HTML, JS, Batch",
+    
+    overview: "AMPA (Agnel Match Predicting Algorithm) is a state-of-the-art simulation framework engineered specifically for the 2026 FIFA World Cup. It processes over 49,000 historical international matches dating back to the 1870s, computes dynamic attacking and defensive strengths, and runs a complex Bivariate Poisson Distribution to simulate every possible scoreline of every match in the tournament.",
+    challenge: "Unlike basic predictors that rely purely on static FIFA rankings or simple win/loss ratios, AMPA required a robust mathematical model. I had to resolve the classical overdispersion problem in football goal modeling where the variance of goals is greater than the mean.",
+    solution: "I implemented a Negative Binomial Distribution with Dixon-Coles correction to prevent 0-0 inflation, along with a custom Elo rating system. The project is split into AMPE (Python Engine) which acts as the brain, and AMPI (Web Interface) which visually renders the tournament bracket.",
+    
+    keyHighlightsTitle: "The Statistical Model",
+    keyHighlights: [
+      { title: "Custom Elo Rating System", description: "Goal difference multiplier and tournament weighting ensure accurate relative strength tracking." },
+      { title: "Negative Binomial Distribution", description: "Dixon-Coles correction prevents 0-0 inflation, with a custom bivariate urgency factor for highly realistic match outcomes." },
+      { title: "Form, Streaks & Momentum", description: "Tracks a team's last 10-15 matches to trigger momentum multipliers based on streaks and recent head-to-head records." },
+      { title: "Live Data Integration", description: "Fetches real-time, in-progress World Cup 2026 scores. Real outcomes overwrite predictions dynamically." }
+    ]
+  },
+  {
+    id: "agnel-forms",
+    category: "SaaS & Tools",
+    title: "Agnel Forms",
+    description: "A highly-customizable, privacy-focused, self-hosted alternative to Typeform & Google Forms.",
+    image: "/images/projects/forms/1.png",
+    bgClass: "bg-blue",
+    tags: ["Next.js", "Supabase", "Tailwind CSS"],
+    size: "large",
+    links: [{ url: "https://agnel-forms.vercel.app/", label: "Visit Live Site", type: "live" }, { url: "https://github.com/agnelfranciso/Personal-Form-Creator-Template", label: "View Source Code", type: "github" }],
+    screenshots: [
+      "/images/projects/forms/1.png"
+    ],
+    
+    role: "Full Stack Developer",
+    timeline: "2026",
+    focus: "Privacy & Data Collection",
+    tech: "Next.js, Supabase, Tailwind CSS",
+    
+    overview: "Built from the ground up for absolute privacy, limitless customization, and flexible storage. Agnel Forms pushes the boundaries of data collection—featuring advanced flows like custom ID-to-email mapping, secure email verification before submission, and complex respondent tracking.",
+    
+    keyHighlightsTitle: "Features",
+    keyHighlights: [
+      { title: "Dynamic Form Builder", description: "Drag and drop interface for building forms." },
+      { title: "Conditional Branching Logic", description: "Show/hide questions based on previous answers in real-time." },
+      { title: "Identity Verification", description: "Lock forms behind secure magic-link OTP authentication." },
+      { title: "Granular Controls", description: "Set expiration dates, limit response counts to prevent spam, or restrict submissions to one per person effortlessly." }
+    ]
+  },
+  {
+    id: "velurpedia",
+    category: "Community & Wiki",
+    title: "VelurPedia",
+    description: "The free encyclopedia for Velur, Thrissur that anyone can edit.",
+    image: "/images/projects/velurpedia/1.png",
+    bgClass: "bg-orange",
+    tags: ["Next.js", "React", "Community"],
+    size: "large",
+    links: [{ url: "https://velurwiki.vercel.app/", label: "Visit Live Site", type: "live" }, { url: "https://github.com/agnelfranciso/velur-wiki", label: "View Source Code", type: "github" }],
+    screenshots: [
+      "/images/projects/velurpedia/1.png"
+    ],
+    
+    role: "Creator",
+    timeline: "2026",
+    focus: "Community Knowledge",
+    tech: "Next.js, React",
+    
+    overview: "VelurPedia is a free encyclopedia that anyone can edit, dedicated to hosting detailed articles about the history, geography, and culture of Velur, Thrissur."
   },
   {
     id: "the-fise",

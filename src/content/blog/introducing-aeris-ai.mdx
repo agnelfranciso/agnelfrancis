@@ -1,0 +1,45 @@
+---
+title: "Introducing Aeris AI: Privacy-First Disaster Intelligence"
+date: "2026-06-08"
+excerpt: "Exploring AerisIQ, a privacy-first disaster risk intelligence utility featuring on-device AI and real-time telemetry."
+tags: ["AI", "Android", "Privacy", "Disaster Safety"]
+---
+
+# Redefining Personal Safety with Aeris AI
+
+In an era where data privacy is often a second thought, we built **AerisIQ**—a privacy-first disaster risk intelligence and local safety utility for Android. Aeris AI is at the heart of this experience, providing critical safety summaries without ever sending your data to the cloud.
+
+## The Core Philosophy: Privacy First
+
+AerisIQ was built on strict user-sovereignty principles. Unlike most modern AI utilities that rely on server-side processing, AerisIQ runs a **100% offline Large Language Model (LLM)** securely within the device's sandbox.
+
+- **No Chat Logs:** Your interactions remain on your device.
+- **Zero Telemetry:** No analytical trackers or advertisement loggers.
+- **On-Device Inference:** Powered by Qwen 2.5 0.5B via MediaPipe.
+
+![AerisIQ Dashboard Preview](/images/projects/aerisiq/13.png)
+
+## How It Works
+
+AerisIQ queries public warning feeds and parses raw disaster bulletins. It then combines this information with live local weather telemetry. The magic happens when Aeris AI processes these datasets to provide concise, actionable safety summaries.
+
+### Key Technical Highlights:
+- **Offline LLM:** Utilizing LiteRT and MediaPipe LLM Inference APIs.
+- **Geocoding:** Coordinates are resolved via client-side API requests with manual fallback options.
+- **Safety Lock:** Extreme warnings trigger a 6-step checklist that users must complete before AI analysis is unlocked.
+
+![Safety Checklists & AI Summaries](/images/projects/aerisiq/15.png)
+
+## A Premium Experience
+
+We believe safety tools should be as beautiful as they are functional. AerisIQ features a **premium dark glassmorphic design system** with Google Sans Flex variable-axis typography.
+
+![Detailed Risk Analysis](/images/projects/aerisiq/16.png)
+
+## The Road Ahead
+
+AerisIQ is more than just an app; it's a statement that advanced AI doesn't have to come at the cost of your privacy. As we continue to refine the on-device models and integration, our focus remains on providing the most reliable, private, and beautiful safety utility available.
+
+You can learn more about the complete feature set by exploring the [AerisIQ Project Page](/work/aerisiq).
+
+Stay safe, and stay private.

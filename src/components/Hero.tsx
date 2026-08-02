@@ -13,29 +13,107 @@ export default function Hero() {
     return () => clearTimeout(t);
   }, []);
 
-  // Parallax tilt on the visual card
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
   useEffect(() => {
-    const card = visualRef.current;
-    if (!card) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    const handleMove = (e: MouseEvent) => {
-      const rect = card.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) / (rect.width / 2);
-      const dy = (e.clientY - cy) / (rect.height / 2);
-      card.style.transform = `perspective(900px) rotateY(${dx * 8}deg) rotateX(${-dy * 6}deg) scale(1.02)`;
+    let particles: { x: number, y: number, vx: number, vy: number, size: number, color: string }[] = [];
+    const colors = ['#FF5555', '#55AAFF', '#FFDD55', '#22C55E'];
+    
+    const resize = () => {
+      const parent = canvas.parentElement;
+      if (parent) {
+        canvas.width = parent.clientWidth;
+        canvas.height = parent.clientHeight;
+        initParticles();
+      }
     };
 
-    const handleLeave = () => {
-      card.style.transform = `perspective(900px) rotateY(0deg) rotateX(0deg) scale(1)`;
+    const initParticles = () => {
+      particles = [];
+      const numParticles = (canvas.width * canvas.height) / 6000;
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 1.5,
+          vy: (Math.random() - 0.5) * 1.5,
+          size: Math.random() * 2 + 1,
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+      }
     };
 
-    card.addEventListener("mousemove", handleMove);
-    card.addEventListener("mouseleave", handleLeave);
+    window.addEventListener('resize', resize);
+    // Initial size setup needs a small delay to ensure parent is fully rendered
+    setTimeout(resize, 50);
+
+    let mouse = { x: -1000, y: -1000 };
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    };
+    const onMouseLeave = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+    
+    // We attach mouse events to the parent to make the hover area larger
+    const parent = canvas.parentElement;
+    if (parent) {
+        parent.addEventListener('mousemove', onMouseMove);
+        parent.addEventListener('mouseleave', onMouseLeave);
+    }
+
+    let animationId: number;
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        // mouse interaction
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          ctx.beginPath();
+          ctx.strokeStyle = p.color;
+          ctx.globalAlpha = 1 - (dist / 150);
+          ctx.lineWidth = 1;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+      }
+
+      animationId = requestAnimationFrame(animate);
+    };
+    animate();
+
     return () => {
-      card.removeEventListener("mousemove", handleMove);
-      card.removeEventListener("mouseleave", handleLeave);
+      window.removeEventListener('resize', resize);
+      if (parent) {
+          parent.removeEventListener('mousemove', onMouseMove);
+          parent.removeEventListener('mouseleave', onMouseLeave);
+      }
+      cancelAnimationFrame(animationId);
     };
   }, []);
 
@@ -100,45 +178,12 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── RIGHT COLUMN — visual card ── */}
-        <div className="hero-v2-right">
-          <div className="hero-visual-card" ref={visualRef}>
-            {/* Decorative rings */}
-            <div className="visual-ring visual-ring-1" />
-            <div className="visual-ring visual-ring-2" />
-
-            {/* Floating badge */}
-            <div className="visual-badge visual-badge-tl">
-              <span className="badge-icon">🎮</span>
-              <span>Game Dev</span>
-            </div>
-            <div className="visual-badge visual-badge-br">
-              <span className="badge-icon">⚡</span>
-              <span>Full‑Stack</span>
-            </div>
-
-            {/* Central identity block */}
-            <div className="visual-identity">
-              <div className="visual-avatar-ring">
-                <div className="visual-avatar-inner">
-                  <span className="visual-initials">AF</span>
-                </div>
-              </div>
-              <p className="visual-name">Agnel Francis</p>
-              <p className="visual-role">CEO · FramePixel</p>
-
-              {/* Skill tags inside card */}
-              <div className="visual-tags">
-                {["React", "Next.js", "Figma", "Node"].map((s) => (
-                  <span key={s} className="visual-tag">{s}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Decorative floating orbs outside card */}
-          <div className="orb orb-a" />
-          <div className="orb orb-b" />
+        {/* ── RIGHT COLUMN — visual ── */}
+        <div className="hero-v2-right" style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
+          <canvas 
+            ref={canvasRef} 
+            style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, zIndex: 1 }}
+          />
         </div>
       </div>
 

@@ -3,7 +3,9 @@ import { projectsData } from "../../../data/projects";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import HorizontalScrollGallery from "../../../components/HorizontalScrollGallery";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faGlobe, faDownload } from '@fortawesome/free-solid-svg-icons';
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const project = projectsData.find(p => p.id === id);
@@ -55,7 +57,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
         position: "relative",
         overflow: "hidden"
       }}>
-        {project.screenshots && project.screenshots.length > 1 ? (
+        {project.isMobileApp && project.screenshots && project.screenshots.length > 1 ? (
             <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {project.screenshots.slice(0, 3).map((src, idx) => {
                     const transforms = [
@@ -122,63 +124,78 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
                     <p style={{fontSize: "1.2rem", fontWeight: "bold"}}>{project.tech}</p>
                 </div>
             )}
-            {project.liveLink && (
-                <div style={{marginTop: "1rem"}}>
-                    <a 
-                        href={project.liveLink} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="btn-primary wave-btn"
-                        style={{ width: "100%", padding: "0.8rem 1.5rem", fontSize: "1rem" }}
-                    >
-                        <span>Visit Live Site</span>
-                        <span className="wave-emoji">↗</span>
-                    </a>
+            {project.links && project.links.length > 0 && (
+                <div style={{marginTop: "1rem", display: "flex", flexDirection: "column", gap: "0.8rem"}}>
+                    {project.links.map((link, idx) => (
+                        <a 
+                            key={idx}
+                            href={link.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="btn-primary wave-btn"
+                            style={{ 
+                                width: "100%", 
+                                padding: "0.8rem 1.5rem", 
+                                fontSize: "1rem", 
+                                display: "flex", 
+                                alignItems: "center", 
+                                justifyContent: "center",
+                                gap: "0.8rem"
+                            }}
+                        >
+                            <FontAwesomeIcon icon={
+                                link.type === 'github' ? faGithub :
+                                link.type === 'fdroid' ? faDownload :
+                                faGlobe
+                            } style={{ fontSize: "1.2rem" }} />
+                            <span>{link.label}</span>
+                            <span className="wave-emoji">↗</span>
+                        </a>
+                    ))}
                 </div>
             )}
         </div>
 
-        {/* Content Body */}
-        <div className="project-content" style={{ fontSize: "clamp(1rem, 3.5vw, 1.25rem)", lineHeight: "1.8", color: "var(--text-muted)", display: "flex", flexDirection: "column", gap: "3.5rem" }}>
+        <div className="project-content" style={{ minWidth: 0, overflowWrap: "break-word", fontSize: "clamp(1rem, 3.5vw, 1.25rem)", lineHeight: "1.8", color: "var(--text-muted)", display: "flex", flexDirection: "column", gap: "3.5rem" }}>
             
             {project.overview && (
                 <section>
-                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.4rem, 6vw, 2.5rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>Overview</h2>
+                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.2rem, 4vw, 2rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>Overview</h2>
                     <p>{project.overview}</p>
                 </section>
             )}
 
             {project.challenge && (
                 <section>
-                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.4rem, 6vw, 2.5rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>The Challenge</h2>
+                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.2rem, 4vw, 2rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>The Challenge</h2>
                     <p>{project.challenge}</p>
                 </section>
             )}
 
             {project.solution && (
                 <section>
-                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.4rem, 6vw, 2.5rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>The Solution</h2>
+                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.2rem, 4vw, 2rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>The Solution</h2>
                     <p>{project.solution}</p>
                 </section>
             )}
 
             {project.whyItExists && (
                 <section>
-                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.4rem, 6vw, 2.5rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>Why It Exists</h2>
+                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.2rem, 4vw, 2rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>Why It Exists</h2>
                     <p>{project.whyItExists}</p>
                 </section>
             )}
 
             {project.impactDesc && (
                 <section>
-                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.4rem, 6vw, 2.5rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>Impact</h2>
+                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.2rem, 4vw, 2rem)", color: "var(--text-main)", marginBottom: "1.5rem"}}>Impact</h2>
                     <p>{project.impactDesc}</p>
                 </section>
             )}
 
             {project.keyHighlights && project.keyHighlights.length > 0 && (
                 <section>
-                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.4rem, 6vw, 2.5rem)", color: "var(--text-main)", marginBottom: "2rem"}}>
+                    <h2 style={{fontFamily: "IntraNet, sans-serif", fontSize: "clamp(1.2rem, 4vw, 2rem)", color: "var(--text-main)", marginBottom: "2rem"}}>
                         {project.keyHighlightsTitle || "Key Highlights"}
                     </h2>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "2rem" }}>

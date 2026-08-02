@@ -9,7 +9,7 @@ export default function Home() {
       <Marquee />
       <section className="home-projects-section">
         <h2 className="section-title text-center" style={{marginTop: "6rem", marginBottom: "3rem"}}>Selected Work</h2>
-        <Projects limit={3} />
+        <Projects limit={4} />
       </section>
     </main>
   );

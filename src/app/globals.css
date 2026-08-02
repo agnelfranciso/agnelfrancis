@@ -54,6 +54,21 @@
     font-style: normal;
 }
 
+/* PPSupplySans for Premium Sans needs */
+@font-face {
+    font-family: 'PPSupplySans';
+    src: url('/fonts/PPSupply/PPSupplySans-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PPSupplySans';
+    src: url('/fonts/PPSupply/PPSupplySans-Ultralight.otf') format('opentype');
+    font-weight: 200;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -1144,6 +1159,8 @@ button, .btn-primary, .btn-secondary {
 .bg-orange { background-color: #FFF0ED; color: var(--accent-primary); }
 .bg-blue { background-color: #E6F8F7; color: var(--accent-blue); }
 .bg-yellow { background-color: #FFFCE5; color: var(--accent-yellow); }
+.bg-green { background-color: #F1FDF4; color: #10B981; }
+.bg-purple { background-color: #F8F5FF; color: #8B5CF6; }
 
 /* Playful Abstract CSS Shapes for Projects */
 .abstract-shape {
@@ -1673,4 +1690,295 @@ button, .btn-primary, .btn-secondary {
 /* Preloader Skip Support */
 .skip-preloader .preloader {
     display: none !important;
+}
+
+/* --- Blog Styles --- */
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.blog-card {
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  gap: 3rem;
+  padding: 2.5rem;
+  background: white;
+  border-radius: var(--border-radius-md);
+  text-decoration: none;
+  transition: transform var(--transition-bounce), box-shadow 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.blog-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+}
+
+.blog-card-image {
+  aspect-ratio: 1;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.blog-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.blog-card-date {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.blog-card-title {
+  font-family: 'PPSupplySans', sans-serif !important;
+  font-size: 2.2rem !important;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+  font-weight: normal !important;
+}
+
+.blog-card-excerpt {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* --- Blog Detail Styles --- */
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.back-link:hover {
+  transform: translateX(-5px);
+}
+
+.detail-header {
+  margin-bottom: 4rem;
+}
+
+.detail-title {
+  font-family: 'PPSupplySans', sans-serif !important;
+  font-weight: 200 !important;
+  font-size: clamp(3rem, 10vw, 6rem) !important;
+  line-height: 1.05 !important;
+  margin-bottom: 2rem;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detail-category {
+  color: var(--text-muted);
+}
+
+.detail-tags {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.detail-tag {
+  background: rgba(0, 0, 0, 0.03);
+  padding: 6px 14px;
+  border-radius: 8px;
+  color: var(--text-muted);
+}
+
+/* --- Prose Styling --- */
+.prose {
+  color: var(--text-main);
+  line-height: 1.8;
+  font-size: 1.25rem;
+  max-width: 850px;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  font-family: 'PPSupplySans', sans-serif !important;
+  font-weight: normal !important;
+  color: var(--text-main);
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.prose h2 { font-size: 1.8rem; }
+.prose h3 { font-size: 1.4rem; }
+
+.prose p, .prose .prose-p {
+  margin-bottom: 1.8rem;
+}
+
+.prose img {
+  max-width: 100%;
+  max-height: 600px;
+  width: auto;
+  height: auto;
+  border-radius: 20px;
+  margin: 2.5rem 0;
+  display: block;
+  object-fit: contain;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+/* --- React Medium Image Zoom Styles --- */
+[data-rmiz] {
+  display: block;
+  width: 100%;
+}
+
+[data-rmiz-ghost] {
+  pointer-events: none;
+  position: absolute;
+}
+
+[data-rmiz-overlay] {
+  background-color: rgba(250, 248, 245, 0.95);
+  transition-property: background-color;
+}
+
+[data-rmiz-btn-zoom], [data-rmiz-btn-unzoom] {
+  display: none;
+}
+
+.prose ul, .prose ol {
+  margin-bottom: 1.8rem;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.75rem;
+}
+
+.prose code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--accent-primary);
+}
+
+.prose pre {
+  background: #0D0D0D;
+  padding: 2rem;
+  border-radius: 20px;
+  overflow-x: auto;
+  margin: 2.5rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  color: #E0E0E0;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .blog-card {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+  .blog-card-image {
+    aspect-ratio: 16 / 9;
+  }
+  .blog-card-title {
+    font-size: 1.8rem !important;
+  }
+  .detail-title {
+    font-size: 2.8rem !important;
+  }
+}
+
+/* Minimalist Geometry Animation */
+.minimalist-geometry {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 0 30px rgba(var(--accent-primary-rgb), 0.15));
+}
+
+.geo-svg {
+  width: 100%;
+  height: 100%;
+  animation: geo-spin 25s linear infinite;
+}
+
+.geo-circle {
+  fill: none;
+  stroke: var(--accent-primary);
+  stroke-width: 1.5;
+  stroke-dasharray: 600;
+  animation: dash-draw 10s ease-in-out infinite alternate;
+}
+
+.geo-rect {
+  fill: none;
+  stroke: var(--accent-blue, #55AAFF);
+  stroke-width: 1.5;
+  transform-origin: center;
+  animation: geo-pulse 8s ease-in-out infinite alternate;
+}
+
+.geo-triangle {
+  fill: none;
+  stroke: var(--accent-yellow, #FFDD55);
+  stroke-width: 1.5;
+  transform-origin: center;
+  animation: geo-pulse-reverse 12s ease-in-out infinite alternate;
+}
+
+@keyframes geo-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dash-draw {
+  0% { stroke-dashoffset: 600; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes geo-pulse {
+  0% { transform: scale(0.8) rotate(0deg); opacity: 0.4; }
+  100% { transform: scale(1.1) rotate(45deg); opacity: 1; }
+}
+
+@keyframes geo-pulse-reverse {
+  0% { transform: scale(1.1) rotate(45deg); opacity: 0.4; }
+  100% { transform: scale(0.7) rotate(-30deg); opacity: 1; }
 }

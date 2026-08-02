@@ -25,6 +25,9 @@ export default function Footer() {
           <a href="https://www.instagram.com/oslohaz_e/" target="_blank" rel="noopener noreferrer">Instagram</a>
         </div>
       </div>
+      <div style={{ textAlign: 'center', marginTop: '2rem', padding: '1rem', opacity: 0.7, fontSize: '0.9rem' }}>
+        <p>Not Loading? <a href="/simple" style={{ textDecoration: 'underline', color: 'inherit' }}>Load a simpler page!</a></p>
+      </div>
     </section>
   );
 }
