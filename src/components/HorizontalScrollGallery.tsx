@@ -1,13 +1,12 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
-import Zoom from "react-medium-image-zoom";
-import "react-medium-image-zoom/dist/styles.css";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 export default function HorizontalScrollGallery({ images, title }: { images: string[], title: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(true); // default true for hydration safety, or false
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -17,6 +16,22 @@ export default function HorizontalScrollGallery({ images, title }: { images: str
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedImage(null);
+    };
+    if (selectedImage) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [selectedImage]);
 
   useEffect(() => {
     if (!isMobile) {
@@ -65,6 +80,67 @@ export default function HorizontalScrollGallery({ images, title }: { images: str
     }
   };
 
+  const modal = selectedImage ? (
+    <div 
+      onClick={() => setSelectedImage(null)}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        zIndex: 99999,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "2rem",
+        cursor: "zoom-out"
+      }}
+    >
+      <button 
+        onClick={() => setSelectedImage(null)}
+        style={{
+          position: "absolute",
+          top: "2rem",
+          right: "2rem",
+          background: "rgba(255, 255, 255, 0.1)",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+          color: "white",
+          width: "48px",
+          height: "48px",
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          padding: 0,
+          transition: "all 0.2s"
+        }}
+        onMouseEnter={e => e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)"}
+        onMouseLeave={e => e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)"}
+      >
+        <X size={24} />
+      </button>
+      
+      <img 
+        src={selectedImage} 
+        alt="Expanded view" 
+        style={{
+          maxWidth: "100%",
+          maxHeight: "100%",
+          objectFit: "contain",
+          borderRadius: "8px",
+          boxShadow: "0 25px 50px rgba(0,0,0,0.5)",
+          cursor: "default"
+        }}
+        onClick={e => e.stopPropagation()}
+      />
+    </div>
+  ) : null;
+
   if (!isMobile) {
     return (
       <section style={{ marginTop: "4rem", position: "relative" }}>
@@ -104,16 +180,20 @@ export default function HorizontalScrollGallery({ images, title }: { images: str
                 backgroundColor: "#fff"
               }}
             >
-              <Zoom>
+              <div 
+                style={{ cursor: "zoom-in", width: "100%", height: "100%" }}
+                onClick={() => setSelectedImage(src)}
+              >
                 <img 
                   src={src} 
                   alt={`${title} screenshot ${index + 1}`} 
                   style={{ width: "100%", height: "auto", display: "block" }} 
                 />
-              </Zoom>
+              </div>
             </div>
           ))}
         </div>
+        {modal}
       </section>
     );
   }
@@ -165,17 +245,21 @@ export default function HorizontalScrollGallery({ images, title }: { images: str
                 backgroundColor: "#fff"
               }}
             >
-              <Zoom>
+              <div 
+                style={{ cursor: "zoom-in", width: "100%", height: "100%" }}
+                onClick={() => setSelectedImage(src)}
+              >
                 <img 
                   src={src} 
                   alt={`${title} screenshot ${index + 1}`} 
                   style={{ width: "100%", height: "auto", display: "block" }} 
                 />
-              </Zoom>
+              </div>
             </div>
           ))}
         </div>
       </div>
+      {modal}
     </div>
   );
 }

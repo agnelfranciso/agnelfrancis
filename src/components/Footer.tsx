@@ -17,7 +17,10 @@ export default function Footer() {
         </a>
       </div>
       <div className="footer-bottom">
-        <p>© 2026 Agnel Francis Olakkengil. All rights reserved.</p>
+        <div style={{ textAlign: "left" }}>
+          <p>© 2026 Agnel Francis Olakkengil. All rights reserved.</p>
+          <a href="/legal" style={{ fontSize: "0.9rem", color: "var(--text-muted)", textDecoration: "underline", display: "inline-block", marginTop: "0.5rem", textAlign: "left" }}>Legal & Disclaimer</a>
+        </div>
         <div className="socials">
           <a href="https://github.com/agnelfranciso" target="_blank" rel="noopener noreferrer">Github</a>
           <a href="https://www.linkedin.com/in/agnel-francis-olakkengil/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
