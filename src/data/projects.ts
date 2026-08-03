@@ -76,7 +76,7 @@ export const projectsData: Project[] = [
     bgClass: "bg-orange",
     tags: ["React", "PWA", "LocalStorage"],
     size: "large",
-    links: [{ url: "https://thesemfolder.netlify.app/", label: "Visit Live Site", type: "live" }],
+    links: [{ url: "https://thesemfolder.netlify.app/download", label: "Download the App", type: "live" }],
     
     role: "Web & Android",
     timeline: "2024",
@@ -159,7 +159,12 @@ export const projectsData: Project[] = [
     tags: ["Android", "Kotlin", "Offline", "GTFS"],
     size: "large",
     isMobileApp: true,
-    links: [{ url: "https://f-droid.org/en/packages/app.agneldev.kochitransitgo/", label: "Download from F-Droid", type: "fdroid" }],
+    links: [
+      { url: "https://f-droid.org/en/packages/app.agneldev.kochitransitgo/", label: "Download from F-Droid", type: "fdroid" },
+      { url: "https://github.com/agnelfranciso/Kochi-Transit-Go", label: "Android Source Code", type: "github" },
+      { url: "https://github.com/agnelfranciso/Kochi-Transit-Go-Web", label: "Web Source Code", type: "github" },
+      { url: "https://kochitransitgo.vercel.app/", label: "Web Portal", type: "live" }
+    ],
     screenshots: [
       "/images/projects/kochi-transit-go/1.png",
       "/images/projects/kochi-transit-go/2.png",
@@ -192,7 +197,7 @@ export const projectsData: Project[] = [
     image: "/images/projects/ampa/1.png",
     bgClass: "bg-purple",
     tags: ["Python", "Pandas", "Statistics", "HTML/JS"],
-    size: "large",
+    size: "small",
     links: [{ url: "https://github.com/agnelfranciso/AMPA-Predictor", label: "View Source Code", type: "github" }],
     screenshots: [
       "/images/projects/ampa/1.png"
@@ -223,7 +228,7 @@ export const projectsData: Project[] = [
     image: "/images/projects/forms/1.png",
     bgClass: "bg-blue",
     tags: ["Next.js", "Supabase", "Tailwind CSS"],
-    size: "large",
+    size: "small",
     links: [{ url: "https://agnel-forms.vercel.app/", label: "Visit Live Site", type: "live" }, { url: "https://github.com/agnelfranciso/Personal-Form-Creator-Template", label: "View Source Code", type: "github" }],
     screenshots: [
       "/images/projects/forms/1.png"
@@ -263,7 +268,15 @@ export const projectsData: Project[] = [
     focus: "Community Knowledge",
     tech: "Next.js, React",
     
-    overview: "VelurPedia is a free encyclopedia that anyone can edit, dedicated to hosting detailed articles about the history, geography, and culture of Velur, Thrissur."
+    overview: "VelurPedia is a personal project by Agnel Francis — a free, open encyclopedia dedicated entirely to documenting the village of Velur, located in Thrissur district, Kerala, India.",
+    whyItExists: "Velur is a significant place — rich in history, culture, and community life. Yet, very little documented historical data about Velur is available online. Most of what is known lives in the memories of residents or physical archives. VelurPedia was created to change that, making data available to everyone freely.",
+    keyHighlightsTitle: "Key Features & Philosophy",
+    keyHighlights: [
+      { title: "Familiar Interface", description: "Uses a Wikipedia-style UI, including Wikitext formatting, infoboxes, and internal linking, making it easy for anyone to contribute." },
+      { title: "Community Driven", description: "Anyone can create an account and submit edits or new articles. All community submissions go through an editorial review process to ensure quality." },
+      { title: "Open Access", description: "All content is freely available to read, reference, and share. Local knowledge should be accessible, searchable, and preserved for future generations." },
+      { title: "Locally Focused", description: "Unlike broader platforms, VelurPedia features guidelines tailored for a locally-focused wiki, documenting everything from local landmarks to stories." }
+    ]
   },
   {
     id: "the-fise",
