@@ -279,6 +279,32 @@ export const projectsData: Project[] = [
     ]
   },
   {
+    id: "kerala-holiday-api",
+    category: "AI",
+    title: "Kerala Holiday API & Dashboard",
+    description: "Autonomous AI engine tracking educational holidays across all 14 districts in Kerala.",
+    bgClass: "bg-blue",
+    tags: ["Python", "FastAPI", "React", "Gemini AI"],
+    size: "large",
+    links: [
+      { url: "https://github.com/agnelfranciso/kerala-holiday-api", label: "GitHub", type: "github" }
+    ],
+    role: "Creator & AI Engineer",
+    timeline: "2026",
+    focus: "AI Reasoning, Web Scraping, APIs",
+    tech: "Python, FastAPI, React, TypeScript, Gemini API, BeautifulSoup4",
+    overview: "A fully autonomous AI engine that tracks educational holidays across all 14 districts in Kerala. Built with a React frontend and a FastAPI backend, the engine dynamically scrapes Google News and utilizes Google Gemini to reason through news reports, filter out stale data, and extract highly accurate, structured JSON payloads.",
+    problem: "Finding accurate, up-to-date information on educational holidays across all districts in Kerala is challenging. News reports can be ambiguous (e.g., confusing yesterday's 'tomorrow' with today's 'tomorrow'), making it hard to extract structured data reliably.",
+    solution: "I built a fully autonomous engine that scrapes Google News, feeds the pure text to Google Gemini using few-shot Chain-of-Thought (CoT) reasoning, and exposes the parsed JSON via a FastAPI backend to a React dashboard.",
+    features: [
+      { title: "Smart Scraping", description: "Bypasses Google News redirects and filters out generic website junk (like 'Subscribe here') to feed pure news data to the AI." },
+      { title: "Batched AI Inference", description: "Uses Gemini to analyze news for all 14 districts in a single batched prompt." },
+      { title: "Few-Shot Reasoning", description: "The AI is strictly guided by few-shot CoT to avoid common pitfalls when parsing ambiguous news dates." },
+      { title: "Confidence Scoring", description: "If the AI infers a district because it wasn't explicitly named, the UI flags it with a yellow warning triangle." },
+      { title: "Bring Your Own Key (BYOK)", description: "Securely enter your Gemini API key directly into the web UI to power the engine locally." }
+    ]
+  },
+  {
     id: "the-fise",
     category: "Photography",
     title: "The Fise™",
