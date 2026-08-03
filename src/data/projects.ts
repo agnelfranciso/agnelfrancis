@@ -197,7 +197,7 @@ export const projectsData: Project[] = [
     image: "/images/projects/ampa/1.png",
     bgClass: "bg-purple",
     tags: ["Python", "Pandas", "Statistics", "HTML/JS"],
-    size: "small",
+    size: "normal",
     links: [{ url: "https://github.com/agnelfranciso/AMPA-Predictor", label: "View Source Code", type: "github" }],
     screenshots: [
       "/images/projects/ampa/1.png"
@@ -228,7 +228,7 @@ export const projectsData: Project[] = [
     image: "/images/projects/forms/1.png",
     bgClass: "bg-blue",
     tags: ["Next.js", "Supabase", "Tailwind CSS"],
-    size: "small",
+    size: "normal",
     links: [{ url: "https://agnel-forms.vercel.app/", label: "Visit Live Site", type: "live" }, { url: "https://github.com/agnelfranciso/Personal-Form-Creator-Template", label: "View Source Code", type: "github" }],
     screenshots: [
       "/images/projects/forms/1.png"
