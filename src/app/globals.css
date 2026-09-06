@@ -1544,7 +1544,7 @@ button, .btn-primary, .btn-secondary {
     .contact-details { display: flex; justify-content: center; }
     .playful-shape-1, .playful-shape-2 { opacity: 0.5; }
     .hero-title { font-size: 4rem; }
-    .about-content { display: flex; flex-direction: column-reverse; gap: 4rem; }
+    .about-content { display: grid; grid-template-columns: 1fr; gap: 4rem; }
     .project-detail-content { grid-template-columns: 1fr; gap: 4rem; }
     .project-meta { position: relative; top: 0; flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
     .project-meta > div { min-width: 45%; }

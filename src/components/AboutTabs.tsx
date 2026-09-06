@@ -14,7 +14,7 @@ export default function AboutTabs() {
           style={{
             background: "none",
             border: "none",
-            fontSize: "1.2rem",
+            fontSize: "clamp(1rem, 4vw, 1.2rem)",
             fontFamily: "IntraNet, sans-serif",
             color: activeTab === "about" ? "var(--text-main)" : "var(--text-muted)",
             cursor: "pointer",
@@ -36,7 +36,7 @@ export default function AboutTabs() {
           style={{
             background: "none",
             border: "none",
-            fontSize: "1.2rem",
+            fontSize: "clamp(1rem, 4vw, 1.2rem)",
             fontFamily: "IntraNet, sans-serif",
             color: activeTab === "experience" ? "var(--text-main)" : "var(--text-muted)",
             cursor: "pointer",
