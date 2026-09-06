@@ -35,6 +35,7 @@ export default function Navbar() {
         <div className="nav-links">
           <Link href="/work" className={pathname === "/work" ? "active" : ""}>Work</Link>
           <Link href="/blog" className={pathname === "/blog" ? "active" : ""}>Blog</Link>
+          <Link href="/hall-of-fame" className={pathname === "/hall-of-fame" ? "active" : ""}>Hall of Fame</Link>
           <Link href="/about" className={pathname === "/about" ? "active" : ""}>About</Link>
           <Link href="/contact" className={pathname === "/contact" ? "active" : ""}>Contact</Link>
         </div>
@@ -63,6 +64,7 @@ export default function Navbar() {
           <Link href="/" onClick={() => setIsOpen(false)} className={pathname === "/" ? "active" : ""}>Home</Link>
           <Link href="/work" onClick={() => setIsOpen(false)} className={pathname === "/work" ? "active" : ""}>Work</Link>
           <Link href="/blog" onClick={() => setIsOpen(false)} className={pathname === "/blog" ? "active" : ""}>Blog</Link>
+          <Link href="/hall-of-fame" onClick={() => setIsOpen(false)} className={pathname === "/hall-of-fame" ? "active" : ""}>Hall of Fame</Link>
           <Link href="/about" onClick={() => setIsOpen(false)} className={pathname === "/about" ? "active" : ""}>About</Link>
           <Link href="/contact" onClick={() => setIsOpen(false)} className={pathname === "/contact" ? "active" : ""}>Contact</Link>
           <div style={{ marginTop: '1rem', width: '100%', display: 'flex', justifyContent: 'center' }}>

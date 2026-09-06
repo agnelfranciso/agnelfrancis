@@ -162,7 +162,8 @@ export default function HorizontalScrollGallery({ images, title }: { images: str
             gap: "2rem", 
             overflowX: "auto", 
             paddingBottom: "1.5rem",
-            scrollbarWidth: "none" // Hide scrollbar for firefox
+            scrollbarWidth: "none", // Hide scrollbar for firefox
+            alignItems: "stretch"
           }}
         >
           <style>{`
@@ -172,7 +173,7 @@ export default function HorizontalScrollGallery({ images, title }: { images: str
             <div 
               key={index} 
               style={{ 
-                flex: "0 0 350px", 
+                flex: "0 0 500px", 
                 borderRadius: "16px", 
                 overflow: "hidden", 
                 border: "1px solid rgba(0,0,0,0.05)", 
@@ -187,7 +188,7 @@ export default function HorizontalScrollGallery({ images, title }: { images: str
                 <img 
                   src={src} 
                   alt={`${title} screenshot ${index + 1}`} 
-                  style={{ width: "100%", height: "auto", display: "block" }} 
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} 
                 />
               </div>
             </div>
@@ -230,14 +231,14 @@ export default function HorizontalScrollGallery({ images, title }: { images: str
             gap: "2rem", 
             padding: "0 10vw", 
             willChange: "transform",
-            alignItems: "center"
+            alignItems: "stretch"
           }}
         >
           {images.map((src, index) => (
             <div 
               key={index} 
               style={{ 
-                flex: "0 0 min(220px, 60vw)", 
+                flex: "0 0 min(350px, 80vw)", 
                 borderRadius: "16px", 
                 overflow: "hidden", 
                 border: "1px solid rgba(0,0,0,0.05)", 
@@ -252,7 +253,7 @@ export default function HorizontalScrollGallery({ images, title }: { images: str
                 <img 
                   src={src} 
                   alt={`${title} screenshot ${index + 1}`} 
-                  style={{ width: "100%", height: "auto", display: "block" }} 
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} 
                 />
               </div>
             </div>

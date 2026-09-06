@@ -46,7 +46,7 @@ export default function Projects({ limit }: { limit?: number }) {
         >
           <article style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <div className={`card-image ${project.bgClass}`}>
-              {project.screenshots && project.screenshots.length > 1 ? (
+              {project.isMobileApp && project.screenshots && project.screenshots.length > 1 ? (
                 <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   {project.screenshots.slice(0, 3).map((src, idx) => {
                     // Create a fanned out overlapping effect
