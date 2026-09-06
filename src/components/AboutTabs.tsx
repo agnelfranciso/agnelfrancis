@@ -8,52 +8,22 @@ export default function AboutTabs() {
 
   return (
     <div className="about-tabs-container" style={{ width: "100%" }}>
-      <div className="tabs-header" style={{ display: "flex", gap: "1rem", marginBottom: "2rem", borderBottom: "1px solid rgba(0,0,0,0.1)", paddingBottom: "1rem", overflowX: "auto", whiteSpace: "nowrap" }}>
+      <div className="tabs-header">
         <button 
           onClick={() => setActiveTab("about")}
-          style={{
-            background: "none",
-            border: "none",
-            fontSize: "clamp(0.85rem, 4vw, 1.2rem)",
-            fontFamily: "IntraNet, sans-serif",
-            color: activeTab === "about" ? "var(--text-main)" : "var(--text-muted)",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            position: "relative",
-            transition: "color 0.2s",
-            flexShrink: 0
-          }}
+          className={`tab-btn ${activeTab === "about" ? "active" : ""}`}
         >
-          <User size={20} />
+          <User className="tab-icon" />
           About
-          {activeTab === "about" && (
-            <div style={{ position: "absolute", bottom: "-1.1rem", left: 0, width: "100%", height: "2px", background: "var(--text-main)", borderRadius: "2px" }} />
-          )}
+          {activeTab === "about" && <div className="tab-indicator" />}
         </button>
         <button 
           onClick={() => setActiveTab("experience")}
-          style={{
-            background: "none",
-            border: "none",
-            fontSize: "clamp(0.85rem, 4vw, 1.2rem)",
-            fontFamily: "IntraNet, sans-serif",
-            color: activeTab === "experience" ? "var(--text-main)" : "var(--text-muted)",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            position: "relative",
-            transition: "color 0.2s",
-            flexShrink: 0
-          }}
+          className={`tab-btn ${activeTab === "experience" ? "active" : ""}`}
         >
-          <Briefcase size={20} />
+          <Briefcase className="tab-icon" />
           Experience
-          {activeTab === "experience" && (
-            <div style={{ position: "absolute", bottom: "-1.1rem", left: 0, width: "100%", height: "2px", background: "var(--text-main)", borderRadius: "2px" }} />
-          )}
+          {activeTab === "experience" && <div className="tab-indicator" />}
         </button>
       </div>
 
