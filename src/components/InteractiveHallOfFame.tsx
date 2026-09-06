@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ExternalLink, X } from "lucide-react";
+import { ExternalLink, X, User } from "lucide-react";
 
 interface Collaborator {
   id: string;
@@ -54,10 +54,14 @@ export default function InteractiveHallOfFame({ collaborators }: Props) {
             onClick={() => setSelectedPerson(person)}
           >
             <div className="hof-card-inner">
-              {person.image && (
+              {person.image ? (
                 <div className="hof-avatar">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={person.image} alt={person.name} />
+                </div>
+              ) : (
+                <div className="hof-avatar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--surface)', color: 'var(--text-muted)' }}>
+                  <User size={40} />
                 </div>
               )}
               <h2 className="hof-name">{person.name}</h2>
@@ -84,10 +88,14 @@ export default function InteractiveHallOfFame({ collaborators }: Props) {
           
           {selectedPerson && (
             <div className="hof-modal-inner">
-              {selectedPerson.image && (
+              {selectedPerson.image ? (
                 <div className="hof-modal-avatar">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={selectedPerson.image} alt={selectedPerson.name} />
+                </div>
+              ) : (
+                <div className="hof-modal-avatar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--surface)', color: 'var(--text-muted)' }}>
+                  <User size={60} />
                 </div>
               )}
               <h2 className="hof-modal-name">{selectedPerson.name}</h2>

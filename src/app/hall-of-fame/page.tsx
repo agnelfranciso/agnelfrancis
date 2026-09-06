@@ -17,7 +17,20 @@ const collaborators = [
     bgClass: "bg-blue",
     image: "/images/halloffame/nakul-suresh.png"
   },
-  // You can add more collaborators here in the future
+  {
+    id: "athul-krishna",
+    name: "Athul Krishna",
+    role: "Classmate & Project Collaborator - Ente Nadu",
+    description: "My classmate during my education in Sarvodayam VHSS Aryampadam (2023-25). He was instrumental in helping me build the 'Ente Nadu' project.",
+    bgClass: "bg-pink",
+  },
+  {
+    id: "arjun-p",
+    name: "Arjun P",
+    role: "Classmate & Project Collaborator - Ente Nadu",
+    description: "My classmate during my education in Sarvodayam VHSS Aryampadam (2023-25). He provided great support and helped me bring the 'Ente Nadu' project to life.",
+    bgClass: "bg-purple",
+  }
 ];
 
 export default function HallOfFamePage() {
