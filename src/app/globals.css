@@ -2006,3 +2006,10 @@ button, .btn-primary, .btn-secondary {
   0% { transform: scale(1.1) rotate(45deg); opacity: 0.4; }
   100% { transform: scale(0.7) rotate(-30deg); opacity: 1; }
 }
+/* Hide scrollbar for tabs header */
+.tabs-header::-webkit-scrollbar {
+  display: none;
+}
+.tabs-header {
+  scrollbar-width: none;
+}

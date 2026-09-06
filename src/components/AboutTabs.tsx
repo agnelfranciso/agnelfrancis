@@ -8,13 +8,13 @@ export default function AboutTabs() {
 
   return (
     <div className="about-tabs-container" style={{ width: "100%" }}>
-      <div className="tabs-header" style={{ display: "flex", gap: "1rem", marginBottom: "2rem", borderBottom: "1px solid rgba(0,0,0,0.1)", paddingBottom: "1rem" }}>
+      <div className="tabs-header" style={{ display: "flex", gap: "1rem", marginBottom: "2rem", borderBottom: "1px solid rgba(0,0,0,0.1)", paddingBottom: "1rem", overflowX: "auto", whiteSpace: "nowrap" }}>
         <button 
           onClick={() => setActiveTab("about")}
           style={{
             background: "none",
             border: "none",
-            fontSize: "clamp(1rem, 4vw, 1.2rem)",
+            fontSize: "clamp(0.85rem, 4vw, 1.2rem)",
             fontFamily: "IntraNet, sans-serif",
             color: activeTab === "about" ? "var(--text-main)" : "var(--text-muted)",
             cursor: "pointer",
@@ -22,7 +22,8 @@ export default function AboutTabs() {
             alignItems: "center",
             gap: "0.5rem",
             position: "relative",
-            transition: "color 0.2s"
+            transition: "color 0.2s",
+            flexShrink: 0
           }}
         >
           <User size={20} />
@@ -36,7 +37,7 @@ export default function AboutTabs() {
           style={{
             background: "none",
             border: "none",
-            fontSize: "clamp(1rem, 4vw, 1.2rem)",
+            fontSize: "clamp(0.85rem, 4vw, 1.2rem)",
             fontFamily: "IntraNet, sans-serif",
             color: activeTab === "experience" ? "var(--text-main)" : "var(--text-muted)",
             cursor: "pointer",
@@ -44,7 +45,8 @@ export default function AboutTabs() {
             alignItems: "center",
             gap: "0.5rem",
             position: "relative",
-            transition: "color 0.2s"
+            transition: "color 0.2s",
+            flexShrink: 0
           }}
         >
           <Briefcase size={20} />
