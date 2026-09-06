@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const pathname = usePathname();
-  if (pathname === "/links") return null;
+  if (pathname === "/links" || pathname.startsWith("/games")) return null;
 
   return (
     <section id="contact" className="footer">
@@ -30,6 +30,7 @@ export default function Footer() {
       </div>
       <div style={{ textAlign: 'center', marginTop: '2rem', padding: '1rem', opacity: 0.7, fontSize: '0.9rem' }}>
         <p>Not Loading? <a href="/simple" style={{ textDecoration: 'underline', color: 'inherit' }}>Load a simpler page!</a></p>
+        <p style={{ marginTop: '0.5rem' }}>Bored of my portfolio? <a href="/games" style={{ textDecoration: 'underline', color: 'inherit' }}>Let&apos;s play a game with my portfolio.</a></p>
       </div>
     </section>
   );

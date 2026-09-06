@@ -24,7 +24,7 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
-  if (pathname === "/links") return null;
+  if (pathname === "/links" || pathname.startsWith("/games")) return null;
 
   return (
     <>
