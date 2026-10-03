@@ -1,0 +1,64 @@
+---
+title: "Adding an AI Chat Assistant to My Portfolio"
+date: "2026-10-03"
+excerpt: "How I built a context-aware AI assistant for my portfolio using Google Gemini 3.5 Flash Lite and Next.js, complete with rate limiting and anti-jailbreak measures."
+tags: ["AI", "Next.js", "Gemini", "Web Development"]
+---
+
+# Meet Your New AI Assistant!
+
+If you look at the bottom right corner of the screen, you'll notice a new addition floating right above my resume download button: **An AI Chat Assistant**. 
+
+I wanted a way for visitors to instantly ask questions about my experience, my projects, and what I do as the CEO of FramePixel, without having to manually dig through every single project page. So, I built a custom AI agent tailored exactly for this portfolio.
+
+Here is a deep dive into how I built it, how it works, and how I kept it secure.
+
+## The Tech Stack
+
+The entire system is remarkably lightweight. I didn't want to drag in massive external SDKs or complicated vector databases. I kept it native to the stack I was already using:
+
+- **Frontend:** React (Next.js Client Components) + CSS Modules
+- **Backend:** Next.js App Router API Routes
+- **LLM:** Google Gemini 3.5 Flash Lite (via direct REST API)
+
+## How It Knows Everything About Me
+
+Most generic AI models don't know who "Agnel Francis" is, or what "FramePixel" is doing this year. To solve this, I used a technique called **System Prompt Injection**.
+
+Instead of a database, my portfolio already has a robust `projects.ts` file that holds all my project data. When you send a message, the backend route intercepts it and silently prepends a massive set of instructions to the AI:
+
+```typescript
+const systemInstruction = `You are a helpful AI assistant for Agnel Francis's portfolio website. 
+You know all about Agnel's projects, experience, and background. Here is his personal info:
+- Name: Agnel Francis Olakkengil
+- Role: Full-stack developer, designer, and CEO of FramePixel.
+...
+
+Here is his project data:
+${JSON.stringify(projectsData)}
+`;
+```
+
+By instantly reading my source code's data, the AI inherently knows about every new project the second I add it to the portfolio. No retraining required.
+
+## Keeping It Secure (Anti-Spam & Anti-Jailbreak)
+
+Exposing a raw LLM API to the public internet is usually a recipe for disaster. People will try to spam it, or worse, "jailbreak" it to act as a free coding assistant or essay writer.
+
+To prevent this, I added two layers of defense:
+
+1. **In-Memory Rate Limiting:** 
+   I wrote a custom IP-based rate limiter in the API route. It tracks `x-forwarded-for` headers and strictly limits requests to **5 messages per minute**. Go any faster, and it blocks you with a `429 Too Many Requests` error before the AI even wakes up.
+
+2. **Strict Topic Boundaries:**
+   I explicitly command the AI to refuse to answer anything unrelated to my portfolio:
+   > *"CRITICAL RULES: If the user asks ANY question that is NOT related to Agnel, his projects, his experience, or his portfolio, you MUST politely decline to answer. Do NOT act as a general-purpose AI."*
+
+## The UI/UX Polish
+
+I spent a good amount of time perfecting the interface:
+- **Markdown Rendering:** It formats bold text and lists cleanly using `react-markdown`.
+- **Typing Indicator:** Instead of a generic spinner, it features a fluid, bouncing typing indicator (`...`).
+- **Mobile First:** I ensured the chat window locks perfectly to the viewport on mobile devices, avoiding nasty cut-offs from the browser's address bar or device notches (`env(safe-area-inset-top)`).
+
+Try it out! Click the little robot icon on the bottom right and ask it about FramePixel, OSImposter, or where I go to college!
