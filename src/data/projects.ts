@@ -30,6 +30,7 @@ export interface Project {
 }
 
 export const projectsData: Project[] = [
+
   {
     id: "aerisiq",
     category: "Safety & AI Utility",
@@ -171,6 +172,40 @@ export const projectsData: Project[] = [
       { title: "Batch Actions", description: "Multi-select courses and delete multiple subjects at once with visual selection mode." },
       { title: "Modern UI", description: "Clean Material 3 design with intuitive gestures. Tap to open, long-press for quick actions." },
       { title: "Local-First", description: "All data stored locally on your device. Fast, private, and works completely offline." }
+    ]
+  },
+  {
+    id: "osimposter",
+    category: "Game & Entertainment",
+    title: "OSImposter",
+    description: "A fast, 100% free, fully open-source party game with infinite variety.",
+    image: "/images/osimposter/1.png",
+    bgClass: "bg-purple",
+    tags: ["React", "Next.js", "Local-first", "Open Source"],
+    size: "normal",
+    isMobileApp: false,
+    links: [
+      { url: "https://osimposter.vercel.app/", label: "Play Now", type: "live" },
+      { url: "https://github.com/agnelfranciso/osimposter", label: "View Source Code", type: "github" }
+    ],
+    screenshots: [
+      "/images/osimposter/1.png",
+      "/images/osimposter/2.png"
+    ],
+    role: "Creator",
+    timeline: "2026",
+    focus: "Social Deduction & Party Game",
+    tech: "React, Next.js",
+    overview: "OSImposter is a completely local-first, highly customizable web-based party game where you create the fun. It reimagines the social deduction genre by allowing endless variety through custom word packs tailored specifically for your friends.",
+    whyItExists: "Most social deduction and \"imposter\" party games have a glaring flaw: they get bland fast. They ship with a static set of words that get extremely repetitive after a few matches, hints that are too obvious, and vocabulary that might not even be relatable to your friend group. OSImposter was built to solve that.",
+    keyHighlightsTitle: "Key Features",
+    keyHighlights: [
+      { title: "Endless Variety via Word Packs", description: "Create your own custom word packs tailored specifically for your friends, or fill them with inside jokes and local places." },
+      { title: "Import & Export", description: "Download your awesome packs as a JSON file and share them with the community, or import massive, creative word packs from others instantly." },
+      { title: "Custom Game Rules", description: "Set the number of imposters, toggle hints and category visibility, use optional discussion timers, and a built-in voting mechanism." },
+      { title: "Mobile Optimized", description: "Designed as a sleek, premium mobile-first experience so you can easily pass the phone around in a circle of friends." },
+      { title: "Privacy First", description: "Everything happens locally right inside your web browser. There is no server tracking you, no accounts, and no data leaving your device." },
+      { title: "100% Ad-Free & Open Source", description: "No microtransactions, no pop-ups, no paywalls. Just pure, uninterrupted fun." }
     ]
   },
   {
@@ -341,6 +376,36 @@ export const projectsData: Project[] = [
       { title: "Bring Your Own Key (BYOK)", description: "Securely enter your Gemini API key directly into the web UI to power the engine locally." }
     ]
   },
+
+  {
+    id: "opcode-impact-2026",
+    category: "Web Development",
+    title: "Opcode Impact 2026",
+    description: "Official website for the National Level 24-Hour Cybersecurity Hackathon.",
+    image: "/images/opcode/1.png",
+    bgClass: "bg-green",
+    tags: ["Frontend", "Web Development", "UI/UX"],
+    size: "normal",
+    isMobileApp: false,
+    links: [
+      { url: "https://opcode-impact-2026.vercel.app/", label: "Visit Live Site", type: "live" }
+    ],
+    screenshots: [
+      "/images/opcode/1.png",
+      "/images/opcode/2.png"
+    ],
+    role: "Website Refiner",
+    timeline: "2026",
+    focus: "Event Website Optimization",
+    overview: "OPCODE IMPACT 2026 is a premier National Level 24-Hour Cybersecurity for Sustainable Development Hackathon hosted by Jyothi Engineering College. I worked on developing and refining the hackathon's official website, focusing on improving the overall user experience, design, and performance.",
+    keyHighlightsTitle: "Key Highlights",
+    keyHighlights: [
+      { title: "Website Improvement", description: "Refined and improved the overall website architecture, design, and user experience." },
+      { title: "Information Accessibility", description: "Structured event details, tracks, schedule, and FAQs to make it easily accessible for participants." },
+      { title: "Performance Optimization", description: "Optimized the website to ensure fast loading times and smooth navigation for hackathon registrants." }
+    ]
+  },
+
   {
     id: "the-fise",
     category: "Photography",

@@ -7,6 +7,7 @@ import Protection from "@/components/Protection";
 import Preloader from "@/components/Preloader";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import ResumeFAB from "@/components/ResumeFAB";
+import AIChatFAB from "@/components/AIChatFAB";
 
 export const metadata: Metadata = {
   title: "Agnel Francis | Designer & Developer",
@@ -100,6 +101,7 @@ export default function RootLayout({
           {children}
         </LayoutWrapper>
         <ResumeFAB />
+        <AIChatFAB />
         <Footer />
       </body>
     </html>
