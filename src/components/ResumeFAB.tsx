@@ -94,14 +94,6 @@ export default function ResumeFAB() {
 
         @media (max-width: 768px) {
           .resume-fab {
-            bottom: 25px;
-            right: 25px;
-          }
-          /* Keep it as a simple circle on mobile for better UX */
-          .resume-fab:hover {
-            width: 45px;
-          }
-          .fab-text {
             display: none;
           }
         }

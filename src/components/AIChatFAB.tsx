@@ -390,7 +390,7 @@ export default function AIChatFAB() {
 
         @media (max-width: 768px) {
           .ai-fab {
-            bottom: 85px;
+            bottom: 25px;
             right: 25px;
           }
           .ai-fab:hover {
@@ -401,12 +401,23 @@ export default function AIChatFAB() {
           }
           
           .ai-chat-window {
-            bottom: 0;
+            top: 0;
+            left: 0;
             right: 0;
+            bottom: 0;
             width: 100%;
-            height: 100dvh;
-            max-height: none;
+            height: 100%;
+            max-height: 100%;
             border-radius: 0;
+            z-index: 9999;
+          }
+          
+          .chat-header {
+            padding-top: max(15px, env(safe-area-inset-top));
+          }
+          
+          .chat-input-area {
+            padding-bottom: max(15px, env(safe-area-inset-bottom));
           }
         }
       `}</style>
