@@ -1,4 +1,5 @@
 import { projectsData } from "@/data/projects";
+import { getAllPosts } from "@/lib/blog";
 
 const rateLimitMap = new Map<string, { count: number, startTime: number }>();
 
@@ -24,9 +25,19 @@ export async function POST(req: Request) {
 
     const { messages } = await req.json();
 
-    // System prompt with project context
+    // Blog summaries for AI knowledge context
+    const blogSummaries = getAllPosts().map((post) => ({
+      title: post.title,
+      slug: post.slug,
+      date: post.date,
+      excerpt: post.excerpt,
+      tags: post.tags,
+      url: `/blog/${post.slug}`,
+    }));
+
+    // System prompt with project & blog context
     const systemInstruction = `You are a helpful AI assistant for Agnel Francis's portfolio website. 
-You know all about Agnel's projects, experience, and background. Here is his personal info:
+You know all about Agnel's projects, experience, blog articles, and background. Here is his personal info:
 - Name: Agnel Francis Olakkengil
 - Role: Full-stack developer, designer, and CEO of FramePixel.
 - FramePixel: A digital solutions and web-based games studio focused on building experiences that actually matter.
@@ -38,10 +49,14 @@ You know all about Agnel's projects, experience, and background. Here is his per
 Here is his project data:
 ${JSON.stringify(projectsData, null, 2)}
 
+Here are Agnel's blog posts, excerpts, and topics:
+${JSON.stringify(blogSummaries, null, 2)}
+
 CRITICAL RULES:
 1. Answer questions extremely concisely (1-3 sentences max) and politely.
-2. If the user asks ANY question that is NOT related to Agnel, his projects, his experience, or his portfolio, you MUST politely decline to answer. 
-3. Do NOT act as a general-purpose AI. Do NOT write code, essays, or solve general knowledge problems. You exist ONLY to discuss Agnel and his work.`;
+2. If the user asks about Agnel's writings, recent activities, or topics covered in his blogs (e.g. hackathons, OPCODE, CastLink, SIH, AI assistant, Aeris, etc.), provide an accurate concise answer based on his blog excerpts and point them to the relevant blog post (e.g., /blog/<slug>).
+3. If the user asks ANY question that is NOT related to Agnel, his projects, his blog posts, his experience, or his portfolio, you MUST politely decline to answer. 
+4. Do NOT act as a general-purpose AI. Do NOT write code, essays, or solve general knowledge problems. You exist ONLY to discuss Agnel and his work.`;
 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
