@@ -8,7 +8,7 @@ export interface Project {
   tags: string[];
   size: "normal" | "large";
   isMobileApp?: boolean;
-  links?: { url: string, label: string, type: 'live' | 'github' | 'fdroid' | 'playstore' }[];
+  links?: { url: string, label: string, type: 'live' | 'github' | 'fdroid' | 'playstore' | 'download', fileName?: string, fileSize?: string }[];
   // Detail page specifics
   role?: string;
   timeline?: string;
@@ -41,7 +41,10 @@ export const projectsData: Project[] = [
     tags: ["Android", "Kotlin", "On-Device AI", "Jetpack Compose"],
     size: "large",
     isMobileApp: true,
-    links: [{ url: "https://github.com/agnelfranciso/AerisIQ", label: "View Source Code", type: "github" }],
+    links: [
+      { url: "https://github.com/agnelfranciso/AerisIQ", label: "View Source Code", type: "github" },
+      { url: "/project-files/aerisiq/AerisIQ-release.apk", label: "Download App", type: "download", fileName: "AerisIQ-release.apk", fileSize: "26.5 MB" }
+    ],
     screenshots: [
       "/images/projects/aerisiq/13.png",
       "/images/projects/aerisiq/15.png",

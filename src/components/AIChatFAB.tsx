@@ -247,6 +247,28 @@ export default function AIChatFAB() {
           display: flex;
           flex-direction: column;
           gap: 15px;
+          /* Firefox */
+          scrollbar-width: thin;
+          scrollbar-color: rgba(59, 130, 246, 0.45) transparent;
+        }
+
+        /* Chrome / Safari / Edge */
+        .chat-messages::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+          background: rgba(59, 130, 246, 0.45);
+          border-radius: 99px;
+          transition: background 0.2s ease;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+          background: rgba(59, 130, 246, 0.75);
         }
         
         .message {
