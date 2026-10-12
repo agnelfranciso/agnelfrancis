@@ -10,26 +10,22 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="page-container">
+    <main className="page-container about-page-container">
       <div className="about-content">
         <div className="about-text">
-          <h1 className="page-title">About Me</h1>
+          <div className="about-header-tag">
+            <span className="about-kicker">PROFILE &amp; BACKGROUND</span>
+          </div>
+          <h1 className="page-title about-page-title">About Me</h1>
+          
           <AboutTabs />
-          <div style={{
-            marginTop: "3rem",
-            paddingTop: "1.5rem",
-            borderTop: "1px solid rgba(0,0,0,0.07)",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.4rem",
-            color: "var(--text-muted, #888)",
-            fontSize: "0.78rem",
-            fontFamily: "var(--font-mono, monospace)",
-          }}>
+          
+          <div className="about-changelog-strip">
             <span>This site is open-source —</span>
             <ChangelogButton />
           </div>
         </div>
+
         <div className="about-image-container">
           <div className="about-image-wrapper">
             <Image
@@ -40,6 +36,10 @@ export default function AboutPage() {
               className="about-profile-image"
               priority
             />
+            <div className="about-image-caption">
+              <span className="about-caption-dot" />
+              <span>Agnel Francis Olakkengil</span>
+            </div>
           </div>
         </div>
       </div>
