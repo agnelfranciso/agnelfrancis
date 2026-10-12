@@ -11,10 +11,16 @@ export default function ContactPage() {
     setStatus("loading");
     setResult("Sending...");
     
+    const accessKey =
+      process.env.NEXT_PUBLIC_WEB3FORMS_KEY ||
+      process.env.NEXT_PUBLIC_W3FORMS_KEY ||
+      "ccd20e1c-d127-47b7-88b5-41b45080d930";
+
     const formData = new FormData(e.currentTarget);
+    formData.append("access_key", accessKey);
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData
       });
