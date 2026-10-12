@@ -12,10 +12,9 @@ export default function ContactPage() {
     setResult("Sending...");
     
     const formData = new FormData(e.currentTarget);
-    formData.append("access_key", process.env.NEXT_PUBLIC_W3FORMS_KEY as string);
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         body: formData
       });
@@ -34,12 +33,12 @@ export default function ContactPage() {
         }, 5000);
       } else {
         setStatus("error");
-        setResult(data.message);
+        setResult(data.message || "Failed to send message. Please email directly at agnelfrancis2007@hotmail.com.");
       }
     } catch (error) {
       console.error(error);
       setStatus("error");
-      setResult("Something went wrong! Please check your connection and try again.");
+      setResult("Something went wrong! Please check your connection or email directly at agnelfrancis2007@hotmail.com.");
     }
   };
 
