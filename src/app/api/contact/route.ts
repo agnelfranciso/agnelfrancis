@@ -20,8 +20,10 @@ export async function POST(req: Request) {
       process.env.WEB3FORMS_KEY ||
       process.env.NEXT_PUBLIC_WEB3FORMS_KEY ||
       process.env.W3FORMS_KEY ||
-      process.env.NEXT_PUBLIC_W3FORMS_KEY ||
-      "ccd20e1c-d127-47b7-88b5-41b45080d930";
+      process.env.NEXT_PUBLIC_W3FORMS_KEY;
+    if (!accessKey) {
+      throw new Error("Web3Forms access key is not configured.");
+    }
 
     const payload = {
       ...data,
