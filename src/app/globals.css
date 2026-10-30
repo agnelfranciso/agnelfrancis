@@ -2246,6 +2246,7 @@ button, .btn-primary, .btn-secondary {
     margin-bottom: 3rem;
 }
 
+@media (min-width: 769px) {
 .home-projects-section .project-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem 2rem;
@@ -2287,6 +2288,8 @@ button, .btn-primary, .btn-secondary {
 .home-projects-section .tag {
     font-size: 0.75rem;
     padding: 0.25rem 0.65rem;
+}
+
 }
 
 .home-projects-section {
@@ -3285,7 +3288,7 @@ button, .btn-primary, .btn-secondary {
 
     
 
-    .project-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .project-grid, .home-projects-section .project-grid { grid-template-columns: 1fr !important; gap: 2.5rem; }
 
     .project-card.large { grid-column: span 1; }
 
