@@ -32,7 +32,25 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
     <main className="page-container" style={{ paddingBottom: "6rem" }}>
       <div className="project-detail-header" style={{marginBottom: "3rem"}}>
         <Link href="/#work" className="back-link">← Back to Projects</Link>
-        <p className="subtitle" style={{marginTop: "1.5rem", marginBottom: "0"}}>{project.category}</p>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.8rem", marginTop: "1.5rem", marginBottom: "0", flexWrap: "wrap" }}>
+          <p className="subtitle" style={{ margin: 0 }}>{project.category}</p>
+          {project.badge && (
+            <span style={{
+              fontSize: "0.75rem",
+              fontFamily: "PPSupplyMono, monospace",
+              padding: "0.2rem 0.65rem",
+              borderRadius: "var(--border-radius-pill, 999px)",
+              backgroundColor: "rgba(239, 68, 68, 0.08)",
+              color: "#dc2626",
+              border: "1px solid rgba(239, 68, 68, 0.25)",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.06em",
+            }}>
+              {project.badge}
+            </span>
+          )}
+        </div>
         <h1 className="page-title" style={{marginTop: "0.5rem", fontSize: "4.5vw", marginBottom: "1.5rem"}}>{project.title}</h1>
         <p style={{fontSize: "1.4rem", color: "var(--text-muted)", maxWidth: "800px", lineHeight: "1.6"}}>{project.description}</p>
         
@@ -110,10 +128,16 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
                     <p style={{fontSize: "1.2rem", fontWeight: "bold"}}>{project.timeline}</p>
                 </div>
             )}
-            {(project.focus || project.impact || project.status) && (
+            {project.status && (
                 <div>
-                    <h4 style={{fontFamily: "PPSupplyMono, monospace", fontSize: "0.9rem", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "0.5rem"}}>{project.focus ? "Focus" : project.status ? "Status" : "Impact"}</h4>
-                    <p style={{fontSize: "1.2rem", fontWeight: "bold"}}>{project.focus || project.status || project.impact}</p>
+                    <h4 style={{fontFamily: "PPSupplyMono, monospace", fontSize: "0.9rem", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "0.5rem"}}>Status</h4>
+                    <p style={{fontSize: "1.2rem", fontWeight: "bold"}}>{project.status}</p>
+                </div>
+            )}
+            {(project.focus || (!project.status && project.impact)) && (
+                <div>
+                    <h4 style={{fontFamily: "PPSupplyMono, monospace", fontSize: "0.9rem", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "0.5rem"}}>{project.focus ? "Focus" : "Impact"}</h4>
+                    <p style={{fontSize: "1.2rem", fontWeight: "bold"}}>{project.focus || project.impact}</p>
                 </div>
             )}
             {project.tech && (

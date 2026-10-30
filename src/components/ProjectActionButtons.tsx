@@ -220,7 +220,7 @@ export default function ProjectActionButtons({ links, projectTitle }: Props) {
                 Download {projectTitle}
               </h3>
               <p style={{ margin: 0, fontSize: "0.92rem", color: "#6B6B6B" }}>
-                File: <strong>{activeDownload.fileName || "AerisIQ-release.apk"}</strong> {activeDownload.fileSize ? `(${activeDownload.fileSize})` : "(~27 MB)"}
+                File: <strong>{activeDownload.fileName || `${projectTitle.replace(/\s+/g, "")}-release.apk`}</strong> {activeDownload.fileSize ? `(${activeDownload.fileSize})` : ""}
               </p>
             </div>
 
@@ -247,13 +247,13 @@ export default function ProjectActionButtons({ links, projectTitle }: Props) {
                   <strong>Direct Package Installation (APK):</strong> This app is packaged directly for Android. Installing it requires enabling <em>&ldquo;Install Unknown Apps&rdquo;</em> on your device.
                 </li>
                 <li>
-                  <strong>Safe & Privacy-First:</strong> AerisIQ executes 100% offline on-device AI with zero remote analytics, telemetry, or data tracking.
+                  <strong>Safe & Secure:</strong> {projectTitle} is built with modern native Android standards, verified package builds, and clean architecture.
                 </li>
                 <li>
-                  <strong>Provided As-Is (FOSS):</strong> This software is provided free and open-source for personal evaluation and safety assistance without commercial warranties.
+                  <strong>Provided As-Is:</strong> This software is provided free and open-source for personal evaluation and use without commercial warranties.
                 </li>
                 <li>
-                  <strong>Hardware Requirements:</strong> Requires Android 8.0+ and sufficient device memory to run the offline AI model.
+                  <strong>System Requirements:</strong> Requires Android 8.0 (API 26) through Android 14+ on compatible Android devices.
                 </li>
               </ul>
             </div>

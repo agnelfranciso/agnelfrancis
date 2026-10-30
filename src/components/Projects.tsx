@@ -90,6 +90,25 @@ export default function Projects({ limit }: { limit?: number }) {
               )}
             </div>
             <div className="card-info" style={{ flexGrow: 1 }}>
+              {project.badge && (
+                <div style={{ marginBottom: "0.4rem" }}>
+                  <span style={{
+                    fontSize: "0.72rem",
+                    fontFamily: "PPSupplyMono, monospace",
+                    padding: "0.2rem 0.6rem",
+                    borderRadius: "var(--border-radius-pill, 999px)",
+                    backgroundColor: "rgba(239, 68, 68, 0.08)",
+                    color: "#dc2626",
+                    border: "1px solid rgba(239, 68, 68, 0.25)",
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.06em",
+                    display: "inline-block"
+                  }}>
+                    {project.badge}
+                  </span>
+                </div>
+              )}
               <h3 style={{ color: 'var(--text-main)' }}>{project.title}</h3>
               <p style={{ color: 'var(--text-muted)' }}>{project.description}</p>
               <div className="tags">

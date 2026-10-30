@@ -8,6 +8,7 @@ export interface Project {
   tags: string[];
   size: "normal" | "large";
   isMobileApp?: boolean;
+  badge?: string;
   links?: { url: string, label: string, type: 'live' | 'github' | 'fdroid' | 'playstore' | 'download', fileName?: string, fileSize?: string }[];
   // Detail page specifics
   role?: string;
@@ -30,6 +31,65 @@ export interface Project {
 }
 
 export const projectsData: Project[] = [
+  {
+    id: "campuscrave",
+    category: "Concept Demo • Campus Logistics",
+    title: "CampusCrave",
+    badge: "Concept Demo",
+    description: "[Interactive Demo] An Android prototype for hyper-local classroom doorstep canteen logistics, unifying students, canteen staff, and peer runners with simulated corridor telemetry.",
+    image: "/images/projects/campuscrave/03_home_feed.png",
+    bgClass: "bg-green",
+    tags: ["Concept Demo", "Android", "Kotlin", "Jetpack Compose", "Material 3", "Clean Architecture"],
+    size: "large",
+    isMobileApp: true,
+    links: [
+      { url: "/project-files/campuscrave/CampusCrave-v1.0.0.apk", label: "Download Demo APK (v1.0.0)", type: "download", fileName: "CampusCrave-v1.0.0.apk", fileSize: "20.5 MB" },
+      { url: "https://github.com/agnelfranciso/CampusCrave", label: "View Source Code", type: "github" }
+    ],
+    screenshots: [
+      "/images/projects/campuscrave/03_home_feed.png",
+      "/images/projects/campuscrave/12_live_tracking_inflight.png",
+      "/images/projects/campuscrave/06_food_detail.png",
+      "/images/projects/campuscrave/01_onboarding.png",
+      "/images/projects/campuscrave/02_student_access.png",
+      "/images/projects/campuscrave/04_soft_drinks_category.png",
+      "/images/projects/campuscrave/05_drinks_catalog.png",
+      "/images/projects/campuscrave/07_saved_dropoffs_dialog.png",
+      "/images/projects/campuscrave/08_food_search.png",
+      "/images/projects/campuscrave/09_search_filter_sheet.png",
+      "/images/projects/campuscrave/10_doorstep_basket.png",
+      "/images/projects/campuscrave/11_order_confirmed.png",
+      "/images/projects/campuscrave/13_runner_handoff.png",
+      "/images/projects/campuscrave/14_order_completed.png",
+      "/images/projects/campuscrave/15_student_profile.png",
+      "/images/projects/campuscrave/16_cravepass_plans.png",
+      "/images/projects/campuscrave/17_demo_presentation_lab.png"
+    ],
+
+    role: "Lead Android Architect & Sole Developer",
+    timeline: "October 2026",
+    status: "Interactive Demo / Evaluator Prototype",
+    focus: "Hyper-Local Classroom Doorstep Logistics",
+    tech: "Kotlin, Jetpack Compose, Material 3, Clean Architecture MVVM + StateFlow, Stitch Tokens",
+
+    overview: "CampusCrave is an interactive concept demo and evaluator prototype of a college-supported, student-operated food ordering and classroom delivery platform for Android. Built as a demonstration prototype to test and showcase door-to-door logistics within multi-block academic campuses, students can simulate pre-ordering meals delivered directly outside lecture room doors. Simultaneously, it illustrates how campus breaks can be transformed into voluntary micro-enterprise earning opportunities for peer runners.",
+    whyItExists: "Built as a proof-of-concept demo to solve the universal campus lunch rush bottleneck. Traditional commercial delivery apps fail inside college campuses because lecture halls lack fixed seat numbering, commercial delivery drivers cannot enter academic buildings, and classroom drop-offs disrupt lectures. CampusCrave introduces designated classroom doorstep drop zones with 4-digit PIN verification, bell-synchronized preparation batching, and student corridor couriers.",
+    challenge: "College lunch breaks are rigidly timed (typically 30–40 minutes). When hundreds of students converge onto a single canteen facility simultaneously, they encounter 25+ minute queues, cold or rushed food, and tardiness to afternoon sessions. Canteen operators face overwhelming rushes and unpredictable demand surges, while students lack flexible on-campus micro-earning options that fit between classes.",
+    solution: "CampusCrave provides a synchronized tri-pillar logistics network: classroom doorstep drop zones outside lecture doors, pre-orders synchronized with lecture bells, student corridor couriers using thermal bags, the DemandCraft™ feasibility engine to prevent ordering items that take longer than the remaining break, and SmartStop™ capacity halt state machines to protect kitchen bandwidth.",
+
+    keyHighlightsTitle: "Key Features & Architecture",
+    keyHighlights: [
+      { title: "Classroom Doorstep Drop Zones", description: "Food handoffs occur strictly outside lecture room doors with a 4-digit PIN verification, preserving academic decorum with zero in-class disruption." },
+      { title: "Academic Corridor Routing Matrix", description: "Built-in campus wayfinding matrix covering Eastern (EAB), Western (WAB), Administrative (ADM), and Southern (SAB) blocks with multi-floor room targeting." },
+      { title: "Bell-Synchronized Timetables", description: "Pre-orders open 10–20 minutes before the bell, allowing central kitchen staff to batch-prepare orders before the mass rush." },
+      { title: "DemandCraft™ Feasibility", description: "Intelligent engine dynamically evaluates preparation times against the lecture resumption bell to guarantee prompt delivery." },
+      { title: "SmartStop™ Capacity Halt", description: "Reactive StateFlow state machine automatically throttles checkouts when courier workload or kitchen prep queues approach saturation." },
+      { title: "5-Second Payment Handshake", description: "Realistic simulation of a student payment gateway featuring animated multi-node handshake verification and instant slot confirmation." },
+      { title: "Live Indoor Waypoint Radar", description: "Live corridor radar telemetry showing courier assignment, transit waypoints, and the 4-digit collection PIN." },
+      { title: "Campus CravePass Subscriptions", description: "Essential (₹49/mo) and Pro (₹99/mo) plans with 12:00 PM priority slot reservation and free doorstep drops." },
+      { title: "Evaluator Demo Lab", description: "Built-in presentation tool to warp simulated timetable clocks, trigger rush hours, and step through all 8 order lifecycle states." }
+    ]
+  },
 
   {
     id: "aerisiq",
