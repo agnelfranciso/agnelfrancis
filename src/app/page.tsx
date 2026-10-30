@@ -9,7 +9,7 @@ export default function Home() {
       <Hero />
       <Marquee />
       <section className="home-projects-section">
-        <h2 className="section-title text-center" style={{marginTop: "6rem", marginBottom: "3rem"}}>Selected Work</h2>
+        <h2 className="section-title text-center" style={{marginTop: "4.5rem", marginBottom: "2.5rem"}}>Selected Work</h2>
         <Projects limit={4} />
         <div style={{ textAlign: "center", marginTop: "3.5rem" }}>
           <Link href="/work" className="btn-secondary wave-btn" style={{ display: "inline-flex", alignItems: "center", gap: "0.6rem", padding: "0.85rem 2rem", fontSize: "1rem", borderRadius: "var(--border-radius-pill)" }}>
