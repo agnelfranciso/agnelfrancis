@@ -285,7 +285,7 @@ export const projectsData: Project[] = [
     bgClass: "bg-purple",
     isMobileApp: false,
     tags: ["Next.js", "TypeScript", "CSS", "TMDB API"],
-    size: "large",
+    size: "normal",
     links: [
       { url: "https://castlink-pi.vercel.app/", label: "Visit Live Site", type: "live" },
       { url: "https://github.com/agnelfranciso/castlink", label: "View Source Code", type: "github" }
@@ -322,7 +322,7 @@ export const projectsData: Project[] = [
     image: "/images/projects/semfolder.png",
     bgClass: "bg-orange",
     tags: ["React", "PWA", "LocalStorage"],
-    size: "large",
+    size: "normal",
     links: [{ url: "https://thesemfolder.netlify.app/download", label: "Download the App", type: "live" }],
 
     role: "Web & Android",
@@ -449,7 +449,7 @@ export const projectsData: Project[] = [
     image: "/images/projects/velurpedia/1.png",
     bgClass: "bg-orange",
     tags: ["Next.js", "React", "Community"],
-    size: "large",
+    size: "normal",
     links: [{ url: "https://velurwiki.vercel.app/", label: "Visit Live Site", type: "live" }, { url: "https://github.com/agnelfranciso/velur-wiki", label: "View Source Code", type: "github" }],
     screenshots: [
       "/images/projects/velurpedia/1.png"
@@ -478,7 +478,7 @@ export const projectsData: Project[] = [
     description: "Autonomous AI engine tracking educational holidays across all 14 districts in Kerala.",
     bgClass: "bg-blue",
     tags: ["Python", "FastAPI", "React", "Gemini AI"],
-    size: "large",
+    size: "normal",
     links: [
       { url: "https://github.com/agnelfranciso/kerala-holiday-api", label: "GitHub", type: "github" }
     ],
