@@ -32,6 +32,54 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
+    id: "cineseat",
+    category: "Backend Architecture • Cinema Intelligence & Spatial Geometry",
+    title: "CineSeat API",
+    badge: "Live Service",
+    description: "High-performance cinema showtimes intelligence & 3D auditorium spatial geometry engine evaluating SMPTE 196M optical standards and THX acoustic sightlines across 2,167+ Indian cities.",
+    image: "/images/projects/cineseat/01_scalar_overview.png",
+    bgClass: "bg-purple",
+    tags: ["FastAPI", "Python 3.12", "Pydantic v2", "Spatial Geometry", "SMPTE 196M", "Docker", "Scalar UI", "Antideploy"],
+    size: "large",
+    isMobileApp: false,
+    links: [
+      { url: "https://cineseat-api.antideploy.app/docs", label: "Interactive Scalar Docs", type: "live" },
+      { url: "https://cineseat-api.antideploy.app", label: "Live API Server", type: "live" },
+      { url: "https://github.com/agnelfranciso/cineseat-api", label: "View Source Code", type: "github" }
+    ],
+    screenshots: [
+      "/images/projects/cineseat/01_scalar_overview.png",
+      "/images/projects/cineseat/02_smpte_formulation.png",
+      "/images/projects/cineseat/03_best_seats_engine.png",
+      "/images/projects/cineseat/04_auditorium_layout.png",
+      "/images/projects/cineseat/05_cities_geo_lookup.png"
+    ],
+
+    role: "System Architect & Backend Engineer",
+    timeline: "November 2026",
+    status: "Production REST Service",
+    focus: "3D Cinema Geometry & Optical Viewing Optimization",
+    tech: "FastAPI, Python 3.12, Pydantic v2, Scalar OpenAPI 3.1, Haversine Geo-Routing, Docker, Antideploy",
+
+    overview: "CineSeat API is a production-grade cinema showtimes and seating intelligence platform engineered to eliminate bad cinema seating. While conventional ticketing platforms represent cinema auditoriums as flat 2D seat grids that obscure true viewing angles, CineSeat models physical auditoriums in true 3D metric units (x, y, z) and rigorously evaluates each seat against global optical standards—including SMPTE 196M (≥30° FOV, 45° reference sweet spot), THX viewing distance guidelines (≥36° immersion), horizontal off-axis keystoning, and vertical cervical neck tilt limits (≤15°). Built with FastAPI, Pydantic v2, and deployed on Antideploy with a rich interactive Scalar documentation UI, it serves 2,167+ Indian cities with millisecond spatial vector calculations.",
+    whyItExists: "Built to solve the universal problem of blindly booking movie tickets based on flat 2D seat maps. Standard ticketing systems treat every seat within a price tier equally, leaving patrons vulnerable to acute neck strain in front rows, trapezoidal image keystoning from side aisles, and degraded acoustic immersion. CineSeat models the exact physical auditorium geometry in real-world metric units, computing mathematical sightlines to deliver empirical seat quality scores.",
+    challenge: "Computing real-time optical geometry for hundreds of seats across diverse auditorium architectures (stadium seating tiers, sloped floors, varying screen widths and elevations) requires continuous trigonometric evaluations without compromising API response latency. Furthermore, managing geographic showtimes and cinema metadata across 2,167+ Indian cities and towns demanded an ultra-efficient in-memory spatial index and clean RESTful design.",
+    solution: "I engineered a vector-based spatial geometry engine that computes 3D Euclidean distances, horizontal FOV arctangents, off-axis displacement angles, and vertical neck tilt angles in single-digit milliseconds. The engine synthesizes these metrics into a normalized 0–100 composite quality score, dynamically finds optimal contiguous seat blocks for parties of any size, and exposes interactive API documentation powered by Scalar OpenAPI 3.1.",
+
+    keyHighlightsTitle: "Key Architecture & Mathematical Highlights",
+    keyHighlights: [
+      { title: "SMPTE 196M Optical Math", description: "Evaluates horizontal Field of View (FOV) against the 30° minimum and 45° reference sweet spot to guarantee optimal retinal immersion." },
+      { title: "THX Neck Tilt Protection", description: "Computes vertical viewing angles relative to screen center; penalizes seats exceeding the 15° cervical neck fatigue threshold." },
+      { title: "Off-Axis Keystoning Mitigation", description: "Calculates angular lateral displacement from the screen centerline, preventing optical trapezoid distortion and stereo audio imbalance." },
+      { title: "Contiguous Block Optimizer", description: "Sliding-window geometry algorithm that discovers and ranks adjacent seats for families and groups based on aggregated vantage scores." },
+      { title: "2,167+ Cities Geo-Directory", description: "Full geographic dataset spanning all 28 Indian states, complete with Tier-1 metro filters and spherical Haversine nearest-city GPS lookup." },
+      { title: "3D Auditorium Modeling", description: "True metric coordinate representation of screen width, elevation, stadium tier step rises, and row curved radii." },
+      { title: "Scalar OpenAPI 3.1 UI", description: "Modern, interactive API reference with multi-language code snippets (cURL, Python, Node.js, PHP, Ruby) and live payload testing." },
+      { title: "Antideploy Cloud Infrastructure", description: "Packaged as a lightweight multi-stage Docker container deployed natively on Antideploy with automated TLS and edge routing." }
+    ]
+  },
+
+  {
     id: "campuscrave",
     category: "Concept Demo • Campus Logistics",
     title: "CampusCrave",
