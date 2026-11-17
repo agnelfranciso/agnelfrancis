@@ -1,0 +1,97 @@
+---
+title: "Solving the Cinema Seating Dilemma: Why 2D Seat Maps Fail"
+date: "2026-11-17"
+excerpt: "How I engineered CineSeat API using FastAPI, spatial geometry, and SMPTE/THX optical standards to eliminate bad movie seats and blind ticket bookings across 2,167+ Indian cities."
+tags: ["FastAPI", "Python", "Spatial Geometry", "Cinema Tech", "APIs", "Open Source"]
+---
+
+Have you ever paid good money for a movie ticket, walked into the auditorium, and immediately realized you made a terrible mistake?
+
+You sit down in Row B, only to discover you have to crane your neck backward at an agonizing angle for three hours just to see the subtitles. Or you pick what looks like a "decent middle seat" on a booking app, only to realize the screen is so close and wide that you spend the entire film swiveling your head like you're watching a tennis match.
+
+This happens all the time. And the reason is simple: **traditional ticketing platforms show you flat 2D seat grids that lie to you.**
+
+![CineSeat API Interactive Documentation](/images/projects/cineseat/01_scalar_overview.png)
+
+## The Blind Spot of 2D Seat Maps
+
+When you book a ticket online, every seat is rendered as an identical little square. At best, seats are color-coded by price category. But a 2D grid completely hides the physical reality of the auditorium:
+
+1. **Vertical Elevation & Neck Strain**: Front rows force patrons to tilt their heads upward well beyond comfortable ergonomic limits, causing acute cervical strain.
+2. **Screen Keystone Distortion**: Extreme side-aisle seats view the screen at a severe oblique angle, causing optical trapezoid distortion and uneven stereo/surround audio balance.
+3. **The Sweet Spot Myth**: In modern stadium-style cinemas, the "best seat" isn't just about being in the middle of a row—it's about the intersection of optimal field-of-view, screen height, and acoustic staging.
+4. **Group Seating Roulette**: Booking contiguous seats for friends or family is usually a gamble of guessing which row still has good sightlines left.
+
+I wanted to solve this fundamentally with math, code, and clean architecture. That's why I built **CineSeat API**.
+
+---
+
+## What is CineSeat API?
+
+**CineSeat API** is a high-performance cinema intelligence engine and REST platform designed to evaluate and eliminate bad movie seats.
+
+Instead of treating auditoriums as flat tables, CineSeat models the physical hall in real metric units $(x, y, z)$. It accounts for screen width, screen elevation above the floor, tier step rises, and row curve radiuses.
+
+![SMPTE and THX Mathematical Formulations](/images/projects/cineseat/02_smpte_formulation.png)
+
+Every seat is empirically scored against global cinematic standards:
+
+### 1. SMPTE 196M Field of View (FOV)
+The Society of Motion Picture and Television Engineers (SMPTE) Standard 196M specifies that the horizontal viewing angle from a seat should span at least **30°** of your vision for standard viewing, with **45°** representing the ideal cinematic sweet spot. Anything less than 30° feels disconnected and distant; anything over 55° causes visual fatigue.
+
+### 2. THX Vertical Neck Tilt Protection
+THX guidelines mandate that the vertical viewing angle from an audience member's eyes to the top/center of the screen should never exceed **15°**. CineSeat calculates this trigonometric angle based on tier elevation and eye height. If a seat forces a tilt beyond 15°, it gets aggressively penalized.
+
+### 3. Off-Axis Keystoning Mitigation
+Watching an IMAX or wide-aspect cinema screen from the far edges introduces severe trapezoidal distortion. CineSeat calculates the angular displacement from the screen's center normal axis, identifying seats that preserve symmetric acoustics and un-distorted visuals.
+
+### 4. Normalized Composite Quality Score
+The engine computes these metrics in single-digit milliseconds and generates a normalized composite quality score from **0 to 100**, categorized into:
+- **Reference Sweet Spot** (90–100)
+- **Prime Viewing** (75–89)
+- **Acceptable** (60–74)
+- **Sub-optimal / Neck Strain Warning** (Under 60)
+
+---
+
+## Smart Contiguous Group Booking
+
+One of my favorite features in the engine is the contiguous group optimizer. When booking for 2, 4, or 6 people, you shouldn't have to manually check every row to see where the best block remains.
+
+CineSeat uses a sliding-window spatial vector algorithm that scans all available contiguous seats in an auditorium and ranks candidate blocks by aggregated vantage quality, ensuring everyone in the party enjoys an optimal view without anyone being shoved into an extreme corner.
+
+![3D Auditorium Layout Spec](/images/projects/cineseat/04_auditorium_layout.png)
+
+---
+
+## Pan-India Geo-Directory (2,167+ Cities)
+
+Cinema showtimes are meaningless without seamless location intelligence. CineSeat integrates a pan-India geographic index covering **2,167+ cities, towns, and municipalities** across all 28 states and union territories.
+
+With the spherical **Haversine formula**, developers can pass user GPS coordinates (`lat`, `lng`) and instantly retrieve the nearest operational cinema hub and its active showtimes.
+
+![Pan-India Cities and Geo-Location](/images/projects/cineseat/05_cities_geo_lookup.png)
+
+---
+
+## The Tech Stack
+
+I wanted the service to be fast, type-safe, developer-friendly, and lightweight:
+
+- **FastAPI & Python 3.12**: Asynchronous request handling, fast startup, and native concurrency.
+- **Pydantic v2**: High-throughput validation with compiled Rust internals.
+- **Scalar UI (OpenAPI 3.1)**: Modern, beautiful interactive documentation featuring dark mode, client libraries (cURL, Python, Node.js, PHP, Ruby), and real-time endpoint testing.
+- **Docker & Antideploy**: Multi-stage alpine container deployment with zero-downtime rolling updates and automated edge SSL.
+
+---
+
+## Try It Out & Explore the Code
+
+CineSeat API is completely open-source and live right now:
+
+- 📖 **Interactive Scalar Docs**: [cineseat-api.antideploy.app/docs](https://cineseat-api.antideploy.app/docs)
+- 🚀 **Live Service**: [cineseat-api.antideploy.app](https://cineseat-api.antideploy.app)
+- 💻 **GitHub Repository**: [github.com/agnelfranciso/cineseat-api](https://github.com/agnelfranciso/cineseat-api)
+- 💼 **Portfolio Project Study**: [/work/cineseat](/work/cineseat)
+
+If you're a moviegoer, developer, or cinema enthusiast, I'd love to know what you think! Drop me any thoughts or feature ideas through the [Contact](/contact) page.
