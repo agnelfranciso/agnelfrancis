@@ -32,6 +32,143 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
+    id: "kochitransitgo",
+    category: "Public Transport",
+    title: "Kochi Transit Go",
+    description: "Offline Kochi Metro route planner and fare calculator. Fast, Free & Private.",
+    image: "/images/projects/kochi-transit-go/1.png",
+    bgClass: "bg-green",
+    tags: ["Android", "Kotlin", "Offline", "GTFS"],
+    size: "large",
+    isMobileApp: true,
+    links: [
+      { url: "https://f-droid.org/en/packages/app.agneldev.kochitransitgo/", label: "Download from F-Droid", type: "fdroid" },
+      { url: "https://github.com/agnelfranciso/Kochi-Transit-Go", label: "Android Source Code", type: "github" },
+      { url: "https://github.com/agnelfranciso/Kochi-Transit-Go-Web", label: "Web Source Code", type: "github" },
+      { url: "https://kochitransitgo.vercel.app/", label: "Web Portal", type: "live" }
+    ],
+    screenshots: [
+      "/images/projects/kochi-transit-go/1.png",
+      "/images/projects/kochi-transit-go/2.png",
+      "/images/projects/kochi-transit-go/3.png",
+      "/images/projects/kochi-transit-go/4.png"
+    ],
+
+    role: "Sole Developer",
+    timeline: "June 2026",
+    focus: "Privacy-first Transit Companion",
+    tech: "Android, Kotlin, GTFS, SQLite",
+
+    overview: "Kochi Transit Go is the definitive, privacy-respecting transit companion for the Kochi Metro system. Built from the ground up as a native Android app, it provides instantaneous access to train schedules, routes, and fare calculations without ever requiring an internet connection.",
+    whyItExists: "Privacy First: No analytics, no ad trackers, and no unnecessary permissions. Your location data stays on your device. The app operates fully offline with bundled GTFS schedules.",
+
+    keyHighlightsTitle: "Features",
+    keyHighlights: [
+      { title: "Offline Mode", description: "All official GTFS schedules are bundled locally. Plan trips even deep underground." },
+      { title: "Instant Fare Calculator", description: "Know exactly how much your trip will cost before you reach the station." },
+      { title: "GPS Station Locator", description: "Automatically detects the nearest metro station using your device's location." },
+      { title: "Live Tracker", description: "See upcoming departures and platform directions." },
+      { title: "Open Source", description: "Fully open-source under the MIT License and uses official Kochi Metro Open GTFS data." }
+    ]
+  },
+
+  {
+    id: "aerisiq",
+    category: "Safety & AI Utility",
+    title: "AerisIQ",
+    description: "Privacy-first disaster risk intelligence and local safety utility for Android, featuring an offline LLM.",
+    image: "/images/projects/aerisiq/13.png",
+    bgClass: "bg-blue",
+    tags: ["Android", "Kotlin", "On-Device AI", "Jetpack Compose"],
+    size: "large",
+    isMobileApp: true,
+    links: [
+      { url: "https://github.com/agnelfranciso/AerisIQ", label: "View Source Code", type: "github" },
+      { url: "/project-files/aerisiq/AerisIQ-release.apk", label: "Download App", type: "download", fileName: "AerisIQ-release.apk", fileSize: "26.5 MB" }
+    ],
+    screenshots: [
+      "/images/projects/aerisiq/13.png",
+      "/images/projects/aerisiq/15.png",
+      "/images/projects/aerisiq/16.png",
+      "/images/projects/aerisiq/14.png",
+      "/images/projects/aerisiq/17.png",
+      "/images/projects/aerisiq/18.png"
+    ],
+
+    role: "Lead Developer",
+    timeline: "June 2026 (Made in 2 days)",
+    focus: "Privacy-first Disaster Risk Intelligence",
+    tech: "Kotlin, Jetpack Compose, LiteRT, MediaPipe, Qwen 2.5 0.5B",
+
+    overview: "AerisIQ is a Free and Open Source Software (FOSS), privacy-first disaster risk intelligence and local safety utility application for Android. The app queries public warning feeds, parses raw disaster bulletins, combines them with live local weather telemetry, and processes the combined datasets using an offline Large Language Model (LLM) running securely in the device's sandbox.",
+    whyItExists: "Built to operate under strict user-sovereignty principles. 100% offline AI ensures safety summaries are executed client-side with no chat logs transmitted. It uses a zero-telemetry approach, meaning no analytical trackers or advertisement loggers.",
+
+    keyHighlightsTitle: "Key Features",
+    keyHighlights: [
+      { title: "100% Offline AI", description: "Safety summaries are executed client-side using Qwen 2.5 0.5B Instruct model via MediaPipe LLM Inference APIs." },
+      { title: "Geocoding API", description: "Coordinates are resolved via client-side API requests. If location permissions are withheld, users can select regions manually." },
+      { title: "Safety Lock", description: "For extreme warnings, a 6-step checklist card is displayed. Users must check off all procedures before AI analysis is unlocked." },
+      { title: "Premium UI", description: "Features a premium dark glassmorphic design system using Google Sans Flex variable-axis typography and directional page-slide transitions." },
+      { title: "Zero Telemetry", description: "No trackers are present. Clearing app storage permanently deletes all local files and AI weights." }
+    ]
+  },
+
+  {
+    id: "ente-nadu",
+    category: "Community",
+    title: "Ente Nadu",
+    description: "Connects local service providers with community members.",
+    image: "/images/projects/entenadu.png",
+    bgClass: "bg-yellow",
+    tags: ["React Native", "Firebase"],
+    size: "normal",
+    links: [{ url: "https://sarvodayam.in/entenadu", label: "Visit Live Site", type: "live" }],
+
+    role: "Developer Intern",
+    timeline: "2023 - 2024",
+    impact: "100+ Providers",
+    tech: "React Native, Firebase",
+
+    overview: "Ente Nadu is a student-driven initiative developed during my internship to address the disconnect between skilled local workers and residents needing services. It serves as a digital directory and connection platform for the village.",
+    impactDesc: "The platform successfully onboarded over 100 service providers, ranging from electricians to plumbers, ensuring they have better visibility. It has strengthened community bonds and supported the local micro-economy.",
+
+    keyHighlightsTitle: "Key Highlights",
+    keyHighlights: [
+      { title: "Service Connections", description: "Bridging the gap between local service providers and households." },
+      { title: "Localized Content", description: "Tailored specifically for the needs of the village community." },
+      { title: "Real-time Updates", description: "Live notifications for service availability and community news." }
+    ]
+  },
+
+  {
+    id: "bussiler",
+    category: "Public Transport",
+    title: "Bussiler",
+    description: "Real-time bus schedules and route information for Velur.",
+    image: "/images/projects/bussiler.png",
+    bgClass: "bg-blue",
+    tags: ["HTML", "CSS", "JS"],
+    size: "normal",
+    links: [{ url: "https://bussiler-app.netlify.app/", label: "Visit Live Site", type: "live" }],
+
+    role: "Full Stack Lead",
+    timeline: "Aug 2024 - Present",
+    status: "Live Beta",
+    tech: "HTML, CSS, JS",
+
+    challenge: "Commuters in Velur faced a daily struggle with unpredictable bus timings and lack of route information. The goal was to create a centralized, easily accessible digital platform to bridge this information gap.",
+    solution: "Bussiler provides a lightweight, user-friendly interface for passengers to check schedules instantly. By digitizing manual timetables, we've reduced waiting times and improved travel planning for hundreds of daily commuters.",
+
+    keyHighlightsTitle: "Key Features",
+    keyHighlights: [
+      { title: "Real-time Schedules", description: "Accurate departure and arrival times for all buses in Velur." },
+      { title: "Route Details", description: "Comprehensive route maps and stop information." },
+      { title: "Upcoming Predictions", description: "Smart algorithms to predict the next available bus." },
+      { title: "Mobile First", description: "Optimized for seamless experience on all mobile devices." }
+    ]
+  },
+
+  {
     id: "cineseat",
     category: "Backend Architecture • Cinema Intelligence & Spatial Geometry",
     title: "CineSeat API",
@@ -140,86 +277,6 @@ export const projectsData: Project[] = [
   },
 
   {
-    id: "aerisiq",
-    category: "Safety & AI Utility",
-    title: "AerisIQ",
-    description: "Privacy-first disaster risk intelligence and local safety utility for Android, featuring an offline LLM.",
-    image: "/images/projects/aerisiq/13.png",
-    bgClass: "bg-blue",
-    tags: ["Android", "Kotlin", "On-Device AI", "Jetpack Compose"],
-    size: "large",
-    isMobileApp: true,
-    links: [
-      { url: "https://github.com/agnelfranciso/AerisIQ", label: "View Source Code", type: "github" },
-      { url: "/project-files/aerisiq/AerisIQ-release.apk", label: "Download App", type: "download", fileName: "AerisIQ-release.apk", fileSize: "26.5 MB" }
-    ],
-    screenshots: [
-      "/images/projects/aerisiq/13.png",
-      "/images/projects/aerisiq/15.png",
-      "/images/projects/aerisiq/16.png",
-      "/images/projects/aerisiq/14.png",
-      "/images/projects/aerisiq/17.png",
-      "/images/projects/aerisiq/18.png"
-    ],
-
-    role: "Lead Developer",
-    timeline: "June 2026 (Made in 2 days)",
-    focus: "Privacy-first Disaster Risk Intelligence",
-    tech: "Kotlin, Jetpack Compose, LiteRT, MediaPipe, Qwen 2.5 0.5B",
-
-    overview: "AerisIQ is a Free and Open Source Software (FOSS), privacy-first disaster risk intelligence and local safety utility application for Android. The app queries public warning feeds, parses raw disaster bulletins, combines them with live local weather telemetry, and processes the combined datasets using an offline Large Language Model (LLM) running securely in the device's sandbox.",
-    whyItExists: "Built to operate under strict user-sovereignty principles. 100% offline AI ensures safety summaries are executed client-side with no chat logs transmitted. It uses a zero-telemetry approach, meaning no analytical trackers or advertisement loggers.",
-
-    keyHighlightsTitle: "Key Features",
-    keyHighlights: [
-      { title: "100% Offline AI", description: "Safety summaries are executed client-side using Qwen 2.5 0.5B Instruct model via MediaPipe LLM Inference APIs." },
-      { title: "Geocoding API", description: "Coordinates are resolved via client-side API requests. If location permissions are withheld, users can select regions manually." },
-      { title: "Safety Lock", description: "For extreme warnings, a 6-step checklist card is displayed. Users must check off all procedures before AI analysis is unlocked." },
-      { title: "Premium UI", description: "Features a premium dark glassmorphic design system using Google Sans Flex variable-axis typography and directional page-slide transitions." },
-      { title: "Zero Telemetry", description: "No trackers are present. Clearing app storage permanently deletes all local files and AI weights." }
-    ]
-  },
-  {
-    id: "kochitransitgo",
-    category: "Public Transport",
-    title: "Kochi Transit Go",
-    description: "Offline Kochi Metro route planner and fare calculator. Fast, Free & Private.",
-    image: "/images/projects/kochi-transit-go/1.png",
-    bgClass: "bg-green",
-    tags: ["Android", "Kotlin", "Offline", "GTFS"],
-    size: "large",
-    isMobileApp: true,
-    links: [
-      { url: "https://f-droid.org/en/packages/app.agneldev.kochitransitgo/", label: "Download from F-Droid", type: "fdroid" },
-      { url: "https://github.com/agnelfranciso/Kochi-Transit-Go", label: "Android Source Code", type: "github" },
-      { url: "https://github.com/agnelfranciso/Kochi-Transit-Go-Web", label: "Web Source Code", type: "github" },
-      { url: "https://kochitransitgo.vercel.app/", label: "Web Portal", type: "live" }
-    ],
-    screenshots: [
-      "/images/projects/kochi-transit-go/1.png",
-      "/images/projects/kochi-transit-go/2.png",
-      "/images/projects/kochi-transit-go/3.png",
-      "/images/projects/kochi-transit-go/4.png"
-    ],
-
-    role: "Sole Developer",
-    timeline: "June 2026",
-    focus: "Privacy-first Transit Companion",
-    tech: "Android, Kotlin, GTFS, SQLite",
-
-    overview: "Kochi Transit Go is the definitive, privacy-respecting transit companion for the Kochi Metro system. Built from the ground up as a native Android app, it provides instantaneous access to train schedules, routes, and fare calculations without ever requiring an internet connection.",
-    whyItExists: "Privacy First: No analytics, no ad trackers, and no unnecessary permissions. Your location data stays on your device. The app operates fully offline with bundled GTFS schedules.",
-
-    keyHighlightsTitle: "Features",
-    keyHighlights: [
-      { title: "Offline Mode", description: "All official GTFS schedules are bundled locally. Plan trips even deep underground." },
-      { title: "Instant Fare Calculator", description: "Know exactly how much your trip will cost before you reach the station." },
-      { title: "GPS Station Locator", description: "Automatically detects the nearest metro station using your device's location." },
-      { title: "Live Tracker", description: "See upcoming departures and platform directions." },
-      { title: "Open Source", description: "Fully open-source under the MIT License and uses official Kochi Metro Open GTFS data." }
-    ]
-  },
-  {
     id: "castlink",
     category: "Entertainment",
     title: "CastLink",
@@ -256,6 +313,7 @@ export const projectsData: Project[] = [
       { title: "High Performance", description: "Built on Next.js 16 App Router with robust, resilient API fetching that automatically handles strict rate limits." }
     ]
   },
+
   {
     id: "semfolder",
     category: "Academic Productivity",
@@ -285,6 +343,7 @@ export const projectsData: Project[] = [
       { title: "Local-First", description: "All data stored locally on your device. Fast, private, and works completely offline." }
     ]
   },
+
   {
     id: "osimposter",
     category: "Game & Entertainment",
@@ -319,59 +378,7 @@ export const projectsData: Project[] = [
       { title: "100% Ad-Free & Open Source", description: "No microtransactions, no pop-ups, no paywalls. Just pure, uninterrupted fun." }
     ]
   },
-  {
-    id: "bussiler",
-    category: "Public Transport",
-    title: "Bussiler",
-    description: "Real-time bus schedules and route information for Velur.",
-    image: "/images/projects/bussiler.png",
-    bgClass: "bg-blue",
-    tags: ["HTML", "CSS", "JS"],
-    size: "normal",
-    links: [{ url: "https://bussiler-app.netlify.app/", label: "Visit Live Site", type: "live" }],
 
-    role: "Full Stack Lead",
-    timeline: "Aug 2024 - Present",
-    status: "Live Beta",
-    tech: "HTML, CSS, JS",
-
-    challenge: "Commuters in Velur faced a daily struggle with unpredictable bus timings and lack of route information. The goal was to create a centralized, easily accessible digital platform to bridge this information gap.",
-    solution: "Bussiler provides a lightweight, user-friendly interface for passengers to check schedules instantly. By digitizing manual timetables, we've reduced waiting times and improved travel planning for hundreds of daily commuters.",
-
-    keyHighlightsTitle: "Key Features",
-    keyHighlights: [
-      { title: "Real-time Schedules", description: "Accurate departure and arrival times for all buses in Velur." },
-      { title: "Route Details", description: "Comprehensive route maps and stop information." },
-      { title: "Upcoming Predictions", description: "Smart algorithms to predict the next available bus." },
-      { title: "Mobile First", description: "Optimized for seamless experience on all mobile devices." }
-    ]
-  },
-  {
-    id: "ente-nadu",
-    category: "Community",
-    title: "Ente Nadu",
-    description: "Connects local service providers with community members.",
-    image: "/images/projects/entenadu.png",
-    bgClass: "bg-yellow",
-    tags: ["React Native", "Firebase"],
-    size: "normal",
-    links: [{ url: "https://sarvodayam.in/entenadu", label: "Visit Live Site", type: "live" }],
-
-    role: "Developer Intern",
-    timeline: "2023 - 2024",
-    impact: "100+ Providers",
-    tech: "React Native, Firebase",
-
-    overview: "Ente Nadu is a student-driven initiative developed during my internship to address the disconnect between skilled local workers and residents needing services. It serves as a digital directory and connection platform for the village.",
-    impactDesc: "The platform successfully onboarded over 100 service providers, ranging from electricians to plumbers, ensuring they have better visibility. It has strengthened community bonds and supported the local micro-economy.",
-
-    keyHighlightsTitle: "Key Highlights",
-    keyHighlights: [
-      { title: "Service Connections", description: "Bridging the gap between local service providers and households." },
-      { title: "Localized Content", description: "Tailored specifically for the needs of the village community." },
-      { title: "Real-time Updates", description: "Live notifications for service availability and community news." }
-    ]
-  },
   {
     id: "ampa",
     category: "Data Science & AI",
@@ -403,6 +410,7 @@ export const projectsData: Project[] = [
       { title: "Live Data Integration", description: "Fetches real-time, in-progress World Cup 2026 scores. Real outcomes overwrite predictions dynamically." }
     ]
   },
+
   {
     id: "agnel-forms",
     category: "SaaS & Tools",
@@ -432,6 +440,7 @@ export const projectsData: Project[] = [
       { title: "Granular Controls", description: "Set expiration dates, limit response counts to prevent spam, or restrict submissions to one per person effortlessly." }
     ]
   },
+
   {
     id: "velurpedia",
     category: "Community & Wiki",
@@ -461,6 +470,7 @@ export const projectsData: Project[] = [
       { title: "Locally Focused", description: "Unlike broader platforms, VelurPedia features guidelines tailored for a locally-focused wiki, documenting everything from local landmarks to stories." }
     ]
   },
+
   {
     id: "kerala-holiday-api",
     category: "AI",
