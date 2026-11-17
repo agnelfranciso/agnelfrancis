@@ -2268,6 +2268,8 @@ button, .btn-primary, .btn-secondary {
 .home-projects-section .card-info h3 {
     font-size: 1.35rem;
     margin-bottom: 0.35rem;
+    word-break: keep-all;
+    overflow-wrap: normal;
 }
 
 .home-projects-section .card-info p {
@@ -2523,11 +2525,11 @@ button, .btn-primary, .btn-secondary {
 
 
 .card-info h3 {
-
-    font-size: 2.5rem;
-
+    font-size: clamp(1.8rem, 3.2vw, 2.5rem);
     margin-bottom: 0.8rem;
-
+    word-break: keep-all;
+    overflow-wrap: normal;
+    line-height: 1.15;
 }
 
 
@@ -3336,7 +3338,12 @@ button, .btn-primary, .btn-secondary {
 
     .abstract-pill { width: 160px; height: 80px; }
 
-    .card-info h3 { font-size: 2rem; }
+    .card-info h3 {
+        font-size: clamp(1.3rem, 5.5vw, 1.75rem);
+        word-break: keep-all;
+        overflow-wrap: normal;
+        line-height: 1.15;
+    }
 
     
 
@@ -3384,7 +3391,15 @@ button, .btn-primary, .btn-secondary {
 
     .hero-title { font-size: 2.4rem; }
 
-    .page-title { font-size: 2.4rem; }
+    .card-info h3 {
+        font-size: clamp(1.1rem, 5vw, 1.45rem);
+        word-break: keep-all;
+        overflow-wrap: normal;
+        letter-spacing: -0.01em;
+        line-height: 1.15;
+    }
+
+    .page-title { font-size: clamp(1.4rem, 6vw, 2rem) !important; word-break: keep-all; overflow-wrap: normal; }
 
     .footer-content h2 { font-size: 1.8rem; }
 

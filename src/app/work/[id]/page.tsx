@@ -51,7 +51,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
             </span>
           )}
         </div>
-        <h1 className="page-title" style={{marginTop: "0.5rem", fontSize: "4.5vw", marginBottom: "1.5rem"}}>{project.title}</h1>
+        <h1 className="page-title" style={{marginTop: "0.5rem", fontSize: "clamp(1.75rem, 4.5vw, 4.5rem)", marginBottom: "1.5rem", wordBreak: "keep-all", overflowWrap: "normal", lineHeight: "1.15"}}>{project.title}</h1>
         <p style={{fontSize: "1.4rem", color: "var(--text-muted)", maxWidth: "800px", lineHeight: "1.6"}}>{project.description}</p>
         
         <div className="tags" style={{marginTop: "2.5rem"}}>

@@ -109,7 +109,7 @@ export default function Projects({ limit }: { limit?: number }) {
                   </span>
                 </div>
               )}
-              <h3 style={{ color: 'var(--text-main)' }}>{project.title}</h3>
+              <h3 style={{ color: 'var(--text-main)', wordBreak: 'keep-all', overflowWrap: 'normal' }}>{project.title}</h3>
               <p style={{ color: 'var(--text-muted)' }}>{project.description}</p>
               <div className="tags">
                 {project.tags.map((tag) => (
