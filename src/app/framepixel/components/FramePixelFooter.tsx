@@ -21,7 +21,7 @@ export default function FramePixelFooter() {
               </span>
             </Link>
             <p className="fp-footer-summary">
-              Digital solutions and web-based games. We help businesses grow with custom websites and engage users with interactive gaming experiences. Founded by Agnel Francis.
+              An independent, non-registered company built by students. We build showcase-quality web platforms and multiplayer games with equal credit for every contributor. Founded by Agnel Francis.
             </p>
           </div>
 

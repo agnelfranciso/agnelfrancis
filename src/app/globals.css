@@ -515,11 +515,15 @@ h1, h2, h3, h4, h5, h6, .logo {
 
 .hamburger .line {
 
-    width: 100%;
+    display: block !important;
 
-    height: 3px;
+    width: 100% !important;
 
-    background-color: var(--text-main);
+    height: 3px !important;
+
+    min-height: 3px !important;
+
+    background-color: var(--text-main, #1F1F1F) !important;
 
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 

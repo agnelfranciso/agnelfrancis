@@ -103,7 +103,7 @@ export async function GET() {
       I am a developer and designer passionate about building scalable digital solutions, interactive web-based games, and privacy-conscious software that blend clean aesthetics with thoughtful logic.
     </p>
     <p>
-      As the <strong>Founder of FramePixel</strong>, I direct a collaborative digital collective with friends and fellow engineers, building bespoke web solutions, internal developer utilities, and web-based party/puzzle games designed to deliver memorable, high-engagement user experiences.
+      As the <strong>Founder of FramePixel</strong>, I direct an independent, non-registered collaborative company built by students, engineering showcase-quality web utilities, transit platforms, and real-time multiplayer games where every contributor shares equal credit.
     </p>
   </section>
 

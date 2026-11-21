@@ -62,7 +62,7 @@ export default function FramePixelClient() {
           <div className="fp-hero-content">
             <div className="fp-status-badge">
               <span className="fp-pulse-dot" />
-              <span>Velur Studio &bull; Accepting Q3&ndash;Q4 Commissions</span>
+              <span>Velur Studio &bull; Non-Registered Student Collective</span>
             </div>
 
             <h1 className="fp-hero-headline">

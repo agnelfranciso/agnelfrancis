@@ -69,9 +69,8 @@ export default function FramePixelHeader() {
               aria-label="Toggle Navigation Drawer"
               onClick={() => setDrawerOpen(true)}
             >
-              <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <line x1="4" x2="20" y1="8" y2="8" strokeLinecap="round" />
-                <line x1="4" x2="20" y1="16" y2="16" strokeLinecap="round" />
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
 

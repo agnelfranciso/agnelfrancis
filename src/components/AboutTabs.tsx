@@ -36,7 +36,7 @@ export default function AboutTabs() {
           <div className="about-pane animate-fade-in">
             {/* Bio Paragraphs */}
             <p className="about-lead-text">
-              Hi, I&apos;m <span className="highlight-text">Agnel Francis Olakkengil</span> — a full-stack developer, designer, and the <strong>Founder of FramePixel</strong>. FramePixel serves as a collaborative studio domain created with friends and fellow engineers to craft high-utility web platforms, transit utilities, and interactive experiences.
+              Hi, I&apos;m <span className="highlight-text">Agnel Francis Olakkengil</span> — a full-stack developer, designer, and the <strong>Founder of FramePixel</strong>. FramePixel is an independent, non-registered company built by students to engineer showcase-quality web platforms, transit utilities, and multiplayer games where all contributors share credit equally.
             </p>
             <p className="about-sub-text">
               Currently pursuing Computer Science and Engineering (Cybersecurity) at <strong>Jyothi Engineering College (Autonomous), Cheruthuruthy</strong>. My passion lies at the intersection of technology, creativity, and play.
@@ -67,7 +67,7 @@ export default function AboutTabs() {
                 </div>
                 <h2 className="framepixel-title">FramePixel</h2>
                 <p className="framepixel-desc">
-                  FramePixel is a collaborative creative and technical domain where friends come together to engineer meaningful digital products. From hyper-local transit platforms to real-time multiplayer games, we focus on software that solves authentic everyday needs.
+                  FramePixel is an independent, non-registered collaborative company and studio domain where students build showcase-quality products together. From hyper-local transit platforms to real-time multiplayer games, every contributor shares equal credit on software complete enough to be proud of.
                 </p>
               </div>
 

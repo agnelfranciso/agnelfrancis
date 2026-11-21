@@ -439,7 +439,7 @@ export default function CollaboratorsPage() {
                 margin: "0 0 1.5rem 0",
               }}
             >
-              At FramePixel, we discard bureaucracy. Each project brings together dedicated collaborators who care about crafting software that solves authentic friction &mdash; from local transit scheduling in Kerala to multiplayer experiences played across continents.
+              FramePixel is an independent, non-registered company built by students. We operate with a simple rule: one shared domain, equal credit for every contributor, personal portfolios linked directly, and software complete enough to be proud of.
             </p>
             <Link href="/framepixel#contact" className="fp-btn-primary">
               Work With FramePixel &rarr;
