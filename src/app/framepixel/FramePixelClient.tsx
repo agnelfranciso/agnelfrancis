@@ -89,12 +89,12 @@ export default function FramePixelClient() {
                 <span className="fp-hero-metric-value">35K+</span>
                 <span className="fp-hero-metric-label">Daily Commuters</span>
               </div>
-              <div style={{ color: "var(--fp-ink-border)" }}>•</div>
+              <div className="fp-metric-divider" style={{ color: "var(--fp-ink-border)" }}>•</div>
               <div className="fp-hero-metric-item">
                 <span className="fp-hero-metric-value">&lt;50ms</span>
                 <span className="fp-hero-metric-label">Sync Latency</span>
               </div>
-              <div style={{ color: "var(--fp-ink-border)" }}>•</div>
+              <div className="fp-metric-divider" style={{ color: "var(--fp-ink-border)" }}>•</div>
               <div className="fp-hero-metric-item">
                 <span className="fp-hero-metric-value">100%</span>
                 <span className="fp-hero-metric-label">Free &amp; Open Utilities</span>

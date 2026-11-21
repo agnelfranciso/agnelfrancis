@@ -83,6 +83,7 @@ export default function BussilerCaseStudyPage() {
 
         {/* Featured Android Showcase Viewport */}
         <div
+          className="fp-case-showcase-box"
           style={{
             backgroundColor: "#0F0F10",
             border: "1px solid rgba(255, 255, 255, 0.1)",
@@ -118,7 +119,7 @@ export default function BussilerCaseStudyPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
               gap: "1.5rem",
               alignItems: "center",
               justifyItems: "center",

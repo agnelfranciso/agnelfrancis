@@ -75,7 +75,7 @@ export default function FramePixelHeader() {
               </svg>
             </button>
 
-            <Link href="/framepixel#contact" className="fp-btn-primary">
+            <Link href="/framepixel#contact" className="fp-btn-primary fp-header-cta">
               Let&apos;s Talk
             </Link>
           </div>

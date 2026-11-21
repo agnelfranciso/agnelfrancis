@@ -48,6 +48,7 @@ export default function CollaboratorsPage() {
         {/* Founder & Owner Spotlight Card */}
         <section style={{ marginBottom: "4rem" }}>
           <div
+            className="fp-founder-card"
             style={{
               backgroundColor: "var(--fp-warm-cream-card)",
               border: "1px solid var(--fp-ink-border)",
@@ -166,12 +167,13 @@ export default function CollaboratorsPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
               gap: "2rem",
             }}
           >
             {/* Collaborator 01: Devanarayan T N */}
             <div
+              className="fp-collaborator-card"
               style={{
                 backgroundColor: "var(--fp-warm-cream-card)",
                 border: "1px solid var(--fp-ink-border)",
@@ -249,6 +251,7 @@ export default function CollaboratorsPage() {
 
             {/* Collaborator 02: Devamshu P Suresh */}
             <div
+              className="fp-collaborator-card"
               style={{
                 backgroundColor: "var(--fp-warm-cream-card)",
                 border: "1px solid var(--fp-ink-border)",
@@ -326,6 +329,7 @@ export default function CollaboratorsPage() {
 
             {/* Collaborator 03: Nakul Suresh */}
             <div
+              className="fp-collaborator-card"
               style={{
                 backgroundColor: "var(--fp-warm-cream-card)",
                 border: "1px solid var(--fp-ink-border)",
