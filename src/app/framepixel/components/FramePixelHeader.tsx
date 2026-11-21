@@ -69,9 +69,9 @@ export default function FramePixelHeader() {
               aria-label="Toggle Navigation Drawer"
               onClick={() => setDrawerOpen(true)}
             >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              <span className="fp-menu-line" />
+              <span className="fp-menu-line" />
+              <span className="fp-menu-line" />
             </button>
 
             <Link href="/framepixel#contact" className="fp-btn-primary fp-header-cta">
