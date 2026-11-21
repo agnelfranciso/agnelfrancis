@@ -116,6 +116,12 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
         
         {/* Meta Sidebar */}
         <div className="project-meta">
+            {project.client && (
+                <div>
+                    <h4 style={{fontFamily: "PPSupplyMono, monospace", fontSize: "0.9rem", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "0.5rem"}}>Client</h4>
+                    <p style={{fontSize: "1.2rem", fontWeight: "bold"}}>{project.client}</p>
+                </div>
+            )}
             {project.role && (
                 <div>
                     <h4 style={{fontFamily: "PPSupplyMono, monospace", fontSize: "0.9rem", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "0.5rem"}}>Role</h4>

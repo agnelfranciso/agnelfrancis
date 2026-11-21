@@ -1,0 +1,128 @@
+---
+title: "More Than a Bus Timetable: How I Tried to Solve a Local Transit Problem in Velur"
+date: "2026-02-18"
+excerpt: "An idea that started with a frustrating timetable image, went through multiple rebuilds, and eventually became one of the longest and most meaningful projects of my early development journey."
+tags: ["Transit", "Android", "Web Development", "Bussiler", "Vibecoding", "AI", "Retrospective"]
+---
+
+*An idea that started with a frustrating timetable image, went through multiple rebuilds, and eventually became one of the longest and most meaningful projects of my early development journey.*
+
+Some projects are built to experiment with new technologies. Some are built to solve complex technical challenges. And then there are projects that begin with a rather ordinary inconvenience in everyday life. This one belongs to the third category.
+
+I genuinely cannot remember whether I started this in 2022 or 2023. What I do remember is the sheer obsession that followed: for years, this was practically the *only* major project I worked on. Aside from minor HTML experiments, I didn't touch anything long-form or serious like this. I bought and hosted multiple domains for this single concept across its various lives—`busiler`, `bussilier`, `bussiler`, `bussily`. 
+
+Between 2022 and 2025, I rebuilt it repeatedly, experimented across web and mobile, scrapped codebases, redesigned interfaces, and eventually built an Android application that I was genuinely proud of. It wasn't the most technically flawless system ever created, but it was the crucible that turned me into the developer I am today.
+
+This is the story of that project.
+
+---
+
+## 01. The Problem: A Giant, Blurry Image
+
+It all started with a simple question: **Why isn't there a proper bus timetable application for Velur?**
+
+Whenever I wanted to check a bus timing, I had to rely on locally circulated timetable images. They were essentially large graphics containing multiple routes and departure times. Finding a bus was an ordeal: opening a massive image, zooming in, panning across endless columns, identifying a route, and squinting to verify the timing. Half the time, the data was outdated or inaccurate anyway.
+
+All I wanted was an instant answer to one question: *When is the next bus?*
+
+Imagine opening an app, picking your boarding point, searching your destination, and immediately seeing upcoming departures—no zooming, no squinting, no hassle. I wasn't trying to replace a major municipal transit network; I just wanted to solve an annoying, real-world friction point for my community.
+
+---
+
+## 02. The First Version: Raw HTML, CSS, and Early AI
+
+At that point, I was still learning web development fundamentals. And truth be told, Bussiler started with AI from day one. 
+
+I was copying and pasting snippets of code from early ChatGPT into raw HTML files. Back then, response token limits were so restrictive that functions would cut off mid-sentence. I’d prompt for the second half, paste it in, and pray the two halves stitched together and rendered.
+
+It worked—barely. Compared to a static JPG, having a website where you could browse routes was already an upgrade. But I quickly ran into the real bottleneck: **data management**.
+
+Parsing schedules, maintaining routes, and synchronizing timings across stops was far harder than building a UI. The site ended up filled with stale entries and formatting inconsistencies. I had built an interface, but I hadn’t solved the data pipeline.
+
+---
+
+## 03. The Web Rebuild: React and Next.js
+
+Later, as I discovered React, Next.js, and modern component architecture, I started over.
+
+The second version looked significantly better. Navigation was slick, sections were modular, and the visual hierarchy felt modern. But I soon hit a sobering realization: **changing frameworks doesn't fix broken data**. The parsing remained brittle, the schedules were still tedious to maintain manually, and the underlying data problems persisted. 
+
+It was a crucial lesson: software engineering isn't just about pretty UI libraries. A slick frontend on top of unreliable data is still unreliable software.
+
+---
+
+## 04. The Android Pivot: Why Mobile Made Sense
+
+At some point, the web felt like the wrong form factor. When people need bus timings, they are standing on a street corner or walking to a stop with a phone in their hand. A dedicated Android app promised faster access, offline caching, and push notifications.
+
+My initial Android attempts, however, were rough. The UI felt incomplete and clunky, leading me to abandon that early APK. 
+
+Before returning for a final attempt, I did something crucial: I stepped away and dived into other projects. That detour gave me perspective. I tackled diverse architectures, broadened my toolkit, and matured as an engineer. When I finally came back to Bussiler, I knew exactly what needed to be built.
+
+---
+
+## 05. 2025: The Complete Android Experience
+
+In 2025, I committed to building the definitive native Android application. It wasn't just a list of static times; it was an authentic transit utility:
+
+- **Structured Route Hierarchy & Search**: Instant, searchable access to destinations without paging through complex timetables.
+- **Corridor Countdowns**: Color-coded live countdown timers showing upcoming buses along major corridors (Thrissur, Wadakkanchery, Kechery).
+- **Bus Timing Alerts**: Notification alarms to remind commuters before a bus departs.
+- **100% Offline Access**: The entire day's timetable bundled locally, ensuring zero reliance on patchy mobile network connectivity.
+- **Custom Boarding Points**: Customizable boarding stops within Velur for hyper-local accuracy.
+- **Shareable Timing Cards**: Clean, exportable cards to share specific bus timings with friends and family without forwarding a massive image.
+
+For the first time in years, the application matched the exact vision in my head.
+
+---
+
+## 06. The Plan That Never Happened—and Losing Years of Work
+
+After completing the app, my next milestone was a centralized cloud backend to sync live schedule corrections directly to devices without requiring APK updates.
+
+Then disaster struck.
+
+A severe malware infection forced me to wipe my laptop completely. Because I had kept the latest source code strictly local and hadn't backed up the completed Android repository to GitHub, the entire project was wiped out in an afternoon. 
+
+Years of iterative work, custom layouts, and local database logic vanished instantly. It was a crushing, unforgettable lesson in the non-negotiable importance of version control and remote backups.
+
+---
+
+## 07. Vibecoding: Then and Now in 2026
+
+I was a vibecoding developer then, and I am a proud vibecoding developer now in 2026.
+
+Critics love to label AI-assisted programming as "AI slop" or dismiss it as fragile, low-effort work. But looking back at everything I built, I poured genuine thought into making software that solved real human needs. In fact, dissecting AI code across restrictive token limits was my programming school—it taught me how code breaks, how browsers parse logic, and how to debug under pressure.
+
+When I started Bussiler, I was stitching together half-prompts from ChatGPT into raw HTML files, hoping the syntax aligned. Today in 2026, the tooling has evolved to where I can architect, scaffold, and deploy full-stack systems from a single prompt.
+
+AI doesn't replace developer taste or empathy; it magnifies it. The AI didn't care about a confusing bus timetable in Velur—I did. It gave me the leverage to build when I was still learning the syntax, and today it gives me the leverage to build faster, cleaner, and more ambitiously than ever before.
+
+---
+
+## 08. Looking Back: Zero Regrets
+
+It is now 2026. I've moved on to complex distributed systems, backend architectures, and hackathons, but Bussiler remains the foundation of everything I know.
+
+Was it my best project? Technically, no. The architecture had flaws, data management was fragile, and I lost the final source code. 
+
+Yet I am not ashamed of a single hour I spent chasing it. I don't consider those years wasted. Every failed deployment, every domain registered, every corrupt local database, and every rewritten screen taught me what it truly means to build software for the real world. Bussiler was the first major software project of my life—it fundamentally shaped who I am and inspired me to dedicate my entire career to the world of computer engineering.
+
+---
+
+## 09. The Ambition That Stays With Me
+
+I will never forget this project. Just like I woke up every day back then finding ways to make it better, my mind is still stuck with it because the core problem is still not truly solved. 
+
+If I get enough time and the right opportunity in the future, I want to return to it. My dream is to engage directly with the relevant transport authorities in Kerala, secure official data access, and build unified real-time live tracking for all private and KSRTC buses across the state. 
+
+Is it wildly ambitious? Absolutely. Many would say it's never going to happen. But that audacious hope to revolutionize public bus transit in Kerala is the exact fire that started this journey—and I know I will find the time to make it happen, just like I did every single day before.
+
+---
+
+If you'd like to explore the project or test the application:
+
+- **Case Study**: [Explore the Bussiler Case Study](/work/bussiler)
+- **Android App**: [Download Bussiler APK (22 MB)](/project-files/bussiler/Bussiler.apk)
+
+I’d love to hear your thoughts, transit experiences, or ideas—please share your valuable feedback through my [Contact Page](/contact).

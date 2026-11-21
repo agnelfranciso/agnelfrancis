@@ -11,6 +11,7 @@ export interface Project {
   badge?: string;
   links?: { url: string, label: string, type: 'live' | 'github' | 'fdroid' | 'playstore' | 'download', fileName?: string, fileSize?: string }[];
   // Detail page specifics
+  client?: string;
   role?: string;
   timeline?: string;
   focus?: string;
@@ -115,56 +116,87 @@ export const projectsData: Project[] = [
 
   {
     id: "ente-nadu",
-    category: "Community",
+    category: "Community & Civic Tech",
     title: "Ente Nadu",
-    description: "Connects local service providers with community members.",
+    description: "Hyper-local community directory connecting local service providers with village households, developed under the Skill Share initiative by Samagra Shiksha Kerala (VHSE).",
     image: "/images/projects/entenadu.png",
     bgClass: "bg-yellow",
-    tags: ["React Native", "Firebase"],
+    tags: ["React Native", "Firebase", "Civic Tech", "Skill Share"],
     size: "normal",
     links: [{ url: "https://sarvodayam.in/entenadu", label: "Visit Live Site", type: "live" }],
 
-    role: "Developer Intern",
+    client: "Skill Share • Samagra Shiksha Kerala (VHSE) / Sarvodayam VHSS",
+    role: "Student Developer & Lead Architect",
     timeline: "2023 - 2024",
+    status: "Completed Initiative",
+    focus: "Community Skills & Vocational Connection",
     impact: "100+ Providers",
-    tech: "React Native, Firebase",
+    tech: "React Native, Firebase, Cloud Firestore",
 
-    overview: "Ente Nadu is a student-driven initiative developed during my internship to address the disconnect between skilled local workers and residents needing services. It serves as a digital directory and connection platform for the village.",
-    impactDesc: "The platform successfully onboarded over 100 service providers, ranging from electricians to plumbers, ensuring they have better visibility. It has strengthened community bonds and supported the local micro-economy.",
+    overview: "Ente Nadu was developed as part of Skill Share, a community-focused initiative implemented by Samagra Shiksha Kerala under Kerala's Vocational Higher Secondary Education (VHSE) program. The core vision of Skill Share is to connect students' practical vocational competencies directly with local community needs. Built at Sarvodayam VHSS Aryampadam, Ente Nadu acts as a centralized digital directory and service-matching platform bridging skilled village professionals (electricians, plumbers, artisans, and technicians) directly with households.",
+    whyItExists: "In rural and semi-urban panchayats, households often struggle to quickly locate trusted local trade workers, while skilled vocational professionals lack a formal digital presence. Developed under the Samagra Shiksha Kerala Skill Share umbrella, Ente Nadu was created to bridge this divide, promote local vocational employment, and stimulate a self-reliant village micro-economy.",
+    challenge: "Creating an ultra-accessible, lightweight mobile platform that non-tech-savvy village residents and local service providers could navigate effortlessly under inconsistent rural mobile data connections.",
+    solution: "Engineered a clean React Native mobile interface with Firebase real-time data sync, categorized service directories, one-tap direct calling, and offline caching for essential contact directories.",
+    impactDesc: "Successfully cataloged and connected over 100 verified service providers across the local panchayat, enabling seamless contact between residents and skilled trade professionals.",
 
-    keyHighlightsTitle: "Key Highlights",
+    keyHighlightsTitle: "Key Highlights & Skill Share Objectives",
     keyHighlights: [
-      { title: "Service Connections", description: "Bridging the gap between local service providers and households." },
-      { title: "Localized Content", description: "Tailored specifically for the needs of the village community." },
-      { title: "Real-time Updates", description: "Live notifications for service availability and community news." }
+      { title: "Skill Share Integration", description: "Implemented under Samagra Shiksha Kerala's VHSE program to apply vocational training directly to community challenges." },
+      { title: "Verified Provider Directory", description: "Direct contact channels for electricians, plumbers, carpenters, mechanics, and local trade artisans." },
+      { title: "Localized Content", description: "Tailored specifically for the regional needs and vernacular language preferences of the village community." },
+      { title: "Low-Bandwidth Optimization", description: "Lightweight architecture optimized for quick loading and one-tap telephone dialing even on 2G/3G connections." }
     ]
   },
 
   {
     id: "bussiler",
-    category: "Public Transport",
+    category: "Android Application",
     title: "Bussiler",
-    description: "Real-time bus schedules and route information for Velur.",
-    image: "/images/projects/bussiler.png",
+    description: "Native Android public transportation platform for Velur. Real-time departure countdowns, bus reminder alerts, and full-day offline schedules.",
+    image: "/images/framepixel/Screenshot_20261121-144406.png",
     bgClass: "bg-blue",
-    tags: ["HTML", "CSS", "JS"],
+    tags: ["Android", "Kotlin", "SQLite", "Transit Telemetry", "Velur"],
     size: "normal",
-    links: [{ url: "https://bussiler-app.netlify.app/", label: "Visit Live Site", type: "live" }],
+    isMobileApp: true,
+    links: [
+      {
+        url: "/project-files/bussiler/Bussiler.apk",
+        label: "Download Bussiler APK",
+        type: "download",
+        fileName: "Bussiler.apk",
+        fileSize: "22.0 MB"
+      }
+    ],
 
-    role: "Full Stack Lead",
-    timeline: "Aug 2024 - Present",
-    status: "Live Beta",
-    tech: "HTML, CSS, JS",
+    client: "FramePixel",
+    role: "Founder & Lead Architect",
+    timeline: "2022 - 2025 (Active Native App)",
+    focus: "First Major Software Project • Hyper-local Transit Utility",
+    status: "Android Active (Website Retired)",
+    tech: "Android Native, Kotlin, SQLite / Room, Local Notifications, Material You",
 
-    challenge: "Commuters in Velur faced a daily struggle with unpredictable bus timings and lack of route information. The goal was to create a centralized, easily accessible digital platform to bridge this information gap.",
-    solution: "Bussiler provides a lightweight, user-friendly interface for passengers to check schedules instantly. By digitizing manual timetables, we've reduced waiting times and improved travel planning for hundreds of daily commuters.",
+    overview: "Bussiler was the first major software project of my life, spanning multiple years of experimentation, rebuilds, and hosted domains (busiler, bussilier, bussiler, bussily). What began with copying and pasting ChatGPT snippets into raw HTML files to solve a frustrating local timetable image grew into an enduring obsession that defined my early development journey and directly inspired me to pursue computer engineering as my career. After rebuilds in React and Next.js, the project officially retired the web prototype and transitioned completely into a native Android application engineered for one-tap convenience, offline reliability, and native departure reminders.",
+    whyItExists: "Commuters across Velur and surrounding Kerala corridors previously had to rely on cumbersome, outdated timetable images circulated locally. Finding a bus meant zooming, scrolling across massive sheets, and guessing if the schedule was still valid. Bussiler exists to answer the only question that matters at a bus stop: 'When is the next bus?'—with instant departure countdowns, native reminder alarms, and complete offline reliability.",
+    challenge: "Creating an accurate, dependable public transportation utility with zero pre-existing transit APIs or live telemetry in rural Kerala. Early web prototypes suffered from mobile connectivity dropouts at village bus stops, data synchronization across routes was brittle, and static frameworks couldn't deliver real-time arrival notifications on mobile devices.",
+    solution: "Fully retired the legacy web prototypes and engineered a dedicated native Android application featuring local SQLite caching for 100% offline schedules, color-coded corridor countdown cards (Thrissur, Wadakkanchery, Kechery), native notification departure alarms, and destination search.",
+    impactDesc: "Beyond providing Velur commuters with a reliable, one-tap transit companion, Bussiler served as my personal software engineering crucible. It was where I learned programming through vibecoding—dissecting AI code across restrictive token limits, debugging broken logic, and understanding the vital difference between flashy UI libraries and robust underlying data architecture.",
 
-    keyHighlightsTitle: "Key Features",
+    keyHighlightsTitle: "Native Android Features & Transit Architecture",
     keyHighlights: [
-      { title: "Real-time Schedules", description: "Accurate departure and arrival times for all buses in Velur." },
-      { title: "Route Details", description: "Comprehensive route maps and stop information." },
-      { title: "Upcoming Predictions", description: "Smart algorithms to predict the next available bus." },
-      { title: "Mobile First", description: "Optimized for seamless experience on all mobile devices." }
+      { title: "Live Corridor Countdowns", description: "Color-accented cards for Thrissur, Wadakkanchery, and Kechery with live minute-by-minute countdowns." },
+      { title: "Bus Timing Alerts", description: "Notification bell reminders for individual bus departures so commuters never miss a ride." },
+      { title: "Full-Day Offline Timetables", description: "Complete 24-hour schedules with local SQLite caching for zero-network access at rural stops." },
+      { title: "Route Hierarchy & Search", description: "Breadcrumb paths for intermediate stops, plus instant search for popular destinations." },
+      { title: "Shareable Timing Cards", description: "One-tap branded timing alert cards with exact stops for easy sharing on WhatsApp." },
+      { title: "Future Vision: Kerala Transit Telemetry", description: "An ambitious roadmap to collaborate with transport authorities to enable unified live tracking for private and KSRTC fleets across Kerala." }
+    ],
+    screenshots: [
+      "/images/framepixel/Screenshot_20261121-144406.png",
+      "/images/framepixel/Screenshot_20261121-144409.png",
+      "/images/framepixel/Screenshot_20261121-144413.png",
+      "/images/framepixel/Screenshot_20261121-144420.png",
+      "/images/framepixel/Screenshot_20261121-144425.png",
+      "/images/framepixel/Screenshot_20261121-144440.png"
     ]
   },
 
@@ -474,7 +506,7 @@ export const projectsData: Project[] = [
   {
     id: "kerala-holiday-api",
     category: "AI",
-    title: "Kerala Holiday API & Dashboard",
+    title: "Kerala Holiday API",
     description: "Autonomous AI engine tracking educational holidays across all 14 districts in Kerala.",
     bgClass: "bg-blue",
     tags: ["Python", "FastAPI", "React", "Gemini AI"],
@@ -515,6 +547,7 @@ export const projectsData: Project[] = [
       "/images/opcode/1.png",
       "/images/opcode/2.png"
     ],
+    client: "Jyothi Engineering College",
     role: "Website Refiner",
     timeline: "2026",
     focus: "Event Website Optimization",
@@ -534,8 +567,40 @@ export const projectsData: Project[] = [
     description: "Minimalistic photography company portfolio.",
     bgClass: "bg-orange",
     tags: ["Frontend", "Design"],
-    size: "large",
+    size: "normal",
+    client: "The Fise™",
+    role: "Lead Frontend Developer & Designer",
+    timeline: "2024",
+    status: "Completed",
+    tech: "HTML5, CSS3, JavaScript",
 
     overview: "A sleek, high-performance portfolio crafted for a minimalistic photography company. Focuses on large typography, stunning imagery, and seamless page transitions.",
+  },
+
+  {
+    id: "sunroute",
+    category: "Full Stack",
+    title: "SunRoute",
+    description: "Find the perfect seat on your bus based on real-time sun position analysis. Powered by OpenStreetMap and SunCalc.",
+    image: "/images/framepixel/sunroute-preview.png",
+    bgClass: "bg-teal",
+    tags: ["React", "TypeScript", "OSRM", "SunCalc"],
+    size: "normal",
+    links: [
+      { url: "https://sunroute.netlify.app/", label: "Visit Live Site", type: "live" }
+    ],
+    role: "Creator & Lead Developer",
+    timeline: "2026",
+    status: "Active",
+    tech: "React, TypeScript, Tailwind CSS, Leaflet, SunCalc, OpenStreetMap OSRM",
+    challenge: "Determining precise sun position along a dynamic route required integrating multiple data sources and handling complex astronomical calculations.",
+    solution: "Implemented SunCalc for solar calculations and combined it with OSRM routing segmentation to provide optimal shade seat recommendations.",
+    keyHighlightsTitle: "Key Features",
+    keyHighlights: [
+      { title: "Real Route Analysis", description: "Uses OpenStreetMap's OSRM engine to calculate exact road paths." },
+      { title: "Precise Sun Tracking", description: "SunCalc calculates exact solar coordinates at each timestamp." },
+      { title: "Smart Recommendations", description: "Analyzes heading differentials to reserve sun-shielded seats." },
+      { title: "Instant & Free", description: "100% free with no tracking, no ads, and no sign-up required." }
+    ]
   }
 ];

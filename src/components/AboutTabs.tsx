@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { GraduationCap, Briefcase, User, Code2, Gamepad2, Sparkles, MapPin, ShieldCheck } from "lucide-react";
 
 export default function AboutTabs() {
