@@ -36,7 +36,7 @@ export default function AboutTabs() {
           <div className="about-pane animate-fade-in">
             {/* Bio Paragraphs */}
             <p className="about-lead-text">
-              Hi, I&apos;m <span className="highlight-text">Agnel Francis Olakkengil</span> — a full-stack developer, designer, and the <strong>CEO of FramePixel</strong>. I specialize in building modern digital solutions and interactive web-based games that blend clean UI with smart logic.
+              Hi, I&apos;m <span className="highlight-text">Agnel Francis Olakkengil</span> — a full-stack developer, designer, and the <strong>Founder of FramePixel</strong>. FramePixel serves as a collaborative studio domain created with friends and fellow engineers to craft high-utility web platforms, transit utilities, and interactive experiences.
             </p>
             <p className="about-sub-text">
               Currently pursuing Computer Science and Engineering (Cybersecurity) at <strong>Jyothi Engineering College (Autonomous), Cheruthuruthy</strong>. My passion lies at the intersection of technology, creativity, and play.
@@ -50,7 +50,7 @@ export default function AboutTabs() {
               </span>
               <span className="fact-chip">
                 <Sparkles size={13} />
-                <span>CEO @ FramePixel</span>
+                <span>Founder @ FramePixel</span>
               </span>
               <span className="fact-chip">
                 <MapPin size={13} />
@@ -67,7 +67,7 @@ export default function AboutTabs() {
                 </div>
                 <h2 className="framepixel-title">FramePixel</h2>
                 <p className="framepixel-desc">
-                  FramePixel is a digital solutions and web-based games studio focused on building experiences that actually matter. From scalable business platforms to multiplayer party games, we sit at the intersection of technology and engagement.
+                  FramePixel is a collaborative creative and technical domain where friends come together to engineer meaningful digital products. From hyper-local transit platforms to real-time multiplayer games, we focus on software that solves authentic everyday needs.
                 </p>
               </div>
 
@@ -79,7 +79,7 @@ export default function AboutTabs() {
                   </div>
                   <h3 className="pillar-title">FramePixel Studio</h3>
                   <p className="pillar-text">
-                    Leading a digital solutions studio focused on custom websites, web apps, and modern interactive platforms.
+                    A collaborative digital collective with friends engineering bespoke websites, transit applications, and lightweight modern platforms.
                   </p>
                 </div>
 

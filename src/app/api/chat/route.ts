@@ -39,8 +39,8 @@ export async function POST(req: Request) {
     const systemInstruction = `You are a helpful AI assistant for Agnel Francis's portfolio website. 
 You know all about Agnel's projects, experience, blog articles, and background. Here is his personal info:
 - Name: Agnel Francis Olakkengil
-- Role: Full-stack developer, designer, and CEO of FramePixel.
-- FramePixel: A digital solutions and web-based games studio focused on building experiences that actually matter.
+- Role: Full-stack developer, designer, and Founder of FramePixel.
+- FramePixel: A collaborative digital studio and technical domain created with friends to engineer high-utility web platforms, transit solutions, and multiplayer web games.
 - Education: 
   1. B.Tech Computer Science and Engineering (Cybersecurity) at Jyothi Engineering College, Cheruthuruthy (Current: 2025 - 2029).
   2. Junior Software Developer Course at Sarvodayam VHSS, Aryampadam (2023 - 2025).

@@ -11,12 +11,12 @@ import AIChatFAB from "@/components/AIChatFAB";
 
 export const metadata: Metadata = {
   title: "Agnel Francis | Designer & Developer",
-  description: "Portfolio of Agnel Francis - CEO of FramePixel, Frontend Developer & Designer based in Thrissur. Building modern, beautiful websites and web-based games.",
-  keywords: ["Agnel Francis", "CEO of FramePixel", "FramePixel", "Frontend Developer", "Designer", "Web Development", "Thrissur", "Jyothi Engineering College", "Portfolio"],
+  description: "Portfolio of Agnel Francis - Founder of FramePixel, Full-Stack Developer & Designer based in Thrissur. Building modern digital platforms, transit utilities, and web-based games.",
+  keywords: ["Agnel Francis", "Founder of FramePixel", "FramePixel", "Full-Stack Developer", "Designer", "Web Development", "Thrissur", "Jyothi Engineering College", "Portfolio"],
   authors: [{ name: "Agnel Francis" }],
   openGraph: {
-    title: "Agnel Francis | CEO of FramePixel",
-    description: "Portfolio of Agnel Francis - CEO of FramePixel, Frontend Developer & Designer.",
+    title: "Agnel Francis | Founder of FramePixel",
+    description: "Portfolio of Agnel Francis - Founder of FramePixel, Full-Stack Developer & Designer.",
     url: "https://agnelfrancis.com",
     siteName: "Agnel Francis Portfolio",
     locale: "en_US",
@@ -81,11 +81,11 @@ export default function RootLayout({
               "@type": "Person",
               "name": "Agnel Francis Olakkengil",
               "url": "https://agnelfrancis.com",
-              "jobTitle": "CEO of FramePixel | Designer & Developer",
+              "jobTitle": "Founder of FramePixel | Designer & Developer",
               "worksFor": {
                 "@type": "Organization",
                 "name": "FramePixel",
-                "description": "A digital solutions and web-based games studio focused on building experiences that actually matter."
+                "description": "A collaborative digital solutions and web-based games studio focused on building experiences that actually matter."
               },
               "alumniOf": "Jyothi Engineering College",
               "sameAs": [

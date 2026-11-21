@@ -12,7 +12,7 @@ export async function GET() {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agnel Francis | Minimal / Text Version</title>
-  <meta name="description" content="Minimal, text-first portfolio and resume for Agnel Francis Olakkengil. Full-stack developer, cybersecurity student, and CEO of FramePixel.">
+  <meta name="description" content="Minimal, text-first portfolio and resume for Agnel Francis Olakkengil. Full-stack developer, cybersecurity student, and Founder of FramePixel.">
   <style>
     :root {
       --bg: #ffffff;
@@ -80,7 +80,7 @@ export async function GET() {
   <header style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem;">
     <h1>Agnel Francis Olakkengil</h1>
     <p style="font-size: 1.15rem; color: var(--muted); margin-bottom: 0.75rem;">
-      Full-Stack Developer • Cybersecurity Student • CEO & Founder at <strong>FramePixel</strong>
+      Full-Stack Developer • Cybersecurity Student • Founder at <strong>FramePixel</strong>
     </p>
     <p>
       📍 Thrissur, Kerala, India &nbsp;|&nbsp;
@@ -103,7 +103,7 @@ export async function GET() {
       I am a developer and designer passionate about building scalable digital solutions, interactive web-based games, and privacy-conscious software that blend clean aesthetics with thoughtful logic.
     </p>
     <p>
-      As the <strong>CEO of FramePixel</strong>, I direct custom web solutions, internal developer utilities, and web-based party/puzzle games designed to deliver memorable, high-engagement user experiences.
+      As the <strong>Founder of FramePixel</strong>, I direct a collaborative digital collective with friends and fellow engineers, building bespoke web solutions, internal developer utilities, and web-based party/puzzle games designed to deliver memorable, high-engagement user experiences.
     </p>
   </section>
 
