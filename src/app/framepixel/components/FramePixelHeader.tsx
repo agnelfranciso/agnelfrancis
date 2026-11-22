@@ -69,9 +69,39 @@ export default function FramePixelHeader() {
               aria-label="Toggle Navigation Drawer"
               onClick={() => setDrawerOpen(true)}
             >
-              <span className="fp-menu-line" />
-              <span className="fp-menu-line" />
-              <span className="fp-menu-line" />
+              <span
+                className="fp-menu-line"
+                style={{
+                  display: "block",
+                  width: "22px",
+                  height: "3px",
+                  minHeight: "3px",
+                  backgroundColor: "#111111",
+                  borderRadius: "3px",
+                }}
+              />
+              <span
+                className="fp-menu-line"
+                style={{
+                  display: "block",
+                  width: "22px",
+                  height: "3px",
+                  minHeight: "3px",
+                  backgroundColor: "#111111",
+                  borderRadius: "3px",
+                }}
+              />
+              <span
+                className="fp-menu-line"
+                style={{
+                  display: "block",
+                  width: "22px",
+                  height: "3px",
+                  minHeight: "3px",
+                  backgroundColor: "#111111",
+                  borderRadius: "3px",
+                }}
+              />
             </button>
 
             <Link href="/framepixel#contact" className="fp-btn-primary fp-header-cta">

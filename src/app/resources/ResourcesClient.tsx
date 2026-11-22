@@ -2,13 +2,16 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Resource, resourcesData, RESOURCE_CATEGORIES } from "@/data/resources";
 import "./resources.css";
 
 export default function ResourcesClient() {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeModalResource, setActiveModalResource] = useState<Resource | null>(null);
+  const [downloadingId, setDownloadingId] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string>("");
   const [showToast, setShowToast] = useState<boolean>(false);
   const [copiedHash, setCopiedHash] = useState<boolean>(false);
@@ -64,15 +67,24 @@ export default function ResourcesClient() {
 
   const handleDownload = (e: React.MouseEvent, resource: Resource) => {
     e.stopPropagation();
-    // Programmatically trigger download
-    const link = document.createElement("a");
-    link.href = resource.downloadUrl;
-    link.download = resource.downloadUrl.split("/").pop() || "download.zip";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    e.preventDefault();
+    if (downloadingId) return;
 
-    triggerToast(`"${resource.title}" download initialized.`);
+    setDownloadingId(resource.id);
+    triggerToast(`Preparing package "${resource.title}" (${resource.fileSize})...`);
+
+    // In-place preparation before passing to user's browser
+    setTimeout(() => {
+      const link = document.createElement("a");
+      link.href = resource.downloadUrl;
+      link.download = resource.downloadUrl.split("/").pop() || `${resource.id}.zip`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setDownloadingId(null);
+      triggerToast(`"${resource.title}" download initiated.`);
+    }, 1100);
   };
 
   const handleCopyHash = (hash: string) => {
@@ -282,7 +294,7 @@ export default function ResourcesClient() {
               <article
                 key={item.id}
                 className="lumina-card"
-                onClick={() => setActiveModalResource(item)}
+                onClick={() => router.push(`/resources/${item.id}`)}
                 style={{ cursor: "pointer" }}
               >
                 {/* Media Preview */}
@@ -337,17 +349,39 @@ export default function ResourcesClient() {
 
                   <div className="lumina-card-footer">
                     <span className="lumina-card-author">by {item.author}</span>
-                    <button
-                      type="button"
-                      className="lumina-btn-download-pill"
-                      onClick={(e) => handleDownload(e, item)}
-                    >
-                      <span>Download</span>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <line x1="12" y1="5" x2="12" y2="19" />
-                        <polyline points="19 12 12 19 5 12" />
-                      </svg>
-                    </button>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
+                      <Link
+                        href={`/resources/${item.id}`}
+                        className="lumina-btn-ghost-pill"
+                        style={{ padding: "4px 10px", fontSize: "0.75rem" }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Details &rarr;
+                      </Link>
+                      <button
+                        type="button"
+                        className="lumina-btn-download-pill"
+                        onClick={(e) => handleDownload(e, item)}
+                        disabled={downloadingId === item.id}
+                      >
+                        {downloadingId === item.id ? (
+                          <>
+                            <span className="material-symbols-outlined text-[13px] animate-spin">
+                              progress_activity
+                            </span>
+                            <span>Packaging...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Download</span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                              <line x1="12" y1="5" x2="12" y2="19" />
+                              <polyline points="19 12 12 19 5 12" />
+                            </svg>
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </article>
