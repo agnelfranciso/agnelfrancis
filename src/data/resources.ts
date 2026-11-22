@@ -24,7 +24,7 @@ export interface Resource {
   categoryLabel: string;
   description: string;
   longDescription?: string;
-  price: string;
+  price?: string;
   originalPrice?: string;
   author: string;
   format: string;
@@ -70,8 +70,6 @@ export const resourcesData: Resource[] = [
     categoryLabel: "UI Kits",
     description: "Complete multi-layout dark aesthetic dashboard kit with pristine token hierarchy, responsive components, and modular charts.",
     longDescription: "Comprehensive, production-ready SaaS dashboard components, tokens, and multi-device templates. Designed with mathematical precision for dark architectural software and cognitive clarity.",
-    price: "$0.00",
-    originalPrice: "$89",
     author: "Agnel Studio",
     format: "Figma • Web",
     fileSize: "148.2 MB",
@@ -133,8 +131,6 @@ export const resourcesData: Resource[] = [
     categoryLabel: "3D Assets",
     description: "Monochrome, frosted glass and metallic procedural 3D icons optimized for contemporary web interfaces.",
     longDescription: "A curated spatial suite of 48 procedurally crafted 3D objects. Rendered in matte frosted glass, brushed titanium, and deep obsidian with pre-configured directional lighting rigs.",
-    price: "$0.00",
-    originalPrice: "$45",
     author: "Forma Lab",
     format: "Blender • PNG",
     fileSize: "42.5 MB",
@@ -192,8 +188,6 @@ export const resourcesData: Resource[] = [
     categoryLabel: "Mockups",
     description: "Meticulously modeled titanium device mockup with isolated shadows, realistic reflections, and customizable dynamic island states.",
     longDescription: "Architectural apparatus staging for iOS and mobile software showcases. Photorealistic natural reflections, separate specular maps, and isolated drop shadows calibrated for neutral dark canvases.",
-    price: "$0.00",
-    originalPrice: "$59",
     author: "Studio K",
     format: "PSD • Figma",
     fileSize: "96.4 MB",
@@ -251,8 +245,6 @@ export const resourcesData: Resource[] = [
     categoryLabel: "UI Kits",
     description: "Enterprise-grade flow sequences for financial telemetry, multi-tenant billing, and system audit logs.",
     longDescription: "End-to-end user journeys for high-volume enterprise software. Includes complex data table interactions, real-time audit event streams, role-based access control flows, and billing invoices.",
-    price: "$0.00",
-    originalPrice: "$99",
     author: "Agnel Studio",
     format: "32 Flows • Figma",
     fileSize: "64.8 MB",
@@ -310,8 +302,6 @@ export const resourcesData: Resource[] = [
     categoryLabel: "3D Assets",
     description: "Noise-free calm vector meshes and 4K raster maps engineered for deep-toned hero backgrounds and ambient lighting.",
     longDescription: "Silky, seamless abstract gradients and fluid color fields formulated for midnight interfaces. Zero color banding, engineered with 16-bit color depth and mathematical spline curvature.",
-    price: "$0.00",
-    originalPrice: "$39",
     author: "Elena Rostova",
     format: "Vector • 4K",
     fileSize: "38.1 MB",
@@ -368,8 +358,6 @@ export const resourcesData: Resource[] = [
     categoryLabel: "Fonts",
     description: "High-contrast editorial serif typeface crafted for architectural journals, mastheads, and modern luxury commerce.",
     longDescription: "An intellectual, razor-sharp serif family that pairs classic Renaissance proportions with crisp modern digital geometry. Designed for titles, editorial mastheads, and high-impact hero treatments.",
-    price: "$0.00",
-    originalPrice: "$65",
     author: "Agnel Foundry",
     format: "OTF • WOFF2",
     fileSize: "12.3 MB",

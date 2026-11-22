@@ -14,7 +14,6 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
     resource.previewMain || resource.image || "/resources/images/lumina-detail-main.png"
   );
   const [activeTab, setActiveTab] = useState<"overview" | "included" | "license">("overview");
-  const [selectedTip, setSelectedTip] = useState<number | null>(null);
 
   // In-place download state
   const [downloadStatus, setDownloadStatus] = useState<"idle" | "downloading" | "completed">("idle");
@@ -264,7 +263,7 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                           {resource.format}
                         </span>
                         <span className="lumina-card-badge-right" style={{ position: "static" }}>
-                          {resource.price}
+                          FREE
                         </span>
                       </div>
                       <div className="lumina-type-specimen" style={{ fontSize: "3.5rem" }}>
@@ -545,15 +544,15 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                 <div className="lumina-purchase-card">
                   <div className="lumina-accent-top-line" />
 
-                  {/* Price Row */}
-                  <div className="lumina-price-row">
-                    <div>
-                      <span className="lumina-price-tag">{resource.price}</span>
-                      {resource.originalPrice && (
-                        <span className="lumina-price-original">{resource.originalPrice}</span>
-                      )}
+                  {/* Asset License / Free Status Header */}
+                  <div className="lumina-asset-status-card">
+                    <div className="lumina-status-indicator-badge">
+                      <span className="lumina-badge-pulse" />
+                      <span>100% Free &amp; Open Resource</span>
                     </div>
-                    <span className="lumina-free-forever-pill">FREE FOREVER</span>
+                    <p className="lumina-asset-status-desc">
+                      Available freely under CC BY 4.0 for unlimited personal &amp; commercial projects. Zero license fees.
+                    </p>
                   </div>
 
                   {/* THE IN-PLACE DOWNLOAD ACTION BUTTON */}
@@ -744,47 +743,29 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                     </div>
                   </div>
 
-                  {/* Optional Tip / Patron Chips */}
+                  {/* Open Source / Community Note */}
                   <div style={{ marginTop: "1.75rem", borderTop: "1px solid var(--res-border-subtle)", paddingTop: "1.25rem" }}>
                     <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--res-outline)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.35rem" }}>
-                      Support Future Releases
+                      Open Source Ecosystem
                     </div>
                     <p style={{ fontSize: "0.775rem", color: "var(--res-on-surface-variant)", margin: "0 0 0.75rem 0", lineHeight: 1.5 }}>
-                      This resource is 100% free. If it saved you studio hours, you can optionally tip the author:
+                      Crafted for designers and developers worldwide. Have an asset request, suggestion, or feedback?
                     </p>
-
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.5rem" }}>
-                      {[3, 5, 10].map((amount) => (
-                        <button
-                          key={amount}
-                          type="button"
-                          className="tip-chip"
-                          onClick={() => setSelectedTip(selectedTip === amount ? null : amount)}
-                          style={{
-                            padding: "6px 0",
-                            borderRadius: "8px",
-                            border: selectedTip === amount ? "1px solid var(--res-primary)" : "1px solid var(--res-border-subtle)",
-                            backgroundColor: selectedTip === amount ? "rgba(99, 102, 241, 0.2)" : "var(--res-surface-container)",
-                            color: selectedTip === amount ? "var(--res-primary)" : "var(--res-on-surface)",
-                            fontSize: "0.8rem",
-                            fontWeight: 700,
-                            cursor: "pointer",
-                            transition: "all 0.2s ease",
-                          }}
-                        >
-                          ${amount}.00
-                        </button>
-                      ))}
-                    </div>
-
-                    {selectedTip && (
-                      <div style={{ marginTop: "0.75rem", fontSize: "0.75rem", color: "var(--res-secondary)" }}>
-                        Thank you for considering a ${selectedTip} contribution! Direct UPI / Card link:{" "}
-                        <Link href="/contact" style={{ color: "var(--res-primary)", textDecoration: "underline" }}>
-                          Connect via Studio
-                        </Link>
-                      </div>
-                    )}
+                    <Link
+                      href="/contact"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "0.35rem",
+                        fontSize: "0.775rem",
+                        color: "var(--res-primary)",
+                        textDecoration: "none",
+                        fontWeight: 600,
+                      }}
+                    >
+                      <span>Connect with Agnel Francis</span>
+                      <span className="material-symbols-outlined" style={{ fontSize: 14 }}>arrow_forward</span>
+                    </Link>
                   </div>
 
                   {/* CLI Quick Integration */}
@@ -908,7 +889,7 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                         <img src={comp.image} alt={comp.title} className="lumina-card-img" />
                       )}
                       <span className="lumina-card-badge-left">{comp.format}</span>
-                      <span className="lumina-card-badge-right">{comp.price}</span>
+                      <span className="lumina-card-badge-right">FREE</span>
                     </div>
                     <div className="lumina-card-content">
                       <div>

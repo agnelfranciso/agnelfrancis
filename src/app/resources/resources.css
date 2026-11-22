@@ -1053,37 +1053,33 @@
   background: linear-gradient(90deg, transparent, var(--res-primary), transparent);
 }
 
-.lumina-price-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
+.lumina-asset-status-card {
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--res-border-subtle);
 }
 
-.lumina-price-tag {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--res-on-surface);
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-
-.lumina-price-original {
-  font-size: 1rem;
-  color: var(--res-outline);
-  text-decoration: line-through;
-  margin-left: 0.5rem;
-}
-
-.lumina-free-forever-pill {
-  padding: 4px 10px;
-  border-radius: 6px;
-  background-color: rgba(49, 49, 192, 0.3);
-  color: var(--res-secondary);
-  font-size: 0.725rem;
+.lumina-status-indicator-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background-color: rgba(99, 102, 241, 0.15);
+  color: var(--res-primary);
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
   font-family: 'Inter', system-ui, sans-serif;
+  border: 1px solid rgba(189, 194, 255, 0.2);
+}
+
+.lumina-asset-status-desc {
+  font-size: 0.8rem;
+  color: var(--res-on-surface-variant);
+  line-height: 1.5;
+  margin: 0.5rem 0 0 0;
 }
 
 /* In-Place Download Button with live progress */

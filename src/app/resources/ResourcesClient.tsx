@@ -306,7 +306,7 @@ export default function ResourcesClient() {
                           {item.format}
                         </span>
                         <span className="lumina-card-badge-right" style={{ position: "static" }}>
-                          {item.price}
+                          FREE
                         </span>
                       </div>
                       <div className="lumina-type-specimen">
@@ -332,7 +332,7 @@ export default function ResourcesClient() {
                         />
                       )}
                       <span className="lumina-card-badge-left">{item.format}</span>
-                      <span className="lumina-card-badge-right">{item.price}</span>
+                      <span className="lumina-card-badge-right">FREE</span>
                     </>
                   )}
                 </div>
