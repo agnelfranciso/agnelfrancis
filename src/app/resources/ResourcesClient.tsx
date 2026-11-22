@@ -206,9 +206,25 @@ export default function ResourcesClient() {
             <span className="lumina-badge-vol">Vol. 04 Released</span>
           </div>
 
-          <h1 className="lumina-hero-title">
+          <h1
+            className="lumina-hero-title"
+            style={{
+              fontFamily: "'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+              letterSpacing: "-0.035em",
+              textTransform: "none",
+            }}
+          >
             Digital assets crafted for{" "}
-            <span className="lumina-hero-title-italic">clarity</span>
+            <span
+              className="lumina-hero-title-italic"
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontStyle: "italic",
+                fontWeight: 400,
+              }}
+            >
+              clarity
+            </span>
           </h1>
 
           <p className="lumina-hero-desc">

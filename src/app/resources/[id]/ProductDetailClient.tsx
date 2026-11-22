@@ -210,9 +210,23 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
               <span>{resource.releaseTag || `${resource.version} • Open Source Release`}</span>
             </div>
 
-            <h1 className="lumina-product-title">
+            <h1
+              className="lumina-product-title"
+              style={{
+                fontFamily: "'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                letterSpacing: "-0.03em",
+                textTransform: "none",
+              }}
+            >
               {resource.title.split(" ").slice(0, -2).join(" ")}{" "}
-              <span className="lumina-product-italic">
+              <span
+                className="lumina-product-italic"
+                style={{
+                  fontFamily: "'Playfair Display', Georgia, serif",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                }}
+              >
                 {resource.title.split(" ").slice(-2).join(" ")}
               </span>
             </h1>

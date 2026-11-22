@@ -30,12 +30,55 @@
 .lumina-product-detail {
   background-color: var(--res-bg);
   color: var(--res-on-surface);
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Force all elements inside the vault to use Plus Jakarta Sans (overrides portfolio's IntraNet font) */
+.lumina-vault h1,
+.lumina-vault h2,
+.lumina-vault h3,
+.lumina-vault h4,
+.lumina-vault h5,
+.lumina-vault h6,
+.lumina-vault p,
+.lumina-vault span,
+.lumina-vault a,
+.lumina-vault button,
+.lumina-vault input,
+.lumina-product-detail h1,
+.lumina-product-detail h2,
+.lumina-product-detail h3,
+.lumina-product-detail h4,
+.lumina-product-detail h5,
+.lumina-product-detail h6,
+.lumina-product-detail p,
+.lumina-product-detail span,
+.lumina-product-detail a,
+.lumina-product-detail button,
+.lumina-product-detail input {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.lumina-vault h1,
+.lumina-vault h2,
+.lumina-vault h3,
+.lumina-vault h4,
+.lumina-vault h5,
+.lumina-vault h6,
+.lumina-product-detail h1,
+.lumina-product-detail h2,
+.lumina-product-detail h3,
+.lumina-product-detail h4,
+.lumina-product-detail h5,
+.lumina-product-detail h6 {
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+  text-transform: none !important;
 }
 
 .material-symbols-outlined {
@@ -99,9 +142,11 @@
   gap: 0.35rem;
   color: var(--res-on-surface);
   text-decoration: none;
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: none !important;
 }
 
 .lumina-brand-dot {
@@ -131,7 +176,8 @@
 .lumina-nav-link {
   color: var(--res-on-surface-variant);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 0.85rem !important;
   font-weight: 500;
   transition: color 0.2s ease;
 }
@@ -171,6 +217,7 @@
   background-color: var(--res-surface-lowest);
   border: 1px solid var(--res-border-subtle);
   color: var(--res-on-surface);
+  font-family: 'Inter', system-ui, sans-serif !important;
   font-size: 0.825rem;
   outline: none;
   transition: all 0.2s ease;
@@ -311,20 +358,23 @@
 }
 
 .lumina-hero-title {
-  font-size: clamp(2.5rem, 5.5vw, 4.2rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: clamp(2.5rem, 5.5vw, 4.2rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.03em !important;
   max-width: 900px;
-  color: var(--res-on-surface);
+  color: var(--res-on-surface) !important;
   margin: 0;
+  text-transform: none !important;
 }
 
 .lumina-hero-title-italic {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  color: var(--res-secondary-fixed-dim);
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: var(--res-secondary-fixed-dim) !important;
+  text-transform: none !important;
 }
 
 .lumina-hero-desc {
@@ -463,11 +513,13 @@
 }
 
 .lumina-filter-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--res-on-surface);
-  margin: 0;
-  letter-spacing: -0.02em;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  color: var(--res-on-surface) !important;
+  margin: 0 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: none !important;
 }
 
 .lumina-tabs {
@@ -644,11 +696,13 @@
 }
 
 .lumina-card-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--res-on-surface);
-  margin: 0;
-  transition: color 0.2s ease;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  color: var(--res-on-surface) !important;
+  margin: 0 !important;
+  transition: color 0.2s ease !important;
+  text-transform: none !important;
 }
 
 .lumina-card:hover .lumina-card-title {
@@ -765,19 +819,22 @@
 }
 
 .lumina-product-title {
-  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-  font-weight: 700;
-  color: var(--res-on-surface);
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  margin: 0 0 0.85rem 0;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem) !important;
+  font-weight: 700 !important;
+  color: var(--res-on-surface) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.03em !important;
+  margin: 0 0 0.85rem 0 !important;
+  text-transform: none !important;
 }
 
 .lumina-product-italic {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  color: var(--res-primary-fixed-dim);
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: var(--res-primary-fixed-dim) !important;
+  text-transform: none !important;
 }
 
 .lumina-product-tagline {
@@ -1297,11 +1354,13 @@
 }
 
 .lumina-modal-title {
-  font-size: 1.85rem;
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0 0 0.5rem 0;
-  color: var(--res-on-surface);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 1.85rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  margin: 0 0 0.5rem 0 !important;
+  color: var(--res-on-surface) !important;
+  text-transform: none !important;
 }
 
 .lumina-modal-title em {
