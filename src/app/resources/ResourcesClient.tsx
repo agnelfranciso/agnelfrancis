@@ -589,7 +589,7 @@ export default function ResourcesClient() {
                   <span style={{ fontWeight: 700, fontSize: "0.9rem", color: "var(--res-on-surface)" }}>
                     Commercial Rights Certificate
                   </span>
-                  <span style={{ fontSize: "0.7rem", padding: "1px 6px", borderRadius: "4px", backgroundColor: "rgba(99, 102, 241, 0.2)", color: "var(--res-primary)", fontWeight: 700 }}>
+                  <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: "4px", backgroundColor: "rgba(255, 255, 255, 0.08)", color: "#ffffff", border: "1px solid rgba(255, 255, 255, 0.12)", fontWeight: 700 }}>
                     Active
                   </span>
                 </div>
