@@ -19,6 +19,12 @@ export default function LinksPage() {
       external: false 
     },
     { 
+      name: "Resources Vault", 
+      url: "/resources", 
+      icon: <FontAwesomeIcon icon={faGlobe} width={20} />, 
+      external: false 
+    },
+    { 
       name: "GitHub", 
       url: "https://github.com/agnelfranciso", 
       icon: <FontAwesomeIcon icon={faGithub} width={20} />, 

@@ -24,7 +24,7 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
-  if (pathname === "/links" || pathname.startsWith("/games") || pathname.startsWith("/framepixel")) return null;
+  if (pathname === "/links" || pathname.startsWith("/games") || pathname.startsWith("/framepixel") || pathname.startsWith("/resources") || pathname.startsWith("/resoources")) return null;
 
   return (
     <>
