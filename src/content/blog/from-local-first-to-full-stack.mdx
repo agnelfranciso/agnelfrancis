@@ -2,123 +2,142 @@
 
 title: "From Local-First to Full-Stack: Building My First Production-Ready Web Application"
 date: "2026-11-25"
-excerpt: "My journey from preferring offline, local-first software to building a production-oriented full-stack application with Next.js and Firebase in a single day. The challenges, security considerations, AI-assisted development, and lessons along the way."
-tags: ["Full-Stack Development", "Next.js", "Firebase", "Web Security", "AI", "Web Development"]
+excerpt: "My journey from preferring offline-first software to building a production-oriented full-stack application with Next.js and Firebase, navigating deployment challenges, database security, AI-assisted development, and everything in between."
+tags: ["Full-Stack Development", "Next.js", "Firebase", "Web Security", "AI-Assisted Development"]
 
 From Local-First to Full-Stack
 
-I've always been a fan of local-first software. Applications that work offline, store data locally, and don't depend on an internet connection have always appealed to me.
+I've always been a fan of local-first software. Applications that work offline, don't depend on external servers, and let users access their data without constantly needing an internet connection have always appealed to me.
 
-But eventually, I realised that not every application can work that way.
+Projects like CampusCrave and my other experiments have shaped how I approach software development. I generally prefer keeping things simple, accessible, and independent of unnecessary infrastructure.
 
-Some software genuinely needs a database, authentication, synchronisation, and proper backend infrastructure. That got me thinking: why not build one myself?
+But eventually, I realised something: Not every application is meant to be local-first.
 
-And that's how I started working on my first production-oriented full-stack web application.
+Some software genuinely needs a database, user authentication, synchronisation, and a proper backend infrastructure. And that got me thinking: why not build one myself?
 
-From Local-First to Something Bigger
+This became an opportunity to take a step further into full-stack development. What started as an experiment turned into one of my most significant development milestones: building a production-oriented full-stack application in approximately one day.
 
-I've previously worked on several web applications and projects, including CampusCrave. However, building something with a proper backend, persistent database, authentication, and remotely accessible infrastructure introduces an entirely different set of challenges.
+Why Full-Stack?
 
-I wanted to build something that wasn't just a frontend demonstration or a website that looked good in screenshots. I wanted something that could actually be used.
+Local-first development has its advantages, but it also has limitations.
 
-For this project, I chose Next.js as the application framework and Firebase for database infrastructure.
+When an application needs multiple users, shared data, persistent accounts, and synchronisation across devices, a local-only architecture isn't always the right solution.
 
-The combination gave me the flexibility I needed without having to build and maintain every piece of backend infrastructure from scratch.
+I wanted to experience the other side of software engineering. Not just building interfaces, but handling the infrastructure behind them.
 
-But getting everything connected was only the beginning.
+I wanted something that wasn't merely a frontend demonstration or a static website. I wanted an application that could actually function as a real product.
+
+The Tech Stack
+
+I chose technologies that allowed me to move quickly without compromising the flexibility of the application.
+
+- Frontend & Application Framework: Next.js
+- Database & Backend Infrastructure: Firebase
+- Development Approach: AI-assisted development using modern vibe coding tools
+
+Next.js provided the foundation for the application, while Firebase handled the database infrastructure and backend services.
+
+It was a combination that allowed me to focus on building the actual product rather than spending all my time setting up infrastructure from scratch.
 
 The Reality of Building Full-Stack Software
 
-One thing I quickly discovered was that building a full-stack application isn't necessarily difficult because of the code itself.
+This was where things got interesting.
 
-It's everything around the code.
+Building the frontend was one thing. Making everything work together was another.
 
-Database configuration, authentication, access permissions, deployment, environment variables, hosting limitations, free-tier restrictions, paywalls, and security considerations all become part of the development process.
+Database configuration, authentication, authorisation, environment variables, deployment, hosting restrictions, free-tier limitations, and unexpected paywalls all became part of the development process.
 
-Things that seem straightforward in a local development environment can become surprisingly complicated when you try to make them accessible to actual users.
+Things that worked perfectly in my local development environment didn't necessarily behave the same way once deployed.
 
-There were limitations I hadn't initially considered. Some services had restrictions, some features came with additional costs, and certain architectural decisions required more thought than I expected.
+I encountered limitations I hadn't initially considered. Certain services had restrictions, some features required paid plans, and some architectural decisions needed to be reconsidered.
 
-I had to work around these constraints, reconsider approaches, and make the most of the tools available to me.
+It wasn't as straightforward as I had imagined.
 
-It wasn't always smooth, but that's probably what made the experience worthwhile.
+But that's part of the experience. Software development isn't just about writing code. It's also about understanding the ecosystem, making compromises, and finding practical solutions within real-world constraints.
 
-Security Wasn't Something I Could Compromise On
+Security Wasn't Optional
 
-This was probably the most important part of the entire project.
+This was probably the part I took most seriously.
 
-When software starts handling user accounts and remotely stored information, the responsibility changes significantly.
+When an application starts handling user accounts and remotely stored information, security becomes a fundamental responsibility.
 
-A database isn't just somewhere to store application data. It's potentially one of the most sensitive components of the entire system.
+A database isn't simply a place to store information. It's one of the most sensitive components of an application.
 
-An incorrectly configured database can expose private information, allow unauthorised users to access other people's records, or even create pathways to account compromise.
+Poorly configured database permissions can expose private information, allow unauthorised access to other users' records, and potentially create pathways to account compromise.
 
-I didn't want to build something that worked perfectly on the surface while leaving fundamental security problems underneath.
+I didn't want to release something that looked great on the surface but had fundamental security problems underneath.
 
-So I spent considerable time looking into authentication, authorisation, database access policies, input handling, and other security considerations.
+I therefore dedicated time to reviewing the application's security, including authentication, authorisation, database access policies, input handling, and other potential vulnerabilities.
 
-I also conducted a dedicated security audit covering areas such as:
+I also conducted a dedicated security audit covering:
 
 - Authentication and authorisation.
-- Cross-site request forgery (CSRF).
-- Cross-site scripting (XSS).
+- Cross-Site Request Forgery (CSRF).
+- Cross-Site Scripting (XSS).
 - SQL injection and command injection.
 - Cryptographic practices.
 - File upload security.
-- API security and defensive programming.
+- API security.
+- Defensive programming.
 
 The audit was read-only, and I wanted to understand the application's actual security posture rather than simply assume that using established technologies made it secure.
 
-I'm still working through improvements. Security isn't a checkbox you tick once and forget about. It's an ongoing responsibility.
+There is still room for improvement, and I'm working towards addressing those areas.
 
-Building Faster With AI, but Thinking Like a Developer
+Security isn't a feature you implement once and forget about. It's an ongoing responsibility.
 
-Another interesting aspect of this project was my use of AI-assisted development.
+Building Faster with AI
 
-Tools commonly associated with vibe coding have changed how quickly I can turn an idea into something functional.
+Another major part of this experience was AI-assisted development.
 
-Tasks that might previously have taken days can sometimes be completed in hours. Prototyping, exploring different implementations, debugging, and iterating on interfaces have become considerably faster.
+Tools commonly associated with vibe coding have significantly changed how quickly I can turn ideas into functional software.
 
-I don't see AI as a replacement for understanding software development, though.
+Prototyping, exploring implementations, debugging, and iterating on interfaces have become considerably faster.
 
-If anything, it makes understanding the underlying architecture more important.
+Building a substantial full-stack application in approximately one day would have been a much more demanding undertaking without these tools.
 
-Generating code is one thing. Knowing whether that code is secure, maintainable, efficient, and appropriate for the application is another.
+However, I don't believe that generating code automatically makes someone a good developer.
 
-I still want to understand what I'm building, why I'm building it that way, and what could go wrong.
+There is a significant difference between generating code and understanding what that code actually does.
 
-AI helped accelerate the process, but the architectural decisions and responsibility for the final product still matter.
+I still need to understand the architecture, evaluate implementation decisions, identify security issues, and ensure that everything works as intended.
 
-One Day. One Major Milestone.
+AI accelerated the development process, but engineering judgement remained essential.
 
-Getting the application to this stage in approximately one day was something I genuinely didn't expect.
+One Day. A Major Milestone.
 
-I've built countless full-stack applications and experimented with several ideas before. Some never made it to release, while others were developed in different contexts where I wasn't necessarily the person publicly credited for the work.
+I've built countless applications and experimented with several full-stack projects before. Some never made it to release, while others were developed in different contexts where I wasn't necessarily credited as the developer.
 
 This project felt different.
 
-It was something I could build, own, iterate on, and present as part of my developer portfolio.
+It was something I could build, own, improve, and present as part of my own developer portfolio.
 
-It's not perfect. I know that. There are still improvements to make, limitations to address, and features I'd like to refine.
+Completing such a substantial application in approximately one day was a milestone I genuinely didn't expect to achieve so quickly.
 
-But it's functional, it's a substantial step forward, and I'm genuinely proud of what I've accomplished.
+Is it perfect? Absolutely not.
+
+There are limitations, improvements to make, and features I'd still like to refine. But it's functional, it's a significant step forward, and I'm genuinely proud of what I've accomplished.
 
 What's Next?
 
-My long-term goal is to become a stronger full-stack developer.
+My goal has always been to become a stronger full-stack developer.
 
-I already have experience working across different parts of application development, but I don't want to stop at knowing how to connect a frontend to a database.
+Although I've already worked across different areas of application development, I don't want to stop at knowing how to connect a frontend to a database.
 
 I want to understand infrastructure, security, deployment, scalability, performance, and the engineering decisions that make software reliable in the real world.
 
-This project is another step in that direction.
+This project has given me a much better appreciation of what goes into building and maintaining a full-stack application.
 
-I'm going to keep improving it, auditing it, and making it better. I don't necessarily expect perfection, but I do want to get as close as practical.
+I'll continue improving it, auditing it, and working towards making it better.
 
-Building software isn't just about making something that works. It's about making something people can trust.
+I don't necessarily expect perfection, but I do want to get as close as practically possible.
 
-And that's probably the biggest lesson I took away from building my first production-oriented full-stack application.
+A Final Thought
 
----
+Building software isn't just about making something that works.
+
+It's about making something reliable, maintainable, secure, and useful to the people who depend on it.
+
+I started this journey as someone who generally preferred local-first applications. I'm ending this particular development milestone with a much better understanding of why full-stack architecture matters and the responsibilities that come with it.
 
 Built with curiosity, accelerated with AI, and improved through engineering.
