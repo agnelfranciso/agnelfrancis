@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { GraduationCap, Briefcase, User, Code2, Gamepad2, Sparkles, MapPin, ShieldCheck } from "lucide-react";
+import { Briefcase, User, Code2, Gamepad2, Sparkles, MapPin, ShieldCheck } from "lucide-react";
 
 export default function AboutTabs() {
   const [activeTab, setActiveTab] = useState<"about" | "experience">("about");
@@ -104,8 +104,12 @@ export default function AboutTabs() {
               {/* Item 1 */}
               <div className="timeline-item">
                 <div className="timeline-marker">
-                  <div className="timeline-icon-box">
-                    <GraduationCap size={18} />
+                  <div className="timeline-icon-box timeline-logo-box">
+                    <img
+                      src="/images/education/jyothi.svg"
+                      alt="Jyothi Engineering College Logo"
+                      className="timeline-logo-img"
+                    />
                   </div>
                   <div className="timeline-line" />
                 </div>
@@ -124,8 +128,12 @@ export default function AboutTabs() {
               {/* Item 2 */}
               <div className="timeline-item">
                 <div className="timeline-marker">
-                  <div className="timeline-icon-box">
-                    <GraduationCap size={18} />
+                  <div className="timeline-icon-box timeline-logo-box">
+                    <img
+                      src="/images/education/sarvodayam.svg"
+                      alt="Sarvodayam VHSS Logo"
+                      className="timeline-logo-img"
+                    />
                   </div>
                   <div className="timeline-line" />
                 </div>
@@ -142,8 +150,12 @@ export default function AboutTabs() {
               {/* Item 3 */}
               <div className="timeline-item">
                 <div className="timeline-marker">
-                  <div className="timeline-icon-box">
-                    <GraduationCap size={18} />
+                  <div className="timeline-icon-box timeline-logo-box">
+                    <img
+                      src="/images/education/grsrvhss.svg"
+                      alt="Govt RSRV HSS Velur Logo"
+                      className="timeline-logo-img"
+                    />
                   </div>
                 </div>
                 <div className="timeline-card">
