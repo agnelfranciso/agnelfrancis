@@ -33,6 +33,46 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
+    id: "gridwiser",
+    category: "Web App · Productivity",
+    title: "GridWiser",
+    description: "Modern timetable UI studio with 12 handcrafted architectural presets, AI schedule import, conflict merging, and instant PNG, PDF, .ZIP, and .ICS exports.",
+    image: "/images/projects/gridwiser/1.png",
+    bgClass: "bg-blue",
+    tags: ["Next.js 16", "TypeScript", "Firebase", "Tailwind CSS"],
+    size: "large",
+    isMobileApp: false,
+    links: [
+      { url: "https://gridwise-umber.vercel.app/", label: "Live Studio", type: "live" },
+      { url: "https://github.com/agnelfranciso/gridwiser", label: "View Source Code", type: "github" }
+    ],
+    liveLink: "https://gridwise-umber.vercel.app/",
+    screenshots: [
+      "/images/projects/gridwiser/1.png",
+      "/images/projects/gridwiser/2.png",
+      "/images/projects/gridwiser/3.png",
+      "/images/projects/gridwiser/4.png"
+    ],
+
+    role: "Sole Developer",
+    timeline: "November 2026",
+    focus: "Timetable Design Studio & Cloud Sync",
+    tech: "Next.js 16, React 19, TypeScript, Tailwind CSS v4, Motion, Firebase Auth & Cloud Storage, jsPDF, JSZip",
+
+    overview: "GridWiser is a modern timetable UI studio that transforms raw class subjects and weekly timings into crisp, print-ready schedules. Users can build schedules manually through a 2-step onboarding wizard or extract them from images and PDFs using AI-assisted JSON import, preview live across 12 structurally distinct templates, and export in multiple formats.",
+    whyItExists: "Traditional timetable makers produce generic, rigid spreadsheets. GridWiser treats weekly schedules like editorial design systems—offering proportional grids, horizontal timelines, bento dashboards, and daily poster packs with strict client-side privacy for exports and AI parsing.",
+
+    keyHighlightsTitle: "Key Features",
+    keyHighlights: [
+      { title: "12 Architectural Presets", description: "Includes Cron Studio, Swiss Timeline, Sapphire Bento, Editorial Journal, Precision Run, Acid Daily, Ivory Daily Deck, and Exhibition Blue." },
+      { title: "Overlap Detection & Smart Merge", description: "Automatically detects conflicting weekly timings and merges intentional parallel labs or electives into unified split cards." },
+      { title: "AI Import & Local Parsing", description: "Generates a structured prompt for external AI tools and parses the returned JSON 100% client-side." },
+      { title: "Multi-Format Exports", description: "Direct 2x Retina PNGs, single-archive daily poster .ZIPs, multi-page PDFs via jsPDF, .ICS calendar files, and JSON backups." },
+      { title: "Google OAuth & Share Links", description: "Passwordless Google Sign-In, private cloud sync, self-serve Account Settings (/account), and PII-free public share links." }
+    ]
+  },
+
+  {
     id: "kochitransitgo",
     category: "Public Transport",
     title: "Kochi Transit Go",
