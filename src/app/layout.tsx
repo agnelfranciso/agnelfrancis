@@ -10,10 +10,16 @@ import ResumeFAB from "@/components/ResumeFAB";
 import AIChatFAB from "@/components/AIChatFAB";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://agnelfrancis.com"),
   title: "Agnel Francis | Designer & Developer",
   description: "Portfolio of Agnel Francis - Founder of FramePixel, Full-Stack Developer & Designer based in Thrissur. Building modern digital platforms, transit utilities, and web-based games.",
   keywords: ["Agnel Francis", "Founder of FramePixel", "FramePixel", "Full-Stack Developer", "Designer", "Web Development", "Thrissur", "Jyothi Engineering College", "Portfolio"],
   authors: [{ name: "Agnel Francis" }],
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
   openGraph: {
     title: "Agnel Francis | Founder of FramePixel",
     description: "Portfolio of Agnel Francis - Founder of FramePixel, Full-Stack Developer & Designer.",
@@ -21,12 +27,21 @@ export const metadata: Metadata = {
     siteName: "Agnel Francis Portfolio",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/icon.png",
+        width: 512,
+        height: 512,
+        alt: "Agnel Francis Logo",
+      },
+    ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Agnel Francis | Designer & Developer",
     description: "Portfolio of Agnel Francis - Frontend Developer & Designer based in Thrissur.",
     creator: "@oslohaz_e",
+    images: ["/icon.png"],
   },
   verification: {
     google: "googlec8e2d91f96bcc759",
@@ -81,6 +96,7 @@ export default function RootLayout({
               "@type": "Person",
               "name": "Agnel Francis Olakkengil",
               "url": "https://agnelfrancis.com",
+              "image": "https://agnelfrancis.com/icon.png",
               "jobTitle": "Founder of FramePixel | Designer & Developer",
               "worksFor": {
                 "@type": "Organization",

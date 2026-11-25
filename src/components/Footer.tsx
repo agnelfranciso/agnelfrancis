@@ -23,6 +23,9 @@ export default function Footer() {
           <a href="/legal" style={{ fontSize: "0.9rem", color: "var(--text-muted)", textDecoration: "underline", display: "inline-block", marginTop: "0.5rem" }}>Legal & Disclaimer</a>
         </div>
         <div className="socials">
+          <Link href="/framepixel">FramePixel</Link>
+          <Link href="/resources">Resources</Link>
+          <Link href="/education">Education</Link>
           <a href="https://github.com/agnelfranciso" target="_blank" rel="noopener noreferrer">Github</a>
           <a href="https://www.linkedin.com/in/agnel-francis-olakkengil/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="https://x.com/oslohaz_e" target="_blank" rel="noopener noreferrer">Twitter</a>

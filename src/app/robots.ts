@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://agnel-francis.netlify.app/sitemap.xml',
+    sitemap: 'https://agnelfrancis.com/sitemap.xml',
   };
 }

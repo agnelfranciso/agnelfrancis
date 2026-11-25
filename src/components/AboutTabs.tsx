@@ -1,11 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Briefcase, User, Code2, Gamepad2, Sparkles, MapPin, ShieldCheck } from "lucide-react";
+import { Briefcase, User, Code2, Gamepad2, Sparkles, MapPin, ShieldCheck, ArrowRight } from "lucide-react";
+import { educationData } from "@/data/education";
 
 export default function AboutTabs() {
   const [activeTab, setActiveTab] = useState<"about" | "experience">("about");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("tab") === "experience") {
+      setActiveTab("experience");
+    }
+  }, []);
 
   return (
     <div className="about-tabs-container" style={{ width: "100%" }}>
@@ -101,72 +110,53 @@ export default function AboutTabs() {
         {activeTab === "experience" && (
           <div className="about-pane animate-fade-in">
             <div className="experience-timeline">
-              {/* Item 1 */}
-              <div className="timeline-item">
-                <div className="timeline-marker">
-                  <div className="timeline-icon-box timeline-logo-box">
-                    <img
-                      src="/images/education/jyothi.svg"
-                      alt="Jyothi Engineering College Logo"
-                      className="timeline-logo-img"
-                    />
+              {educationData.map((inst, idx) => (
+                <div key={inst.id} className="timeline-item">
+                  <div className="timeline-marker">
+                    <div className="timeline-icon-box timeline-logo-box">
+                      <img
+                        src={inst.logo}
+                        alt={`${inst.name} Logo`}
+                        className="timeline-logo-img"
+                      />
+                    </div>
+                    {idx < educationData.length - 1 && (
+                      <div className="timeline-line" />
+                    )}
                   </div>
-                  <div className="timeline-line" />
-                </div>
-                <div className="timeline-card current">
-                  <div className="timeline-badge-row">
-                    <span className="current-badge">
-                      <span className="badge-pulse-dot" /> Current (2025 – 2029)
+                  <Link
+                    href={`/education/${inst.id}`}
+                    className={`timeline-card timeline-card-clickable ${
+                      inst.status === "current" ? "current" : ""
+                    }`}
+                  >
+                    <div className="timeline-badge-row">
+                      <span
+                        className={
+                          inst.status === "current"
+                            ? "current-badge"
+                            : "year-badge"
+                        }
+                      >
+                        {inst.status === "current" && (
+                          <span className="badge-pulse-dot" />
+                        )}
+                        {inst.statusLabel}
+                      </span>
+                    </div>
+                    <h3 className="timeline-title">{inst.name}</h3>
+                    <p className="timeline-degree">{inst.degree}</p>
+                    <p className="timeline-location">{inst.location}</p>
+                    <span className="timeline-explore-link">
+                      <span>
+                        {inst.projectIds.length} Projects &bull;{" "}
+                        {inst.blogSlugs.length} Posts &bull; View Details
+                      </span>
+                      <ArrowRight size={13} />
                     </span>
-                  </div>
-                  <h3 className="timeline-title">Jyothi Engineering College (Autonomous)</h3>
-                  <p className="timeline-degree">B.Tech Computer Science and Engineering (Cybersecurity)</p>
-                  <p className="timeline-location">Cheruthuruthy, Thrissur</p>
+                  </Link>
                 </div>
-              </div>
-
-              {/* Item 2 */}
-              <div className="timeline-item">
-                <div className="timeline-marker">
-                  <div className="timeline-icon-box timeline-logo-box">
-                    <img
-                      src="/images/education/sarvodayam.svg"
-                      alt="Sarvodayam VHSS Logo"
-                      className="timeline-logo-img"
-                    />
-                  </div>
-                  <div className="timeline-line" />
-                </div>
-                <div className="timeline-card">
-                  <div className="timeline-badge-row">
-                    <span className="year-badge">2023 – 2025</span>
-                  </div>
-                  <h3 className="timeline-title">Sarvodayam VHSS</h3>
-                  <p className="timeline-degree">Junior Software Developer Course</p>
-                  <p className="timeline-location">Aryampadam</p>
-                </div>
-              </div>
-
-              {/* Item 3 */}
-              <div className="timeline-item">
-                <div className="timeline-marker">
-                  <div className="timeline-icon-box timeline-logo-box">
-                    <img
-                      src="/images/education/grsrvhss.svg"
-                      alt="Govt RSRV HSS Velur Logo"
-                      className="timeline-logo-img"
-                    />
-                  </div>
-                </div>
-                <div className="timeline-card">
-                  <div className="timeline-badge-row">
-                    <span className="year-badge">2017 – 2023</span>
-                  </div>
-                  <h3 className="timeline-title">Govt RSRV HSS</h3>
-                  <p className="timeline-degree">High School Education</p>
-                  <p className="timeline-location">Velur</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         )}
