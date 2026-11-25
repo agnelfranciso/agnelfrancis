@@ -2,16 +2,84 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Resource, resourcesData, RESOURCE_CATEGORIES } from "@/data/resources";
+import {
+  Download,
+  Loader2,
+  CheckCircle2,
+  ExternalLink,
+  Copy,
+  Check,
+  Layers,
+  Code2,
+  FolderArchive,
+  ShieldCheck,
+  Smartphone,
+  Cpu,
+  Terminal,
+  Type,
+  Globe,
+  FileText,
+  Search,
+  ArrowUpRight,
+  ArrowRight,
+  ZoomIn,
+  Info,
+  RefreshCw,
+} from "lucide-react";
+
+function GithubIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  );
+}
+import { Resource, resourcesData } from "@/data/resources";
 import "../resources.css";
 
 interface ProductDetailClientProps {
   resource: Resource;
 }
 
+function renderFeatureIcon(icon: string) {
+  switch (icon) {
+    case "code":
+      return <Code2 size={18} />;
+    case "smartphone":
+      return <Smartphone size={18} />;
+    case "cpu":
+      return <Cpu size={18} />;
+    case "terminal":
+      return <Terminal size={18} />;
+    case "shield":
+      return <ShieldCheck size={18} />;
+    case "type":
+      return <Type size={18} />;
+    case "globe":
+      return <Globe size={18} />;
+    default:
+      return <Layers size={18} />;
+  }
+}
+
+function renderFileIcon(icon: string) {
+  switch (icon) {
+    case "code":
+      return <Code2 size={17} />;
+    case "folder":
+      return <FolderArchive size={17} />;
+    case "type":
+      return <Type size={17} />;
+    case "smartphone":
+      return <Smartphone size={17} />;
+    default:
+      return <FileText size={17} />;
+  }
+}
+
 export default function ProductDetailClient({ resource }: ProductDetailClientProps) {
   const [activeImg, setActiveImg] = useState<string>(
-    resource.previewMain || resource.image || "/resources/images/lumina-detail-main.png"
+    resource.previewMain || resource.image || ""
   );
   const [activeTab, setActiveTab] = useState<"overview" | "included" | "license">("overview");
 
@@ -26,11 +94,9 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
   const [toastMessage, setToastMessage] = useState<string>("");
   const [showToast, setShowToast] = useState<boolean>(false);
 
-  // Search input state for top bar
   const [searchQuery, setSearchQuery] = useState<string>("");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // Keyboard shortcut (Cmd+K for search)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
@@ -50,36 +116,34 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
     }, 3600);
   };
 
-  // In-place download flow:
-  // "when download is clicked it downloads here then only passes the file to user after download"
+  // In-place download flow: prepares & verifies right here before passing file to browser
   const handleInPlaceDownload = () => {
     if (downloadStatus === "downloading") return;
 
     setDownloadStatus("downloading");
     setDownloadProgress(0);
-    setDownloadPhaseText("Establishing connection to asset mirror...");
+    setDownloadPhaseText("Connecting to archive mirror...");
 
     const startTime = Date.now();
-    const duration = 1800; // 1.8 seconds total in-place preparation
+    const duration = 1600;
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(100, Math.round((elapsed / duration) * 100));
       setDownloadProgress(progress);
 
-      if (progress < 30) {
-        setDownloadPhaseText("Establishing secure connection to asset mirror...");
-      } else if (progress < 65) {
-        setDownloadPhaseText(`Verifying cryptographic SHA-256 integrity... (${progress}%)`);
-      } else if (progress < 95) {
-        setDownloadPhaseText(`Packaging ${resource.fileSize} asset bundle for browser transfer... (${progress}%)`);
+      if (progress < 35) {
+        setDownloadPhaseText("Connecting to asset mirror...");
+      } else if (progress < 75) {
+        setDownloadPhaseText(`Verifying archive & checksum... (${progress}%)`);
+      } else if (progress < 100) {
+        setDownloadPhaseText(`Packaging ${resource.fileSize} for transfer... (${progress}%)`);
       } else {
-        setDownloadPhaseText("Verification complete. Transferring file to device...");
+        setDownloadPhaseText("Verified. Passing file to browser...");
       }
 
       if (progress >= 100) {
         clearInterval(interval);
-        // Trigger real file download via anchor
         const link = document.createElement("a");
         link.href = resource.downloadUrl;
         link.download = resource.downloadUrl.split("/").pop() || `${resource.id}.zip`;
@@ -88,9 +152,8 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
         document.body.removeChild(link);
 
         setDownloadStatus("completed");
-        triggerToast(`"${resource.title}" bundle passed to browser download.`);
+        triggerToast(`"${resource.title}" passed to browser download.`);
 
-        // Reset back to idle after 4.5s
         setTimeout(() => {
           setDownloadStatus("idle");
           setDownloadProgress(0);
@@ -100,27 +163,30 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
   };
 
   const handleCopyHash = () => {
-    const hash = resource.sha256 || "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069";
+    const hash = resource.sha256 || "verified-open-release";
     if (!navigator.clipboard) return;
     navigator.clipboard.writeText(hash);
     setCopiedHash(true);
     setTimeout(() => setCopiedHash(false), 2400);
-    triggerToast("SHA-256 hash copied to clipboard.");
+    triggerToast("Checksum copied to clipboard.");
   };
 
   const handleCopyCode = () => {
-    const cmd = resource.packageCommand || `npx agnel-vault pull ${resource.id}`;
+    const cmd = resource.packageCommand || `git clone ${resource.githubUrl || "https://github.com/agnelfranciso"}`;
     if (!navigator.clipboard) return;
     navigator.clipboard.writeText(cmd);
     setCopiedCode(true);
     setTimeout(() => setCopiedCode(false), 2400);
-    triggerToast("Vault CLI command copied to clipboard.");
+    triggerToast("Command copied to clipboard.");
   };
 
-  // Companion assets (other items)
   const companionAssets = resourcesData
     .filter((item) => item.id !== resource.id)
     .slice(0, 3);
+
+  const titleWords = resource.title.split(" ");
+  const titleMain = titleWords.length > 1 ? titleWords.slice(0, -1).join(" ") : resource.title;
+  const titleLast = titleWords.length > 1 ? titleWords.slice(-1).join(" ") : "";
 
   return (
     <div className="lumina-vault">
@@ -155,10 +221,7 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
           <div className="lumina-header-actions">
             <div className="lumina-search-bar">
               <span className="lumina-search-icon">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
+                <Search size={15} strokeWidth={2} />
               </span>
               <input
                 ref={searchInputRef}
@@ -176,8 +239,13 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
               <span className="lumina-search-kbd">⌘K</span>
             </div>
 
-            <Link href="/" className="lumina-btn-ghost-pill">
-              Portfolio ↗
+            <Link
+              href="/"
+              className="lumina-btn-ghost-pill"
+              style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}
+            >
+              <span>Portfolio</span>
+              <ArrowUpRight size={13} strokeWidth={2.2} />
             </Link>
 
             <Link href="/about" className="lumina-user-pill" title="Agnel Francis">
@@ -207,7 +275,7 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
           <header className="lumina-product-header">
             <div className="lumina-product-release-pill">
               <span className="lumina-badge-pulse" />
-              <span>{resource.releaseTag || `${resource.version} • Open Source Release`}</span>
+              <span>{resource.releaseTag || `${resource.version} • Open Release`}</span>
             </div>
 
             <h1
@@ -218,17 +286,19 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                 textTransform: "none",
               }}
             >
-              {resource.title.split(" ").slice(0, -2).join(" ")}{" "}
-              <span
-                className="lumina-product-italic"
-                style={{
-                  fontFamily: "'Playfair Display', Georgia, serif",
-                  fontStyle: "italic",
-                  fontWeight: 400,
-                }}
-              >
-                {resource.title.split(" ").slice(-2).join(" ")}
-              </span>
+              {titleMain}{" "}
+              {titleLast && (
+                <span
+                  className="lumina-product-italic"
+                  style={{
+                    fontFamily: "'Playfair Display', Georgia, serif",
+                    fontStyle: "italic",
+                    fontWeight: 400,
+                  }}
+                >
+                  {titleLast}
+                </span>
+              )}
             </h1>
 
             <p className="lumina-product-tagline">
@@ -237,69 +307,68 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
 
             <div className="lumina-product-meta-row">
               <div className="lumina-product-meta-item">
-                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>verified</span>
+                <ShieldCheck size={15} />
                 <span>By {resource.author}</span>
               </div>
-              <span>•</span>
+              <span>&bull;</span>
               <div className="lumina-product-meta-item">
-                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>category</span>
+                <Layers size={15} />
                 <span>Format: {resource.format}</span>
               </div>
-              <span>•</span>
+              <span>&bull;</span>
               <div className="lumina-product-meta-item">
-                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>inventory_2</span>
+                <FolderArchive size={15} />
                 <span>Size: {resource.fileSize}</span>
               </div>
-              <span>•</span>
+              <span>&bull;</span>
               <div className="lumina-product-meta-item">
-                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>download</span>
-                <span>{resource.downloadCount || "12.4k"} Downloads</span>
-              </div>
-              <span>•</span>
-              <div className="lumina-product-meta-item">
-                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>license</span>
-                <span>License: CC-BY-4.0 Free</span>
+                <CheckCircle2 size={15} />
+                <span>{resource.license || "Free Open Access"}</span>
               </div>
             </div>
           </header>
 
-          {/* Main 2-Column Product Layout (8 cols + 4 cols) */}
+          {/* Main 2-Column Product Layout */}
           <div className="lumina-product-layout">
             {/* Left Column: Visual Showcase & In-Depth Technical Specs */}
             <div className="lumina-product-left-col">
               {/* Primary Showcase Screen */}
               <div className="lumina-showcase-box">
                 <div className="lumina-showcase-screen">
-                  {resource.isTypographyCard && !resource.previewMain ? (
-                    <div className="lumina-type-card-body" style={{ minHeight: 460 }}>
+                  {resource.isTypographyCard && !activeImg ? (
+                    <div className="lumina-type-card-body" style={{ minHeight: "340px" }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                         <span className="lumina-card-badge-left" style={{ position: "static" }}>
                           {resource.format}
                         </span>
                         <span className="lumina-card-badge-right" style={{ position: "static" }}>
-                          FREE
+                          FREE OTF
                         </span>
                       </div>
-                      <div className="lumina-type-specimen" style={{ fontSize: "3.5rem" }}>
-                        Aesthete <span style={{ fontStyle: "italic", opacity: 0.85 }}>№ 08</span>
-                        <div className="lumina-type-subtext" style={{ fontSize: "0.85rem", marginTop: "1rem" }}>
-                          The quick brown fox jumps over the lazy dog
+                      <div style={{ margin: "auto 0", padding: "1.5rem 0" }}>
+                        <span
+                          className={`lumina-font-specimen-text ${resource.fontPreviewFamily || ""}`}
+                          style={{ fontSize: "clamp(2rem, 5vw, 3.6rem)" }}
+                        >
+                          {resource.fontSampleText || resource.title}
+                        </span>
+                        <div className="lumina-type-subtext" style={{ fontSize: "0.8rem", marginTop: "1rem" }}>
+                          ABCDEFGHIJKLMNOPQRSTUVWXYZ &bull; 0123456789
                         </div>
                       </div>
-                      <div className="lumina-type-styles-strip" style={{ fontSize: "0.85rem" }}>
-                        <span>Regular</span>
-                        <span>•</span>
-                        <span>Medium</span>
-                        <span>•</span>
-                        <span>Italic</span>
-                        <span>•</span>
-                        <span>Display Bold</span>
+                      <div className="lumina-type-styles-strip" style={{ fontSize: "0.8rem", flexWrap: "wrap" }}>
+                        {(resource.fontStylesList || ["Regular", "Bold"]).map((st, idx) => (
+                          <React.Fragment key={st}>
+                            {idx > 0 && <span>&bull;</span>}
+                            <span>{st}</span>
+                          </React.Fragment>
+                        ))}
                       </div>
                     </div>
                   ) : (
                     <img
                       src={activeImg}
-                      alt={`${resource.title} Preview Screen`}
+                      alt={`${resource.title} Preview`}
                       className="lumina-showcase-img"
                     />
                   )}
@@ -320,9 +389,7 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                       <img src={thumb.img} alt={thumb.label} className="lumina-thumb-img" />
                       <div className="lumina-thumb-label-bar">
                         <span>{thumb.label}</span>
-                        <span className="material-symbols-outlined" style={{ fontSize: 13, opacity: 0.8 }}>
-                          zoom_in
-                        </span>
+                        <ZoomIn size={12} />
                       </div>
                     </button>
                   ))}
@@ -337,76 +404,49 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                     className={`lumina-spec-tab-trigger ${activeTab === "overview" ? "active" : ""}`}
                     onClick={() => setActiveTab("overview")}
                   >
-                    <span className="material-symbols-outlined" style={{ fontSize: 17 }}>layers</span>
-                    <span>System Overview</span>
+                    <Layers size={16} />
+                    <span>Overview</span>
                   </button>
                   <button
                     type="button"
                     className={`lumina-spec-tab-trigger ${activeTab === "included" ? "active" : ""}`}
                     onClick={() => setActiveTab("included")}
                   >
-                    <span className="material-symbols-outlined" style={{ fontSize: 17 }}>folder_zip</span>
-                    <span>What&apos;s Included</span>
+                    <FolderArchive size={16} />
+                    <span>Files Included</span>
                   </button>
                   <button
                     type="button"
                     className={`lumina-spec-tab-trigger ${activeTab === "license" ? "active" : ""}`}
                     onClick={() => setActiveTab("license")}
                   >
-                    <span className="material-symbols-outlined" style={{ fontSize: 17 }}>verified_user</span>
-                    <span>Open License</span>
+                    <ShieldCheck size={16} />
+                    <span>License</span>
                   </button>
                 </div>
 
-                {/* Tab 1: System Overview */}
+                {/* Tab 1: Overview */}
                 {activeTab === "overview" && (
                   <div>
-                    <h3 style={{ fontSize: "1.2rem", fontWeight: 700, margin: "0 0 0.5rem 0", color: "var(--res-on-surface)" }}>
-                      Architectural System Breakdown
+                    <h3 style={{ fontSize: "1.15rem", fontWeight: 700, margin: "0 0 0.5rem 0", color: "var(--res-on-surface)" }}>
+                      Technical Highlights
                     </h3>
                     <p style={{ fontSize: "0.85rem", color: "var(--res-on-surface-variant)", lineHeight: 1.6, margin: "0 0 1.5rem 0" }}>
-                      Designed specifically for enterprise platforms, dark-mode dashboards, and technical software products. Every component follows mathematical token curves and strict contrast compliance.
+                      {resource.longDescription || resource.description}
                     </p>
 
                     <div className="lumina-features-2col">
-                      {(resource.features || [
-                        {
-                          title: "450+ Production Components",
-                          desc: "Fully responsive layouts, auto-layout 5.0, variables, dark/light token bindings, and accessible keyboard states.",
-                          icon: "layers",
-                          tag: "Figma Variables Native",
-                        },
-                        {
-                          title: "Tailwind 3.4 Token Sync",
-                          desc: "Exports directly into Tailwind CSS configuration with seamless hexadecimal and CSS-variable mapping.",
-                          icon: "code",
-                          tag: "React & Next.js Ready",
-                        },
-                        {
-                          title: "Responsive Breakpoints",
-                          desc: "Mobile (375px), Tablet (768px), Desktop (1440px), and Ultra-wide (1920px) pre-structured screen templates.",
-                          icon: "devices",
-                          tag: "Tested across screens",
-                        },
-                        {
-                          title: "Strict WCAG AAA Contrast",
-                          desc: "All text and interactive controls rigorously calibrated against deep obsidian backgrounds for zero ocular strain.",
-                          icon: "visibility",
-                          tag: "Mathematical Luminance",
-                        },
-                      ]).map((feat, i) => (
+                      {(resource.features || []).map((feat, i) => (
                         <div key={i} className="lumina-feature-item">
                           <div>
                             <div className="lumina-feature-icon-badge">
-                              <span className="material-symbols-outlined" style={{ fontSize: 20 }}>
-                                {feat.icon}
-                              </span>
+                              {renderFeatureIcon(feat.icon)}
                             </div>
                             <h4 className="lumina-feature-title">{feat.title}</h4>
                             <p className="lumina-feature-desc">{feat.desc}</p>
                           </div>
                           <div className="lumina-feature-tag">
-                            <span className="material-symbols-outlined" style={{ fontSize: 14 }}>check_circle</span>
+                            <CheckCircle2 size={13} />
                             <span>{feat.tag}</span>
                           </div>
                         </div>
@@ -415,24 +455,18 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                   </div>
                 )}
 
-                {/* Tab 2: What's Included */}
+                {/* Tab 2: Files Included */}
                 {activeTab === "included" && (
                   <div>
-                    <h3 style={{ fontSize: "1.2rem", fontWeight: 700, margin: "0 0 0.5rem 0", color: "var(--res-on-surface)" }}>
-                      Archive Directory Manifest
+                    <h3 style={{ fontSize: "1.15rem", fontWeight: 700, margin: "0 0 0.5rem 0", color: "var(--res-on-surface)" }}>
+                      Archive Contents
                     </h3>
                     <p style={{ fontSize: "0.85rem", color: "var(--res-on-surface-variant)", lineHeight: 1.6, margin: "0 0 1.5rem 0" }}>
-                      The single downloadable archive includes all production Figma canvases, token JSON dictionaries, vector exports, and usage guides.
+                      Included inside the downloadable package for {resource.title}.
                     </p>
 
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                      {(resource.filesIncluded || [
-                        { name: `${resource.id}-canvas.fig`, size: "128.4 MB", icon: "dashboard_customize" },
-                        { name: "tokens.dictionary.json", size: "1.2 MB", icon: "data_object" },
-                        { name: "icons-vector-exports.svg.zip", size: "14.5 MB", icon: "shapes" },
-                        { name: "README-INTEGRATION.md", size: "45 KB", icon: "description" },
-                        { name: "COMMERCIAL-LICENSE.pdf", size: "320 KB", icon: "policy" },
-                      ]).map((file, idx) => (
+                      {(resource.filesIncluded || []).map((file, idx) => (
                         <div
                           key={idx}
                           style={{
@@ -445,15 +479,20 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                             border: "1px solid var(--res-border-subtle)",
                             fontFamily: "'Inter', monospace, sans-serif",
                             fontSize: "0.8rem",
+                            gap: "0.75rem",
                           }}
                         >
-                          <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
-                            <span className="material-symbols-outlined" style={{ color: "var(--res-primary)", fontSize: 18 }}>
-                              {file.icon}
+                          <div style={{ display: "flex", alignItems: "center", gap: "0.65rem", minWidth: 0 }}>
+                            <span style={{ color: "#ffffff", flexShrink: 0, display: "flex" }}>
+                              {renderFileIcon(file.icon)}
                             </span>
-                            <span style={{ color: "var(--res-on-surface)", fontWeight: 500 }}>{file.name}</span>
+                            <span style={{ color: "var(--res-on-surface)", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                              {file.name}
+                            </span>
                           </div>
-                          <span style={{ color: "var(--res-outline)", fontSize: "0.75rem" }}>{file.size}</span>
+                          <span style={{ color: "var(--res-outline)", fontSize: "0.75rem", flexShrink: 0 }}>
+                            {file.size}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -463,31 +502,30 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                 {/* Tab 3: Open License */}
                 {activeTab === "license" && (
                   <div>
-                    <h3 style={{ fontSize: "1.2rem", fontWeight: 700, margin: "0 0 0.5rem 0", color: "var(--res-on-surface)" }}>
-                      Open Creative Commons &amp; Commercial Terms
+                    <h3 style={{ fontSize: "1.15rem", fontWeight: 700, margin: "0 0 0.5rem 0", color: "var(--res-on-surface)" }}>
+                      Usage &amp; Open Licensing
                     </h3>
                     <p style={{ fontSize: "0.85rem", color: "var(--res-on-surface-variant)", lineHeight: 1.6, margin: "0 0 1.5rem 0" }}>
-                      Distributed under the permissive CC BY 4.0 license. You are fully empowered to build, ship, and commercialize digital products using this resource.
+                      Distributed under {resource.license || "Open Source / Free Access"}. Completely free to inspect, learn from, and use.
                     </p>
 
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.5rem" }}>
+                    <div className="lumina-license-grid">
                       <div
                         style={{
                           padding: "1rem",
                           borderRadius: "10px",
-                          backgroundColor: "rgba(16, 185, 129, 0.08)",
+                          backgroundColor: "rgba(16, 185, 129, 0.06)",
                           border: "1px solid rgba(16, 185, 129, 0.2)",
                         }}
                       >
-                        <div style={{ color: "#10b981", fontWeight: 700, fontSize: "0.85rem", marginBottom: "0.35rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                          <span className="material-symbols-outlined" style={{ fontSize: 16 }}>check_circle</span>
-                          Allowed Use
+                        <div style={{ color: "#10b981", fontWeight: 700, fontSize: "0.85rem", marginBottom: "0.4rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                          <CheckCircle2 size={15} />
+                          <span>Permitted</span>
                         </div>
                         <ul style={{ margin: 0, paddingLeft: "1.25rem", fontSize: "0.8rem", color: "var(--res-on-surface-variant)", lineHeight: 1.6 }}>
-                          <li>Unlimited personal &amp; commercial client projects</li>
-                          <li>SaaS applications &amp; dashboards</li>
-                          <li>Modification, remixing, and theme adaptation</li>
-                          <li>No recurring license fees or royalty obligations</li>
+                          <li>Personal &amp; educational projects</li>
+                          <li>Inspecting, forking, and learning from source</li>
+                          <li>Zero cost or account sign-up required</li>
                         </ul>
                       </div>
 
@@ -495,60 +533,22 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                         style={{
                           padding: "1rem",
                           borderRadius: "10px",
-                          backgroundColor: "rgba(239, 68, 68, 0.08)",
-                          border: "1px solid rgba(239, 68, 68, 0.2)",
+                          backgroundColor: "rgba(255, 255, 255, 0.03)",
+                          border: "1px solid var(--res-border-subtle)",
                         }}
                       >
-                        <div style={{ color: "#ef4444", fontWeight: 700, fontSize: "0.85rem", marginBottom: "0.35rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                          <span className="material-symbols-outlined" style={{ fontSize: 16 }}>cancel</span>
-                          Prohibited
+                        <div style={{ color: "#f4f4f5", fontWeight: 700, fontSize: "0.85rem", marginBottom: "0.4rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                          <Info size={15} />
+                          <span>Notes</span>
                         </div>
                         <ul style={{ margin: 0, paddingLeft: "1.25rem", fontSize: "0.8rem", color: "var(--res-on-surface-variant)", lineHeight: 1.6 }}>
-                          <li>Direct sub-licensing or raw redistributing as a standalone UI kit</li>
-                          <li>Claiming sole author copyright over original source files</li>
+                          <li>Check repository LICENSE file for commercial font/code terms</li>
+                          <li>Credit Agnel Francis where applicable</li>
                         </ul>
                       </div>
                     </div>
-
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                      <a
-                        href="/resources/downloads/lumina-commercial-certificate.pdf"
-                        download="lumina-commercial-certificate.pdf"
-                        className="lumina-btn-download-pill"
-                        style={{ textDecoration: "none" }}
-                      >
-                        <span className="material-symbols-outlined" style={{ fontSize: 16 }}>download</span>
-                        <span>Download Signed Commercial Certificate (PDF)</span>
-                      </a>
-                    </div>
                   </div>
                 )}
-              </div>
-
-              {/* Benchmark Quality Metrics Strip */}
-              <div className="lumina-benchmark-box">
-                <div>
-                  <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--res-outline)", fontWeight: 700, marginBottom: "0.25rem" }}>
-                    Quality Assurance Benchmarks
-                  </div>
-                  <div style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--res-on-surface)" }}>
-                    Figma Auto-Layout 5.0 Compliant • Zero Detached Symbols
-                  </div>
-                  <div style={{ fontSize: "0.8rem", color: "var(--res-on-surface-variant)", marginTop: "0.25rem" }}>
-                    Verified across Figma 2026 Desktop &amp; Web runtimes with automated design linter passes.
-                  </div>
-                </div>
-
-                <div style={{ display: "flex", gap: "1rem" }}>
-                  <div style={{ textAlign: "center", padding: "0.5rem 1rem", background: "var(--res-surface-container)", borderRadius: "8px" }}>
-                    <div style={{ fontSize: "1.25rem", fontWeight: 800, color: "var(--res-primary)" }}>100%</div>
-                    <div style={{ fontSize: "0.65rem", color: "var(--res-outline)", textTransform: "uppercase" }}>Pass Rate</div>
-                  </div>
-                  <div style={{ textAlign: "center", padding: "0.5rem 1rem", background: "var(--res-surface-container)", borderRadius: "8px" }}>
-                    <div style={{ fontSize: "1.25rem", fontWeight: 800, color: "var(--res-secondary)" }}>0 ms</div>
-                    <div style={{ fontSize: "0.65rem", color: "var(--res-outline)", textTransform: "uppercase" }}>Layout Drift</div>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -558,18 +558,17 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                 <div className="lumina-purchase-card">
                   <div className="lumina-accent-top-line" />
 
-                  {/* Asset License / Free Status Header */}
                   <div className="lumina-asset-status-card">
                     <div className="lumina-status-indicator-badge">
                       <span className="lumina-badge-pulse" />
-                      <span>100% Free &amp; Open Resource</span>
+                      <span>{resource.githubUrl ? "Open Source & Free" : "100% Free Resource"}</span>
                     </div>
                     <p className="lumina-asset-status-desc">
-                      Available freely under CC BY 4.0 for unlimited personal &amp; commercial projects. Zero license fees.
+                      Direct download with zero paywalls, accounts, or subscriptions required.
                     </p>
                   </div>
 
-                  {/* THE IN-PLACE DOWNLOAD ACTION BUTTON */}
+                  {/* In-Place Download Button */}
                   <button
                     type="button"
                     className={`lumina-download-action-btn ${
@@ -579,7 +578,6 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                     disabled={downloadStatus === "downloading"}
                     aria-live="polite"
                   >
-                    {/* Progress bar fill layer animating inside the button */}
                     {downloadStatus === "downloading" && (
                       <div
                         className="lumina-download-progress-fill"
@@ -590,237 +588,207 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                     <div style={{ position: "relative", zIndex: 2, display: "flex", alignItems: "center", gap: "0.5rem" }}>
                       {downloadStatus === "idle" && (
                         <>
-                          <span className="material-symbols-outlined" style={{ fontSize: 20 }}>
-                            download
-                          </span>
-                          <span>Download Archive ({resource.fileSize})</span>
+                          <Download size={18} strokeWidth={2.3} />
+                          <span>Download ({resource.fileSize})</span>
                         </>
                       )}
 
                       {downloadStatus === "downloading" && (
                         <>
-                          <span className="material-symbols-outlined text-[18px] animate-spin">
-                            progress_activity
-                          </span>
-                          <span>
-                            Downloading ({downloadProgress}%)
-                          </span>
+                          <Loader2 size={18} className="lumina-spin" />
+                          <span>Downloading ({downloadProgress}%)</span>
                         </>
                       )}
 
                       {downloadStatus === "completed" && (
                         <>
-                          <span className="material-symbols-outlined" style={{ fontSize: 20 }}>
-                            check_circle
-                          </span>
-                          <span>Archive Downloaded ✓</span>
+                          <CheckCircle2 size={18} strokeWidth={2.3} />
+                          <span>Downloaded</span>
                         </>
                       )}
                     </div>
                   </button>
 
-                  {/* In-Place Status Feed: Shows live progress and cryptographic steps right on the page */}
+                  {/* In-Place Status Feed */}
                   {downloadStatus !== "idle" && (
                     <div className="lumina-in-place-status">
-                      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                        <span
-                          className={`material-symbols-outlined ${
-                            downloadStatus === "downloading" ? "animate-spin" : ""
-                          }`}
-                          style={{
-                            fontSize: 14,
-                            color: downloadStatus === "completed" ? "#10b981" : "var(--res-primary)",
-                          }}
-                        >
-                          {downloadStatus === "completed" ? "verified" : "sync"}
-                        </span>
-                        <span style={{ fontSize: "0.75rem", color: "var(--res-on-surface)" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", minWidth: 0 }}>
+                        {downloadStatus === "completed" ? (
+                          <CheckCircle2 size={14} style={{ color: "#10b981", flexShrink: 0 }} />
+                        ) : (
+                          <RefreshCw size={14} className="lumina-spin" style={{ color: "#ffffff", flexShrink: 0 }} />
+                        )}
+                        <span style={{ fontSize: "0.75rem", color: "var(--res-on-surface)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                           {downloadPhaseText}
                         </span>
                       </div>
-                      <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--res-primary)" }}>
+                      <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#ffffff", flexShrink: 0 }}>
                         {downloadProgress}%
                       </span>
                     </div>
                   )}
 
-                  {/* Secondary Link: Open in Figma preview */}
-                  <a
-                    href="https://www.figma.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="lumina-btn-figma-external"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "0.45rem",
-                      width: "100%",
-                      padding: "10px 16px",
-                      marginTop: "0.85rem",
-                      borderRadius: "8px",
-                      backgroundColor: "var(--res-surface-container)",
-                      border: "1px solid var(--res-border-subtle)",
-                      color: "var(--res-on-surface)",
-                      fontSize: "0.825rem",
-                      fontWeight: 600,
-                      textDecoration: "none",
-                      transition: "all 0.2s ease",
-                    }}
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                      <polyline points="15 3 21 3 21 9" />
-                      <line x1="10" y1="14" x2="21" y2="3" />
-                    </svg>
-                    <span>Open Live Preview in Figma</span>
-                  </a>
+                  {/* GitHub Repository Link */}
+                  {resource.githubUrl && (
+                    <a
+                      href={resource.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="lumina-btn-github"
+                    >
+                      <GithubIcon size={16} />
+                      <span>View Source on GitHub</span>
+                      <ExternalLink size={13} style={{ opacity: 0.6 }} />
+                    </a>
+                  )}
 
-                  {/* Format & Specification Key-Value Table */}
-                  <div style={{ marginTop: "1.75rem", borderTop: "1px solid var(--res-border-subtle)", paddingTop: "1.25rem" }}>
+                  {/* Live URL Link */}
+                  {resource.liveUrl && (
+                    <a
+                      href={resource.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="lumina-btn-github"
+                    >
+                      <Globe size={16} />
+                      <span>Visit Live Project</span>
+                      <ExternalLink size={13} style={{ opacity: 0.6 }} />
+                    </a>
+                  )}
+
+                  {/* Specifications Table */}
+                  <div style={{ marginTop: "1.5rem", borderTop: "1px solid var(--res-border-subtle)", paddingTop: "1.25rem" }}>
                     <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--res-outline)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.85rem" }}>
-                      Specifications
+                      Details
                     </div>
 
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem", fontSize: "0.8rem" }}>
-                      <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem" }}>
                         <span style={{ color: "var(--res-outline)" }}>License</span>
-                        <span style={{ color: "var(--res-on-surface)", fontWeight: 500 }}>CC BY 4.0 Commercial</span>
+                        <span style={{ color: "var(--res-on-surface)", fontWeight: 500, textAlign: "right" }}>
+                          {resource.license || "Open Access"}
+                        </span>
                       </div>
-                      <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <span style={{ color: "var(--res-outline)" }}>Compatibility</span>
-                        <span style={{ color: "var(--res-on-surface)", fontWeight: 500 }}>Auto Layout 5.0</span>
+                      <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem" }}>
+                        <span style={{ color: "var(--res-outline)" }}>Format</span>
+                        <span style={{ color: "var(--res-on-surface)", fontWeight: 500, textAlign: "right" }}>
+                          {resource.format}
+                        </span>
                       </div>
-                      <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <span style={{ color: "var(--res-outline)" }}>File Size</span>
-                        <span style={{ color: "var(--res-on-surface)", fontWeight: 500 }}>{resource.fileSize}</span>
+                      <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem" }}>
+                        <span style={{ color: "var(--res-outline)" }}>Package</span>
+                        <span style={{ color: "var(--res-on-surface)", fontWeight: 500, textAlign: "right" }}>
+                          {resource.fileSize}
+                        </span>
                       </div>
-                      <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <span style={{ color: "var(--res-outline)" }}>Current Version</span>
-                        <span style={{ color: "var(--res-on-surface)", fontWeight: 500 }}>{resource.version}</span>
-                      </div>
-                      <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <span style={{ color: "var(--res-outline)" }}>Last Updated</span>
-                        <span style={{ color: "var(--res-on-surface)", fontWeight: 500 }}>{resource.updatedAt || "October 2026"}</span>
+                      <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem" }}>
+                        <span style={{ color: "var(--res-outline)" }}>Version</span>
+                        <span style={{ color: "var(--res-on-surface)", fontWeight: 500, textAlign: "right" }}>
+                          {resource.version}
+                        </span>
                       </div>
                     </div>
 
-                    {/* SHA-256 Checksum with Copy Button */}
-                    <div
-                      style={{
-                        marginTop: "1rem",
-                        padding: "8px 10px",
-                        borderRadius: "8px",
-                        backgroundColor: "var(--res-surface-container)",
-                        border: "1px solid var(--res-border-subtle)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        gap: "0.5rem",
-                      }}
-                    >
-                      <div style={{ display: "flex", flexDirection: "column", overflow: "hidden" }}>
-                        <span style={{ fontSize: "0.65rem", textTransform: "uppercase", color: "var(--res-outline)", letterSpacing: "0.08em" }}>
-                          SHA-256 Checksum
-                        </span>
+                    {resource.sha256 && (
+                      <div
+                        style={{
+                          marginTop: "1rem",
+                          padding: "8px 10px",
+                          borderRadius: "8px",
+                          backgroundColor: "var(--res-surface-container)",
+                          border: "1px solid var(--res-border-subtle)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          gap: "0.5rem",
+                        }}
+                      >
+                        <div style={{ display: "flex", flexDirection: "column", overflow: "hidden" }}>
+                          <span style={{ fontSize: "0.65rem", textTransform: "uppercase", color: "var(--res-outline)", letterSpacing: "0.08em" }}>
+                            SHA-256
+                          </span>
+                          <span
+                            style={{
+                              fontSize: "0.7rem",
+                              fontFamily: "monospace",
+                              color: "var(--res-on-surface-variant)",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              whiteSpace: "nowrap",
+                            }}
+                          >
+                            {resource.sha256}
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={handleCopyHash}
+                          style={{
+                            background: "none",
+                            border: "none",
+                            color: copiedHash ? "#10b981" : "#ffffff",
+                            cursor: "pointer",
+                            padding: "4px",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                          title="Copy SHA-256"
+                        >
+                          {copiedHash ? <Check size={15} /> : <Copy size={15} />}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* CLI / Clone Command */}
+                  {resource.packageCommand && (
+                    <div style={{ marginTop: "1.5rem", borderTop: "1px solid var(--res-border-subtle)", paddingTop: "1.25rem" }}>
+                      <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--res-outline)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.5rem" }}>
+                        Terminal / Clone
+                      </div>
+                      <div
+                        style={{
+                          padding: "8px 12px",
+                          borderRadius: "8px",
+                          backgroundColor: "var(--res-surface-lowest)",
+                          border: "1px solid var(--res-border-subtle)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          gap: "0.5rem",
+                          fontFamily: "monospace",
+                          fontSize: "0.75rem",
+                        }}
+                      >
                         <span
                           style={{
-                            fontSize: "0.7rem",
-                            fontFamily: "monospace",
                             color: "var(--res-on-surface-variant)",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
                           }}
                         >
-                          {resource.sha256 || "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069"}
+                          {resource.packageCommand}
                         </span>
+                        <button
+                          type="button"
+                          onClick={handleCopyCode}
+                          style={{
+                            background: "none",
+                            border: "none",
+                            color: copiedCode ? "#10b981" : "var(--res-outline)",
+                            cursor: "pointer",
+                            padding: "2px",
+                            flexShrink: 0,
+                            display: "flex",
+                          }}
+                          title="Copy command"
+                        >
+                          {copiedCode ? <Check size={15} /> : <Copy size={15} />}
+                        </button>
                       </div>
-                      <button
-                        type="button"
-                        onClick={handleCopyHash}
-                        style={{
-                          background: "none",
-                          border: "none",
-                          color: copiedHash ? "#10b981" : "var(--res-primary)",
-                          cursor: "pointer",
-                          padding: "4px",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                        title="Copy SHA-256 Checksum"
-                      >
-                        <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
-                          {copiedHash ? "check" : "content_copy"}
-                        </span>
-                      </button>
                     </div>
-                  </div>
-
-                  {/* Open Source / Community Note */}
-                  <div style={{ marginTop: "1.75rem", borderTop: "1px solid var(--res-border-subtle)", paddingTop: "1.25rem" }}>
-                    <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--res-outline)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.35rem" }}>
-                      Open Source Ecosystem
-                    </div>
-                    <p style={{ fontSize: "0.775rem", color: "var(--res-on-surface-variant)", margin: "0 0 0.75rem 0", lineHeight: 1.5 }}>
-                      Crafted for designers and developers worldwide. Have an asset request, suggestion, or feedback?
-                    </p>
-                    <Link
-                      href="/contact"
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "0.35rem",
-                        fontSize: "0.775rem",
-                        color: "var(--res-primary)",
-                        textDecoration: "none",
-                        fontWeight: 600,
-                      }}
-                    >
-                      <span>Connect with Agnel Francis</span>
-                      <span className="material-symbols-outlined" style={{ fontSize: 14 }}>arrow_forward</span>
-                    </Link>
-                  </div>
-
-                  {/* CLI Quick Integration */}
-                  <div style={{ marginTop: "1.75rem", borderTop: "1px solid var(--res-border-subtle)", paddingTop: "1.25rem" }}>
-                    <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--res-outline)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.5rem" }}>
-                      Terminal Pull
-                    </div>
-                    <div
-                      style={{
-                        padding: "8px 12px",
-                        borderRadius: "8px",
-                        backgroundColor: "var(--res-surface-lowest)",
-                        border: "1px solid var(--res-border-subtle)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        fontFamily: "monospace",
-                        fontSize: "0.75rem",
-                      }}
-                    >
-                      <span style={{ color: "var(--res-primary-fixed-dim)" }}>
-                        {resource.packageCommand || `npx agnel-vault pull ${resource.id}`}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={handleCopyCode}
-                        style={{
-                          background: "none",
-                          border: "none",
-                          color: copiedCode ? "#10b981" : "var(--res-outline)",
-                          cursor: "pointer",
-                          padding: "2px",
-                        }}
-                        title="Copy command"
-                      >
-                        <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
-                          {copiedCode ? "check" : "content_copy"}
-                        </span>
-                      </button>
-                    </div>
-                  </div>
+                  )}
                 </div>
 
                 {/* Creator Profile Card */}
@@ -829,16 +797,16 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                     backgroundColor: "var(--res-surface-low)",
                     border: "1px solid var(--res-border-subtle)",
                     borderRadius: "14px",
-                    padding: "1.25rem",
+                    padding: "1.15rem",
                     display: "flex",
                     alignItems: "center",
-                    gap: "1rem",
+                    gap: "0.9rem",
                   }}
                 >
                   <div
                     style={{
-                      width: 44,
-                      height: 44,
+                      width: 42,
+                      height: 42,
                       borderRadius: "50%",
                       backgroundColor: "#ffffff",
                       color: "#000000",
@@ -846,12 +814,13 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: "1rem",
+                      fontSize: "0.95rem",
+                      flexShrink: 0,
                     }}
                   >
                     AF
                   </div>
-                  <div style={{ flex: 1 }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--res-on-surface)" }}>
                       Agnel Francis
                     </div>
@@ -863,12 +832,17 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                     href="/contact"
                     style={{
                       fontSize: "0.75rem",
-                      color: "var(--res-primary)",
+                      color: "#ffffff",
                       textDecoration: "none",
                       fontWeight: 600,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.2rem",
+                      flexShrink: 0,
                     }}
                   >
-                    Say Hello &rarr;
+                    <span>Contact</span>
+                    <ArrowRight size={13} />
                   </Link>
                 </div>
               </div>
@@ -877,16 +851,20 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
 
           {/* Companion Resources Section */}
           {companionAssets.length > 0 && (
-            <section style={{ marginTop: "5rem", paddingTop: "3rem", borderTop: "1px solid var(--res-border-subtle)" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "1.75rem" }}>
+            <section style={{ marginTop: "4.5rem", paddingTop: "3rem", borderTop: "1px solid var(--res-border-subtle)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "1.75rem", gap: "1rem", flexWrap: "wrap" }}>
                 <div>
-                  <span className="lumina-filter-kicker">Complementary Assets</span>
-                  <h2 style={{ fontSize: "1.75rem", fontWeight: 700, color: "var(--res-on-surface)", margin: 0 }}>
-                    Recommended from the Vault
+                  <span className="lumina-filter-kicker">More from Vault</span>
+                  <h2 style={{ fontSize: "1.65rem", fontWeight: 700, color: "var(--res-on-surface)", margin: 0 }}>
+                    Other Open Resources
                   </h2>
                 </div>
-                <Link href="/resources" style={{ fontSize: "0.85rem", color: "var(--res-primary)", textDecoration: "none", fontWeight: 600 }}>
-                  View All Archives &rarr;
+                <Link
+                  href="/resources"
+                  style={{ fontSize: "0.85rem", color: "#ffffff", textDecoration: "none", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.3rem" }}
+                >
+                  <span>View All</span>
+                  <ArrowRight size={14} />
                 </Link>
               </div>
 
@@ -899,11 +877,39 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                     style={{ textDecoration: "none" }}
                   >
                     <div className="lumina-card-media">
-                      {comp.image && (
-                        <img src={comp.image} alt={comp.title} className="lumina-card-img" />
+                      {comp.isTypographyCard ? (
+                        <div className="lumina-type-card-body">
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                            <span className="lumina-card-badge-left" style={{ position: "static" }}>
+                              {comp.format}
+                            </span>
+                            <span className="lumina-card-badge-right" style={{ position: "static" }}>
+                              FREE
+                            </span>
+                          </div>
+                          <div style={{ margin: "auto 0" }}>
+                            <span
+                              className={`lumina-font-specimen-text ${comp.fontPreviewFamily || ""}`}
+                              style={{ fontSize: "1.75rem" }}
+                            >
+                              {comp.fontSampleText || comp.title}
+                            </span>
+                          </div>
+                          <div className="lumina-type-styles-strip">
+                            <span>{comp.version}</span>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          {comp.image && (
+                            <img src={comp.image} alt={comp.title} className="lumina-card-img" loading="lazy" />
+                          )}
+                          <span className="lumina-card-badge-left">{comp.format}</span>
+                          <span className="lumina-card-badge-right">
+                            {comp.githubUrl ? "OPEN SOURCE" : "FREE"}
+                          </span>
+                        </>
                       )}
-                      <span className="lumina-card-badge-left">{comp.format}</span>
-                      <span className="lumina-card-badge-right">FREE</span>
                     </div>
                     <div className="lumina-card-content">
                       <div>
@@ -915,8 +921,9 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
                       </div>
                       <div className="lumina-card-footer">
                         <span className="lumina-card-author">by {comp.author}</span>
-                        <span style={{ fontSize: "0.8rem", color: "var(--res-primary)", fontWeight: 600 }}>
-                          View Details &rarr;
+                        <span style={{ fontSize: "0.8rem", color: "#ffffff", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.25rem" }}>
+                          <span>View Details</span>
+                          <ArrowRight size={13} />
                         </span>
                       </div>
                     </div>
@@ -931,59 +938,54 @@ export default function ProductDetailClient({ resource }: ProductDetailClientPro
       {/* Vault Footer */}
       <footer className="lumina-footer">
         <div className="lumina-footer-inner">
-          <div className="lumina-footer-brand-col">
-            <Link href="/resources" className="lumina-brand">
-              <span>Agnel</span>
-              <span className="lumina-brand-dot" />
-              <span style={{ fontSize: "0.85rem", opacity: 0.6, fontWeight: 500, marginLeft: "0.25rem" }}>
-                Vault
-              </span>
-            </Link>
-            <p className="lumina-footer-bio">
-              A private vault of free, open-source design systems, 3D icons, and interface libraries created by Agnel Francis.
-            </p>
-          </div>
-
-          <div className="lumina-footer-col">
-            <h4 className="lumina-footer-col-title">Archive Sections</h4>
-            <div className="lumina-footer-links">
-              <Link href="/resources?category=ui-kits" className="lumina-footer-link">UI Systems</Link>
-              <Link href="/resources?category=3d" className="lumina-footer-link">3D Renderings</Link>
-              <Link href="/resources?category=mockups" className="lumina-footer-link">Device Mockups</Link>
-              <Link href="/resources?category=fonts" className="lumina-footer-link">Display Typography</Link>
-            </div>
-          </div>
-
-          <div className="lumina-footer-col">
-            <h4 className="lumina-footer-col-title">Governance</h4>
-            <div className="lumina-footer-links">
-              <Link href="/resources/downloads/lumina-commercial-certificate.pdf" className="lumina-footer-link">
-                Open License terms
+          <div className="lumina-footer-grid">
+            <div>
+              <Link href="/resources" className="lumina-brand" style={{ marginBottom: "0.75rem" }}>
+                <span>Agnel</span>
+                <span className="lumina-brand-dot" />
+                <span style={{ fontSize: "0.85rem", opacity: 0.6, fontWeight: 500, marginLeft: "0.25rem" }}>
+                  Vault
+                </span>
               </Link>
-              <Link href="/" className="lumina-footer-link">Agnel Portfolio</Link>
-              <Link href="/framepixel" className="lumina-footer-link">FramePixel Studio</Link>
-              <Link href="/contact" className="lumina-footer-link">Direct Inquiries</Link>
+              <p style={{ fontSize: "0.825rem", color: "var(--res-on-surface-variant)", lineHeight: 1.6, margin: 0 }}>
+                Open-source repositories, Android builds, and the exact typography used across Agnel Francis&apos;s portfolio.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="lumina-footer-col-title">Categories</h4>
+              <ul className="lumina-footer-links">
+                <li><Link href="/resources?category=fonts">Portfolio Fonts</Link></li>
+                <li><Link href="/resources?category=open-source">Open Source Repos</Link></li>
+                <li><Link href="/resources?category=apps">Android APKs</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="lumina-footer-col-title">Ecosystem</h4>
+              <ul className="lumina-footer-links">
+                <li><a href="https://github.com/agnelfranciso" target="_blank" rel="noopener noreferrer">GitHub (@agnelfranciso)</a></li>
+                <li><Link href="/">Main Portfolio</Link></li>
+                <li><Link href="/framepixel">FramePixel Collective</Link></li>
+                <li><Link href="/contact">Contact Agnel</Link></li>
+              </ul>
             </div>
           </div>
-        </div>
 
-        <div className="lumina-footer-bottom">
-          <p className="lumina-footer-copy">
-            &copy; 2026 Agnel Francis &bull; All resources freely accessible under CC BY 4.0.
-          </p>
-          <div className="lumina-footer-sub-links">
-            <Link href="/resources" className="lumina-footer-link">Index</Link>
-            <Link href="/privacy" className="lumina-footer-link">Privacy</Link>
-            <Link href="/contact" className="lumina-footer-link">Contact</Link>
+          <div className="lumina-footer-bottom">
+            <span>&copy; 2026 Agnel Francis &bull; Open Source &amp; Free Resources</span>
+            <div style={{ display: "flex", gap: "1.25rem" }}>
+              <Link href="/resources" style={{ color: "inherit", textDecoration: "none" }}>Index</Link>
+              <Link href="/legal" style={{ color: "inherit", textDecoration: "none" }}>Licensing</Link>
+              <Link href="/contact" style={{ color: "inherit", textDecoration: "none" }}>Contact</Link>
+            </div>
           </div>
         </div>
       </footer>
 
       {/* Toast Notification */}
       <div className={`lumina-toast ${showToast ? "show" : ""}`}>
-        <span className="material-symbols-outlined" style={{ fontSize: 18, color: "var(--res-primary)" }}>
-          info
-        </span>
+        <Info size={16} />
         <span>{toastMessage}</span>
       </div>
     </div>

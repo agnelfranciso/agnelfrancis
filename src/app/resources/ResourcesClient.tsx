@@ -3,6 +3,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import {
+  Search,
+  ArrowUpRight,
+  Download,
+  Loader2,
+  Info,
+  X,
+  Check,
+  Copy,
+  ShieldCheck,
+  Code2,
+} from "lucide-react";
+
+function GithubIcon({ size = 15 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  );
+}
 import { Resource, resourcesData, RESOURCE_CATEGORIES } from "@/data/resources";
 import "./resources.css";
 
@@ -18,6 +38,20 @@ export default function ResourcesClient() {
   const [copiedCode, setCopiedCode] = useState<boolean>(false);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Sync URL query params (?category= or ?q=) on mount
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get("category");
+    const q = params.get("q");
+    if (cat && RESOURCE_CATEGORIES.some((c) => c.id === cat)) {
+      setActiveCategory(cat);
+    }
+    if (q) {
+      setSearchQuery(q);
+    }
+  }, []);
 
   // Keyboard shortcuts (Cmd+K for search, Esc to close modal)
   useEffect(() => {
@@ -35,7 +69,6 @@ export default function ResourcesClient() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeModalResource]);
 
-  // Toast auto-hide
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
     setShowToast(true);
@@ -44,7 +77,6 @@ export default function ResourcesClient() {
     }, 3600);
   };
 
-  // Filter items
   const filteredResources = resourcesData.filter((item) => {
     const matchesCategory =
       activeCategory === "all" || item.category === activeCategory;
@@ -71,9 +103,8 @@ export default function ResourcesClient() {
     if (downloadingId) return;
 
     setDownloadingId(resource.id);
-    triggerToast(`Preparing package "${resource.title}" (${resource.fileSize})...`);
+    triggerToast(`Preparing "${resource.title}" (${resource.fileSize})...`);
 
-    // In-place preparation before passing to user's browser
     setTimeout(() => {
       const link = document.createElement("a");
       link.href = resource.downloadUrl;
@@ -83,8 +114,8 @@ export default function ResourcesClient() {
       document.body.removeChild(link);
 
       setDownloadingId(null);
-      triggerToast(`"${resource.title}" download initiated.`);
-    }, 1100);
+      triggerToast(`"${resource.title}" download started.`);
+    }, 900);
   };
 
   const handleCopyHash = (hash: string) => {
@@ -100,7 +131,7 @@ export default function ResourcesClient() {
     navigator.clipboard.writeText(cmd);
     setCopiedCode(true);
     setTimeout(() => setCopiedCode(false), 2400);
-    triggerToast("CLI command copied to clipboard.");
+    triggerToast("Command copied to clipboard.");
   };
 
   return (
@@ -118,61 +149,29 @@ export default function ResourcesClient() {
             </Link>
 
             <nav className="lumina-nav">
-              <button
-                type="button"
-                className={`lumina-nav-link ${activeCategory === "all" ? "active" : ""}`}
-                onClick={() => setActiveCategory("all")}
-                style={{ background: "transparent", border: "none" }}
-              >
-                Vault
-              </button>
-              <button
-                type="button"
-                className={`lumina-nav-link ${activeCategory === "ui-kits" ? "active" : ""}`}
-                onClick={() => setActiveCategory("ui-kits")}
-                style={{ background: "transparent", border: "none" }}
-              >
-                UI Kits
-              </button>
-              <button
-                type="button"
-                className={`lumina-nav-link ${activeCategory === "3d" ? "active" : ""}`}
-                onClick={() => setActiveCategory("3d")}
-                style={{ background: "transparent", border: "none" }}
-              >
-                3D Assets
-              </button>
-              <button
-                type="button"
-                className={`lumina-nav-link ${activeCategory === "mockups" ? "active" : ""}`}
-                onClick={() => setActiveCategory("mockups")}
-                style={{ background: "transparent", border: "none" }}
-              >
-                Mockups
-              </button>
-              <button
-                type="button"
-                className={`lumina-nav-link ${activeCategory === "fonts" ? "active" : ""}`}
-                onClick={() => setActiveCategory("fonts")}
-                style={{ background: "transparent", border: "none" }}
-              >
-                Fonts
-              </button>
+              {RESOURCE_CATEGORIES.map((cat) => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  className={`lumina-nav-link ${activeCategory === cat.id ? "active" : ""}`}
+                  onClick={() => setActiveCategory(cat.id)}
+                  style={{ background: "transparent", border: "none" }}
+                >
+                  {cat.id === "all" ? "Vault" : cat.label}
+                </button>
+              ))}
             </nav>
           </div>
 
           <div className="lumina-header-actions">
             <div className="lumina-search-bar">
               <span className="lumina-search-icon">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
+                <Search size={15} strokeWidth={2} />
               </span>
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Search digital assets..."
+                placeholder="Search fonts, repos, APKs..."
                 className="lumina-search-input"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -180,8 +179,13 @@ export default function ResourcesClient() {
               <span className="lumina-search-kbd">⌘K</span>
             </div>
 
-            <Link href="/" className="lumina-btn-ghost-pill">
-              Portfolio ↗
+            <Link
+              href="/"
+              className="lumina-btn-ghost-pill"
+              style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}
+            >
+              <span>Portfolio</span>
+              <ArrowUpRight size={13} strokeWidth={2.2} />
             </Link>
 
             <Link href="/about" className="lumina-user-pill" title="Agnel Francis">
@@ -201,9 +205,9 @@ export default function ResourcesClient() {
         <section className="lumina-hero">
           <div className="lumina-hero-badge">
             <span className="lumina-badge-pulse" />
-            <span className="lumina-badge-tag">Free Open Vault 2026</span>
-            <span className="lumina-badge-sep">•</span>
-            <span className="lumina-badge-vol">Vol. 04 Released</span>
+            <span className="lumina-badge-tag">Open Source &amp; Free Vault</span>
+            <span className="lumina-badge-sep">&bull;</span>
+            <span className="lumina-badge-vol">{resourcesData.length} Live Releases</span>
           </div>
 
           <h1
@@ -214,7 +218,7 @@ export default function ResourcesClient() {
               textTransform: "none",
             }}
           >
-            Digital assets crafted for{" "}
+            Fonts, tools &amp; repos built for{" "}
             <span
               className="lumina-hero-title-italic"
               style={{
@@ -228,50 +232,47 @@ export default function ResourcesClient() {
           </h1>
 
           <p className="lumina-hero-desc">
-            A curated sanctuary of free design systems, 3D icons, and interface kits. Built for discerning designers, engineers, and studios.
+            Download the exact typefaces powering this portfolio, inspect open-source GitHub repositories, and grab direct Android APK builds — completely free.
           </p>
 
           <div className="lumina-hero-actions">
             <a href="#vault-grid" className="lumina-btn-primary">
-              <span>Explore Resources</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="7" y1="17" x2="17" y2="7" />
-                <polyline points="7 7 17 7 17 17" />
-              </svg>
+              <span>Explore Vault</span>
+              <ArrowUpRight size={15} strokeWidth={2.3} />
             </a>
-            <button
-              type="button"
+            <a
+              href="https://github.com/agnelfranciso"
+              target="_blank"
+              rel="noopener noreferrer"
               className="lumina-btn-secondary"
-              onClick={() => {
-                setActiveCategory("ui-kits");
-                const el = document.getElementById("vault-grid");
-                el?.scrollIntoView({ behavior: "smooth" });
-              }}
             >
-              <span>View UI Kits</span>
-            </button>
-          </div>
-
-          {/* Quiet Studio Ribbon */}
-          <div className="lumina-ribbon">
-            <span className="lumina-ribbon-label">Utilized by craftspeople at independent studios</span>
-            <div className="lumina-ribbon-logos">
-              <span className="lumina-logo-text" style={{ fontWeight: 800, letterSpacing: "-0.04em" }}>atelier.</span>
-              <span className="lumina-logo-text" style={{ letterSpacing: "0.2em", textTransform: "uppercase", fontSize: "0.95rem" }}>KRONOS</span>
-              <span className="lumina-logo-text" style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "1.3rem" }}>Vektor</span>
-              <span className="lumina-logo-text" style={{ letterSpacing: "0.25em", textTransform: "uppercase", fontSize: "0.85rem", fontWeight: 700 }}>MONOLITH</span>
-              <span className="lumina-logo-text" style={{ fontWeight: 700 }}>Forma™</span>
-            </div>
+              <GithubIcon size={15} />
+              <span>GitHub Profile</span>
+            </a>
           </div>
         </section>
 
         {/* Catalog Grid Section */}
         <section className="lumina-catalog" id="vault-grid">
+          {/* Mobile Search Bar */}
+          <div className="lumina-mobile-search-wrap">
+            <span className="lumina-mobile-search-icon">
+              <Search size={16} strokeWidth={2} />
+            </span>
+            <input
+              type="text"
+              placeholder="Search fonts, GitHub repos, APKs..."
+              className="lumina-mobile-search-input"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+
           {/* Filter Bar Header */}
           <div className="lumina-filter-header">
             <div>
-              <span className="lumina-filter-kicker">Index / Curated Feed</span>
-              <h2 className="lumina-filter-title">Archival Collection</h2>
+              <span className="lumina-filter-kicker">Index / Public Archive</span>
+              <h2 className="lumina-filter-title">Resources &amp; Repositories</h2>
             </div>
 
             {/* Filter Pills */}
@@ -290,14 +291,14 @@ export default function ResourcesClient() {
             </div>
           </div>
 
-          {/* Search Result Feedback if Filtering */}
+          {/* Search Result Feedback */}
           {searchQuery && (
             <div style={{ marginBottom: "1.5rem", fontSize: "0.85rem", color: "var(--res-on-surface-variant)" }}>
               Showing results for &ldquo;<strong>{searchQuery}</strong>&rdquo; ({filteredResources.length} items found) &bull;{" "}
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                style={{ background: "none", border: "none", color: "var(--res-primary)", textDecoration: "underline" }}
+                style={{ background: "none", border: "none", color: "#ffffff", textDecoration: "underline", cursor: "pointer" }}
               >
                 Clear Search
               </button>
@@ -325,16 +326,24 @@ export default function ResourcesClient() {
                           FREE
                         </span>
                       </div>
-                      <div className="lumina-type-specimen">
-                        Aesthete <span style={{ fontStyle: "italic", opacity: 0.85 }}>№ 08</span>
-                        <div className="lumina-type-subtext">The quick brown fox jumps</div>
+                      <div style={{ margin: "auto 0" }}>
+                        <span
+                          className={`lumina-font-specimen-text ${item.fontPreviewFamily || ""}`}
+                          style={{ fontSize: item.fontPreviewFamily === "VaultPreviewIntraNet" ? "1.85rem" : "2.1rem" }}
+                        >
+                          {item.fontSampleText || item.title}
+                        </span>
+                        <div className="lumina-type-subtext">
+                          {item.title} &bull; Real OTF Archive
+                        </div>
                       </div>
                       <div className="lumina-type-styles-strip">
-                        <span>Regular</span>
-                        <span>•</span>
-                        <span>Italic</span>
-                        <span>•</span>
-                        <span>Display Bold</span>
+                        {(item.fontStylesList || ["Regular", "Bold"]).slice(0, 3).map((st, idx) => (
+                          <React.Fragment key={st}>
+                            {idx > 0 && <span>&bull;</span>}
+                            <span>{st}</span>
+                          </React.Fragment>
+                        ))}
                       </div>
                     </div>
                   ) : (
@@ -348,7 +357,9 @@ export default function ResourcesClient() {
                         />
                       )}
                       <span className="lumina-card-badge-left">{item.format}</span>
-                      <span className="lumina-card-badge-right">FREE</span>
+                      <span className="lumina-card-badge-right">
+                        {item.githubUrl ? "OPEN SOURCE" : "FREE"}
+                      </span>
                     </>
                   )}
                 </div>
@@ -366,14 +377,19 @@ export default function ResourcesClient() {
                   <div className="lumina-card-footer">
                     <span className="lumina-card-author">by {item.author}</span>
                     <div style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
-                      <Link
-                        href={`/resources/${item.id}`}
-                        className="lumina-btn-ghost-pill"
-                        style={{ padding: "4px 10px", fontSize: "0.75rem" }}
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        Details &rarr;
-                      </Link>
+                      {item.githubUrl && (
+                        <a
+                          href={item.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="lumina-btn-ghost-pill"
+                          style={{ padding: "5px 9px", display: "inline-flex", alignItems: "center" }}
+                          title="View on GitHub"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <GithubIcon size={14} />
+                        </a>
+                      )}
                       <button
                         type="button"
                         className="lumina-btn-download-pill"
@@ -382,18 +398,13 @@ export default function ResourcesClient() {
                       >
                         {downloadingId === item.id ? (
                           <>
-                            <span className="material-symbols-outlined text-[13px] animate-spin">
-                              progress_activity
-                            </span>
-                            <span>Packaging...</span>
+                            <Loader2 size={13} className="lumina-spin" />
+                            <span>Preparing...</span>
                           </>
                         ) : (
                           <>
                             <span>Download</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                              <line x1="12" y1="5" x2="12" y2="19" />
-                              <polyline points="19 12 12 19 5 12" />
-                            </svg>
+                            <Download size={13} strokeWidth={2.2} />
                           </>
                         )}
                       </button>
@@ -406,7 +417,7 @@ export default function ResourcesClient() {
 
           {filteredResources.length === 0 && (
             <div style={{ textAlign: "center", padding: "4rem 1rem", color: "var(--res-outline)" }}>
-              <p style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>No matching assets found in the vault.</p>
+              <p style={{ fontSize: "1.1rem", marginBottom: "0.85rem" }}>No matching assets found in the vault.</p>
               <button
                 type="button"
                 className="lumina-btn-ghost-pill"
@@ -420,30 +431,9 @@ export default function ResourcesClient() {
             </div>
           )}
         </section>
-
-        {/* Community Open Submissions Banner */}
-        <section className="lumina-submission-banner">
-          <div className="lumina-submission-box">
-            <div>
-              <span className="lumina-submission-kicker">Open Submissions</span>
-              <h3 className="lumina-submission-title">Share your work with the community</h3>
-              <p className="lumina-submission-desc">
-                We welcome thoughtful interface systems, typefaces, and spatial renders from designers worldwide. Retain full IP ownership and direct portfolio credit.
-              </p>
-            </div>
-            <Link
-              href="/contact"
-              className="lumina-btn-ghost-pill"
-              style={{ padding: "12px 24px !important", fontSize: "0.85rem !important", whiteSpace: "nowrap" }}
-            >
-              <span>Submit an Asset</span>
-              <span style={{ marginLeft: "6px" }}>↑</span>
-            </Link>
-          </div>
-        </section>
       </main>
 
-      {/* Asset Download & Inspection Modal */}
+      {/* Quick Inspection Modal (kept for keyboard/direct triggers) */}
       <div
         className={`lumina-modal-backdrop ${activeModalResource ? "open" : ""}`}
         onClick={() => setActiveModalResource(null)}
@@ -458,40 +448,36 @@ export default function ResourcesClient() {
               onClick={() => setActiveModalResource(null)}
               aria-label="Close Modal"
             >
-              ✕
+              <X size={16} strokeWidth={2.2} />
             </button>
 
             <div className="lumina-modal-badge">
               <span className="lumina-badge-pulse" />
-              <span>Instant Download Ready</span>
+              <span>Ready to Download</span>
             </div>
 
             <h2 className="lumina-modal-title">
-              Your download of <em>{activeModalResource.title}</em> is ready
+              {activeModalResource.title}
             </h2>
 
             <p className="lumina-modal-desc">
-              The archive contains master library binaries, atomic tokens, and preview documentation. Initializing transfer below.
+              {activeModalResource.longDescription || activeModalResource.description}
             </p>
 
-            {/* Main Action Card */}
             <div className="lumina-action-card-box">
               <button
                 type="button"
                 className="lumina-direct-download-btn"
                 onClick={(e) => handleDownload(e, activeModalResource)}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <line x1="12" y1="5" x2="12" y2="19" />
-                  <polyline points="19 12 12 19 5 12" />
-                </svg>
-                <span>Download {activeModalResource.title.replace(/\s+/g, "_")}.zip</span>
+                <Download size={17} strokeWidth={2.2} />
+                <span>Download {activeModalResource.title}</span>
                 <span className="lumina-filesize-tag">{activeModalResource.fileSize}</span>
               </button>
 
               <div className="lumina-status-indicator">
-                <span className="lumina-badge-pulse" />
-                <span>Transfer ready • Auto-saves to default downloads</span>
+                <ShieldCheck size={15} />
+                <span>Free &amp; open access &bull; Direct transfer</span>
               </div>
 
               {activeModalResource.sha256 && (
@@ -506,119 +492,32 @@ export default function ResourcesClient() {
                       className="lumina-copy-hash-btn"
                       onClick={() => handleCopyHash(activeModalResource.sha256!)}
                     >
-                      {copiedHash ? "Copied" : "Copy"}
+                      {copiedHash ? <Check size={13} /> : <Copy size={13} />}
                     </button>
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", color: "var(--res-primary)" }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                    <span>Signed &amp; Authenticated Binary</span>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Quickstart Sequence */}
-            <div style={{ marginBottom: "1.5rem" }}>
-              <span style={{ fontSize: "0.725rem", textTransform: "uppercase", letterSpacing: "0.14em", color: "var(--res-primary)", fontWeight: 700, display: "block", marginBottom: "0.35rem" }}>
-                Integration
-              </span>
-              <h3 style={{ fontSize: "1.25rem", margin: "0 0 1rem 0", color: "var(--res-on-surface)" }}>
-                Quickstart Sequence
-              </h3>
-
-              <div className="lumina-steps-grid">
-                <div className="lumina-step-card">
-                  <div>
-                    <span className="lumina-step-num">01</span>
-                    <h4 className="lumina-step-title">Unpack Assets</h4>
-                    <p className="lumina-step-text">Decompress archive contents containing master .fig libraries and raw token files.</p>
-                  </div>
-                </div>
-                <div className="lumina-step-card">
-                  <div>
-                    <span className="lumina-step-num">02</span>
-                    <h4 className="lumina-step-title">Import &amp; Sync</h4>
-                    <p className="lumina-step-text">Drag file into your design tool or inject compiled JSON tokens into your styling engine.</p>
-                  </div>
-                </div>
-                <div className="lumina-step-card">
-                  <div>
-                    <span className="lumina-step-num">03</span>
-                    <h4 className="lumina-step-title">Ship Projects</h4>
-                    <p className="lumina-step-text">Deploy across client engagements and commercial products under perpetual royalty-free coverage.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* CLI Command Snippet if available */}
             {activeModalResource.packageCommand && (
               <div className="lumina-code-box">
-                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                  <span style={{ color: "var(--res-primary)" }}>&gt;_</span>
-                  <code>{activeModalResource.packageCommand}</code>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", overflow: "hidden" }}>
+                  <Code2 size={15} style={{ flexShrink: 0 }} />
+                  <code style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    {activeModalResource.packageCommand}
+                  </code>
                 </div>
                 <button
                   type="button"
                   className="lumina-copy-code-btn"
                   onClick={() => handleCopyCode(activeModalResource.packageCommand!)}
                 >
-                  {copiedCode ? "COPIED" : "Copy Command"}
+                  {copiedCode ? "COPIED" : "Copy"}
                 </button>
               </div>
             )}
-
-            {/* Commercial Rights Certificate Row */}
-            <div
-              style={{
-                backgroundColor: "var(--res-surface-low)",
-                borderRadius: "14px",
-                padding: "1rem 1.25rem",
-                display: "flex",
-                flexWrap: "wrap",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: "1rem",
-                border: "1px solid var(--res-border-subtle)",
-              }}
-            >
-              <div>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.25rem" }}>
-                  <span style={{ fontWeight: 700, fontSize: "0.9rem", color: "var(--res-on-surface)" }}>
-                    Commercial Rights Certificate
-                  </span>
-                  <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: "4px", backgroundColor: "rgba(255, 255, 255, 0.08)", color: "#ffffff", border: "1px solid rgba(255, 255, 255, 0.12)", fontWeight: 700 }}>
-                    Active
-                  </span>
-                </div>
-                <p style={{ margin: 0, fontSize: "0.775rem", color: "var(--res-on-surface-variant)" }}>
-                  ID: {activeModalResource.certificateId || "AGN-2026-VAULT-FREE"} &bull; Commercial &amp; Personal Use
-                </p>
-              </div>
-
-              <a
-                href={activeModalResource.certificatePdfUrl || "/resources/downloads/lumina-commercial-certificate.pdf"}
-                download="Commercial_Rights_Certificate.pdf"
-                className="lumina-btn-ghost-pill"
-                style={{ fontSize: "0.75rem !important" }}
-              >
-                Download Certificate PDF ↓
-              </a>
-            </div>
           </div>
         )}
-      </div>
-
-      {/* Floating Toast Notification */}
-      <div className={`lumina-toast ${showToast ? "show" : ""}`}>
-        <span className="lumina-toast-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-        </span>
-        <span>{toastMessage}</span>
       </div>
 
       {/* Footer */}
@@ -626,62 +525,54 @@ export default function ResourcesClient() {
         <div className="lumina-footer-inner">
           <div className="lumina-footer-grid">
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", marginBottom: "0.75rem" }}>
-                <span style={{ fontWeight: 700, fontSize: "1.1rem", color: "var(--res-on-surface)" }}>Agnel</span>
+              <Link href="/resources" className="lumina-brand" style={{ marginBottom: "0.75rem" }}>
+                <span>Agnel</span>
                 <span className="lumina-brand-dot" />
-                <span style={{ fontSize: "0.8rem", opacity: 0.6 }}>Vault</span>
-              </div>
+                <span style={{ fontSize: "0.85rem", opacity: 0.6, fontWeight: 500, marginLeft: "0.25rem" }}>
+                  Vault
+                </span>
+              </Link>
               <p style={{ fontSize: "0.825rem", color: "var(--res-on-surface-variant)", lineHeight: 1.6, margin: 0 }}>
-                Minimal digital store curating precision interface assets, typographic specimens, and spatial design elements.
+                Open-source repositories, Android builds, and the exact typography used across Agnel Francis&apos;s portfolio.
               </p>
             </div>
 
             <div>
-              <div className="lumina-footer-col-title">Categories</div>
+              <h4 className="lumina-footer-col-title">Categories</h4>
               <ul className="lumina-footer-links">
-                <li><button type="button" onClick={() => setActiveCategory("all")} style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}>Vault Collection</button></li>
-                <li><button type="button" onClick={() => setActiveCategory("ui-kits")} style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}>UI Systems &amp; Kits</button></li>
-                <li><button type="button" onClick={() => setActiveCategory("3d")} style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}>Spatial &amp; 3D Objects</button></li>
-                <li><button type="button" onClick={() => setActiveCategory("mockups")} style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}>Photorealistic Mockups</button></li>
-                <li><button type="button" onClick={() => setActiveCategory("fonts")} style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}>Editorial Typefaces</button></li>
+                <li><button type="button" onClick={() => setActiveCategory("all")} style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}>All Resources</button></li>
+                <li><button type="button" onClick={() => setActiveCategory("fonts")} style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}>Portfolio Fonts</button></li>
+                <li><button type="button" onClick={() => setActiveCategory("open-source")} style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}>Open Source Repos</button></li>
+                <li><button type="button" onClick={() => setActiveCategory("apps")} style={{ background: "none", border: "none", color: "inherit", cursor: "pointer" }}>Android APKs</button></li>
               </ul>
             </div>
 
             <div>
-              <div className="lumina-footer-col-title">Portfolio &amp; Studio</div>
+              <h4 className="lumina-footer-col-title">Ecosystem</h4>
               <ul className="lumina-footer-links">
+                <li><a href="https://github.com/agnelfranciso" target="_blank" rel="noopener noreferrer">GitHub (@agnelfranciso)</a></li>
                 <li><Link href="/">Main Portfolio</Link></li>
-                <li><Link href="/work">Selected Work</Link></li>
-                <li><Link href="/framepixel">FramePixel Studio</Link></li>
-                <li><Link href="/blog">Design Insights</Link></li>
-                <li><Link href="/contact">Get in Touch</Link></li>
+                <li><Link href="/framepixel">FramePixel Collective</Link></li>
+                <li><Link href="/contact">Contact Agnel</Link></li>
               </ul>
-            </div>
-
-            <div>
-              <div className="lumina-footer-col-title">Direct Inquiries</div>
-              <p style={{ fontSize: "0.825rem", color: "var(--res-on-surface-variant)", lineHeight: 1.6, margin: "0 0 0.75rem 0" }}>
-                Direct correspondence and bespoke curation requests.
-              </p>
-              <a
-                href="mailto:agnelfrancis2007@hotmail.com"
-                style={{ color: "var(--res-primary)", fontSize: "0.85rem", textDecoration: "none" }}
-              >
-                agnelfrancis2007@hotmail.com
-              </a>
             </div>
           </div>
 
           <div className="lumina-footer-bottom">
-            <span>© 2026 Agnel Francis. Curated Vault &amp; Digital Storefront.</span>
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <Link href="/legal" style={{ color: "inherit", textDecoration: "none" }}>Licensing Policy</Link>
-              <span>•</span>
-              <Link href="/legal" style={{ color: "inherit", textDecoration: "none" }}>Terms of Service</Link>
+            <span>&copy; 2026 Agnel Francis &bull; Open Source &amp; Free Resources</span>
+            <div style={{ display: "flex", gap: "1.25rem" }}>
+              <Link href="/legal" style={{ color: "inherit", textDecoration: "none" }}>Licensing</Link>
+              <Link href="/work" style={{ color: "inherit", textDecoration: "none" }}>Case Studies</Link>
             </div>
           </div>
         </div>
       </footer>
+
+      {/* Toast Notification */}
+      <div className={`lumina-toast ${showToast ? "show" : ""}`}>
+        <Info size={16} />
+        <span>{toastMessage}</span>
+      </div>
     </div>
   );
 }

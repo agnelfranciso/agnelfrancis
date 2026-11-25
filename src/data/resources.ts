@@ -1,14 +1,14 @@
 export interface ResourceFeature {
   title: string;
   desc: string;
-  icon: string;
+  icon: "layers" | "code" | "smartphone" | "cpu" | "terminal" | "shield" | "type" | "globe";
   tag: string;
 }
 
 export interface ResourceFileItem {
   name: string;
   size: string;
-  icon: string;
+  icon: "file" | "code" | "folder" | "type" | "smartphone";
 }
 
 export interface ResourceGalleryItem {
@@ -20,391 +20,430 @@ export interface Resource {
   id: string;
   title: string;
   version: string;
-  category: "ui-kits" | "3d" | "mockups" | "fonts";
+  category: "fonts" | "open-source" | "apps";
   categoryLabel: string;
   description: string;
   longDescription?: string;
-  price?: string;
-  originalPrice?: string;
   author: string;
   format: string;
   fileSize: string;
   downloadUrl: string;
+  githubUrl?: string;
+  liveUrl?: string;
   image?: string;
   previewMain?: string;
   gallery?: ResourceGalleryItem[];
   features?: ResourceFeature[];
   filesIncluded?: ResourceFileItem[];
   isTypographyCard?: boolean;
+  fontPreviewFamily?: string;
+  fontSampleText?: string;
+  fontStylesList?: string[];
   featured?: boolean;
   tags: string[];
   sha256?: string;
   packageCommand?: string;
-  certificatePdfUrl?: string;
-  certificateId?: string;
   downloadCount?: string;
   updatedAt?: string;
   releaseTag?: string;
+  license?: string;
 }
 
 export interface ResourceCategory {
-  id: "all" | "ui-kits" | "3d" | "mockups" | "fonts";
+  id: "all" | "fonts" | "open-source" | "apps";
   label: string;
-  count?: number;
 }
 
 export const RESOURCE_CATEGORIES: ResourceCategory[] = [
   { id: "all", label: "All" },
-  { id: "ui-kits", label: "UI Kits" },
-  { id: "3d", label: "3D Assets" },
-  { id: "mockups", label: "Mockups" },
   { id: "fonts", label: "Fonts" },
+  { id: "open-source", label: "Open Source" },
+  { id: "apps", label: "Apps & APKs" },
 ];
 
 export const resourcesData: Resource[] = [
   {
-    id: "lumina-glass-ui-kit",
-    title: "Lumina Glass UI Kit",
-    version: "v2.4",
-    category: "ui-kits",
-    categoryLabel: "UI Kits",
-    description: "Complete multi-layout dark aesthetic dashboard kit with pristine token hierarchy, responsive components, and modular charts.",
-    longDescription: "Comprehensive, production-ready SaaS dashboard components, tokens, and multi-device templates. Designed with mathematical precision for dark architectural software and cognitive clarity.",
-    author: "Agnel Studio",
-    format: "Figma • Web",
-    fileSize: "148.2 MB",
-    downloadUrl: "/resources/downloads/lumina-glass-ui-kit.zip",
-    image: "/resources/images/lumina-glass.png",
-    previewMain: "/resources/images/lumina-detail-main.png",
-    gallery: [
-      { label: "01. Token Architecture", img: "/resources/images/lumina-detail-thumb1.png" },
-      { label: "02. Analytics Matrix", img: "/resources/images/lumina-detail-thumb2.png" },
-      { label: "03. Responsive Layouts", img: "/resources/images/lumina-detail-thumb3.png" },
-    ],
-    features: [
-      {
-        title: "450+ UI Components",
-        desc: "Form elements, datagrid configurations, interactive graphs, dropdowns, and modals fully wired to Figma Variants & Auto Layout 5.0.",
-        icon: "layers",
-        tag: "Component set verified v2.4",
-      },
-      {
-        title: "Tailwind 3.4 Config",
-        desc: "Includes copy-paste JSON tokens, CSS variable sheets, and configured Tailwind themes mapping directly to Figma design tokens.",
-        icon: "code",
-        tag: "Ready for React & Next.js",
-      },
-      {
-        title: "8 SaaS Archetypes",
-        desc: "Complete end-to-end layouts: Executive Dashboard, Multi-tenant Settings, Billing Matrix, Analytics Canvas, and API Management.",
-        icon: "web",
-        tag: "Desktop & Tablet specs",
-      },
-      {
-        title: "Fluid Breakpoints",
-        desc: "Designed with fluid min-max scaling principles, ensuring all typography, metrics, and nested components adapt gracefully to viewport shifts.",
-        icon: "devices",
-        tag: "Mobile first architecture",
-      },
-    ],
-    filesIncluded: [
-      { name: "Lumina_Master_Design_System.fig", size: "128.4 MB", icon: "description" },
-      { name: "lumina-tokens.tailwind.config.js", size: "14.2 KB", icon: "data_object" },
-      { name: "Vector_Icons_And_Glyphs.zip", size: "19.5 MB", icon: "folder" },
-      { name: "DOCUMENTATION_AND_SPECS.pdf", size: "2.8 MB", icon: "menu_book" },
-    ],
-    featured: true,
-    tags: ["Figma", "Tailwind", "Design System", "Dashboard", "Dark Mode"],
-    sha256: "e83c7918a93e3d2f98fbc18596a241b1049f4",
-    packageCommand: "npm i @lumina/tokens --save-dev",
-    certificatePdfUrl: "/resources/downloads/lumina-commercial-certificate.pdf",
-    certificateId: "AGN-2026-LUMINA-8849-FREE",
-    downloadCount: "14,248 downloads",
-    updatedAt: "Updated 2 days ago",
-    releaseTag: "Release 2.4 • Refined Obsidian Series",
-  },
-  {
-    id: "nebula-3d-icons",
-    title: "Nebula 3D Icons",
-    version: "48 Items",
-    category: "3d",
-    categoryLabel: "3D Assets",
-    description: "Monochrome, frosted glass and metallic procedural 3D icons optimized for contemporary web interfaces.",
-    longDescription: "A curated spatial suite of 48 procedurally crafted 3D objects. Rendered in matte frosted glass, brushed titanium, and deep obsidian with pre-configured directional lighting rigs.",
-    author: "Forma Lab",
-    format: "Blender • PNG",
-    fileSize: "42.5 MB",
-    downloadUrl: "/resources/downloads/nebula-3d-icons.zip",
-    image: "/resources/images/nebula-icons.png",
-    previewMain: "/resources/images/nebula-icons.png",
-    gallery: [
-      { label: "01. Matte Glass Solids", img: "/resources/images/nebula-icons.png" },
-      { label: "02. Wireframe Meshes", img: "/resources/images/lumina-detail-thumb2.png" },
-      { label: "03. Render Environments", img: "/resources/images/lumina-detail-thumb3.png" },
-    ],
-    features: [
-      {
-        title: "48 Procedural Solids",
-        desc: "Includes geometric prisms, floating toruses, curved conduits, and interface symbols rendered at 4000x4000px resolution.",
-        icon: "view_in_ar",
-        tag: "Cycles & Eevee ready",
-      },
-      {
-        title: "Transparent PNGs",
-        desc: "Isolated alpha cutouts with realistic contact drop-shadows and glass edge transmission for instant drag-and-drop web composition.",
-        icon: "image",
-        tag: "Zero clipping artifacts",
-      },
-      {
-        title: "Raw Blender Scenes",
-        desc: "Complete .blend project files containing procedural shader nodes, camera rigs, and clean polygon topology.",
-        icon: "deployed_code",
-        tag: "Blender 4.0+ compliant",
-      },
-      {
-        title: "Spatial GLTF Binaries",
-        desc: "Web-ready compressed GLTF files for Three.js, React Three Fiber, and WebGL interactive hero presentations.",
-        icon: "3d_rotation",
-        tag: "Sub-500KB per model",
-      },
-    ],
-    filesIncluded: [
-      { name: "Nebula_Master_Scene.blend", size: "28.6 MB", icon: "deployed_code" },
-      { name: "Rendered_PNG_Assets_4K.zip", size: "12.8 MB", icon: "folder_zip" },
-      { name: "Spatial_GLTF_Models.zip", size: "4.1 MB", icon: "view_in_ar" },
-    ],
-    featured: false,
-    tags: ["Blender", "PNG", "3D Icons", "Glassmorphism", "Spatial"],
-    sha256: "7f21a8c9b31e04d49a78bc3410e599a8126b8f10",
-    downloadCount: "8,920 downloads",
-    updatedAt: "Updated 1 week ago",
-    releaseTag: "Spatial Series • Vol. 02",
-  },
-  {
-    id: "studio-iphone-16-pro",
-    title: "Studio iPhone 16 Pro",
-    version: "8 Angles",
-    category: "mockups",
-    categoryLabel: "Mockups",
-    description: "Meticulously modeled titanium device mockup with isolated shadows, realistic reflections, and customizable dynamic island states.",
-    longDescription: "Architectural apparatus staging for iOS and mobile software showcases. Photorealistic natural reflections, separate specular maps, and isolated drop shadows calibrated for neutral dark canvases.",
-    author: "Studio K",
-    format: "PSD • Figma",
-    fileSize: "96.4 MB",
-    downloadUrl: "/resources/downloads/studio-iphone-16-pro.zip",
-    image: "/resources/images/iphone-mockup.png",
-    previewMain: "/resources/images/iphone-mockup.png",
-    gallery: [
-      { label: "01. Frontal Staging", img: "/resources/images/iphone-mockup.png" },
-      { label: "02. Dynamic Island Float", img: "/resources/images/lumina-detail-thumb1.png" },
-      { label: "03. Oblique Isometric", img: "/resources/images/lumina-detail-thumb3.png" },
-    ],
-    features: [
-      {
-        title: "8 Canonical Angles",
-        desc: "Frontal, isometric left/right, portrait floating, and dramatic perspective tilts matching standard Apple marketing fidelity.",
-        icon: "crop_rotate",
-        tag: "6000x4500px 300 DPI",
-      },
-      {
-        title: "Smart Object Screens",
-        desc: "One-click screen replacement in Photoshop and native component overrides in Figma with auto-clipping masks.",
-        icon: "smart_toy",
-        tag: "Zero distortion mapping",
-      },
-      {
-        title: "Natural Titanium Finishes",
-        desc: "Natural, Black, White, and Desert Titanium shader layers with togglable ambient occlusion and realistic micro-scratches.",
-        icon: "palette",
-        tag: "4 official finishes",
-      },
-      {
-        title: "Dynamic Island States",
-        desc: "Interactive overlays for live activity alerts, call banners, audio waveforms, and FaceID authentication sweeps.",
-        icon: "touch_app",
-        tag: "Pixel-perfect iOS 18",
-      },
-    ],
-    filesIncluded: [
-      { name: "iPhone_16_Pro_Figma_Kit.fig", size: "48.2 MB", icon: "description" },
-      { name: "Photoshop_Smart_Objects_Pack.psd", size: "84.1 MB", icon: "image" },
-      { name: "Shadow_And_Reflections_Pass.png", size: "14.1 MB", icon: "layers" },
-    ],
-    featured: false,
-    tags: ["Figma", "PSD", "iPhone 16 Pro", "Device Mockup", "Titanium"],
-    sha256: "3b18f4a9c02d18e907a51cf64188b02ea662319f",
-    downloadCount: "22,410 downloads",
-    updatedAt: "Updated 3 days ago",
-    releaseTag: "Hardware Staging • Titanium Edition",
-  },
-  {
-    id: "hyperdash-analytics",
-    title: "HyperDash Analytics",
-    version: "Pro Kit",
-    category: "ui-kits",
-    categoryLabel: "UI Kits",
-    description: "Enterprise-grade flow sequences for financial telemetry, multi-tenant billing, and system audit logs.",
-    longDescription: "End-to-end user journeys for high-volume enterprise software. Includes complex data table interactions, real-time audit event streams, role-based access control flows, and billing invoices.",
-    author: "Agnel Studio",
-    format: "32 Flows • Figma",
-    fileSize: "64.8 MB",
-    downloadUrl: "/resources/downloads/hyperdash-analytics.zip",
-    image: "/resources/images/hyperdash.png",
-    previewMain: "/resources/images/hyperdash.png",
-    gallery: [
-      { label: "01. Telemetry Dashboard", img: "/resources/images/hyperdash.png" },
-      { label: "02. Multi-tenant Matrix", img: "/resources/images/lumina-detail-thumb2.png" },
-      { label: "03. Audit Stream Table", img: "/resources/images/lumina-detail-thumb1.png" },
-    ],
-    features: [
-      {
-        title: "32 Complete Flows",
-        desc: "From initial enterprise onboarding and tenant provisioning to advanced cluster diagnostics and invoice disputes.",
-        icon: "account_tree",
-        tag: "Tested UX patterns",
-      },
-      {
-        title: "Dense Data Tables",
-        desc: "Custom virtualized tables with column reordering, multi-select bulk actions, filter pills, and inline row expanding.",
-        icon: "table_chart",
-        tag: "High cognitive density",
-      },
-      {
-        title: "Telemetry Sparklines",
-        desc: "Vector charts calibrated for sub-second metrics updates, network throughput monitors, and server health gauges.",
-        icon: "monitoring",
-        tag: "Chart.js / Recharts aligned",
-      },
-      {
-        title: "Security & IAM Modals",
-        desc: "Granular permissions assignment matrices, API key generation dialogues, and SSO SAML setup wizards.",
-        icon: "security",
-        tag: "Enterprise compliant",
-      },
-    ],
-    filesIncluded: [
-      { name: "HyperDash_Enterprise_Flows.fig", size: "58.4 MB", icon: "description" },
-      { name: "Data_Table_Component_Specs.pdf", size: "6.4 MB", icon: "menu_book" },
-    ],
-    featured: false,
-    tags: ["Analytics", "Figma", "Enterprise", "Wireframes", "SaaS"],
-    sha256: "d94a1120eb78a4f9103c8b6631ad02eef5a881cb",
-    packageCommand: "npm i @hyperdash/flows --save-dev",
-    downloadCount: "6,190 downloads",
-    updatedAt: "Updated 5 days ago",
-    releaseTag: "Enterprise Telemetry • Architecture Series",
-  },
-  {
-    id: "aura-fluid-gradients",
-    title: "Aura Fluid Gradients",
-    version: "24 Textures",
-    category: "3d",
-    categoryLabel: "3D Assets",
-    description: "Noise-free calm vector meshes and 4K raster maps engineered for deep-toned hero backgrounds and ambient lighting.",
-    longDescription: "Silky, seamless abstract gradients and fluid color fields formulated for midnight interfaces. Zero color banding, engineered with 16-bit color depth and mathematical spline curvature.",
-    author: "Elena Rostova",
-    format: "Vector • 4K",
-    fileSize: "38.1 MB",
-    downloadUrl: "/resources/downloads/aura-fluid-gradients.zip",
-    image: "/resources/images/aura-gradients.png",
-    previewMain: "/resources/images/aura-gradients.png",
-    gallery: [
-      { label: "01. Midnight Periwinkle", img: "/resources/images/aura-gradients.png" },
-      { label: "02. Deep Indigo Drift", img: "/resources/images/lumina-detail-thumb2.png" },
-      { label: "03. Slate Topography", img: "/resources/images/lumina-detail-thumb3.png" },
-    ],
-    features: [
-      {
-        title: "24 4K Renderings",
-        desc: "3840x2160 UHD wallpaper and hero assets in lossless PNG, ready for production web headers and mobile apps.",
-        icon: "gradient",
-        tag: "16-bit depth • No banding",
-      },
-      {
-        title: "Raw SVG Mesh Vectors",
-        desc: "Infinite resolution vector gradients you can edit in Figma, Illustrator, or CSS inline code.",
-        icon: "polyline",
-        tag: "Scalable vector paths",
-      },
-      {
-        title: "Curated Nocturnal Tones",
-        desc: "Engineered specifically to sit behind white typography and glassmorphic UI without legibility drop.",
-        icon: "dark_mode",
-        tag: "High contrast verified",
-      },
-      {
-        title: "Ambient Blur Spheres",
-        desc: "Individual glow discs designed for CSS backdrop-filter blur implementations.",
-        icon: "blur_on",
-        tag: "CSS snippet included",
-      },
-    ],
-    filesIncluded: [
-      { name: "Aura_Gradients_4K_Lossless.zip", size: "32.0 MB", icon: "folder_zip" },
-      { name: "Vector_SVG_Meshes.zip", size: "6.1 MB", icon: "folder_zip" },
-    ],
-    featured: false,
-    tags: ["Gradients", "4K", "Vector", "Textures", "Wallpapers"],
-    sha256: "6c4a91b24e0df7a1928b553e18ad019cae674129",
-    downloadCount: "11,850 downloads",
-    updatedAt: "Updated 2 weeks ago",
-    releaseTag: "Chromatic Fluidity • Series 04",
-  },
-  {
-    id: "monotype-display-serif",
-    title: "MonoType Display Serif",
-    version: "3 Styles",
+    id: "intranet-font-family",
+    title: "IntraNet Display Family",
+    version: "4 Weights",
     category: "fonts",
     categoryLabel: "Fonts",
-    description: "High-contrast editorial serif typeface crafted for architectural journals, mastheads, and modern luxury commerce.",
-    longDescription: "An intellectual, razor-sharp serif family that pairs classic Renaissance proportions with crisp modern digital geometry. Designed for titles, editorial mastheads, and high-impact hero treatments.",
-    author: "Agnel Foundry",
-    format: "OTF • WOFF2",
-    fileSize: "12.3 MB",
-    downloadUrl: "/resources/downloads/monotype-display-serif.zip",
+    description: "The geometric brutalist display typeface powering agnelfrancis.com headings — includes Regular, Bold, Italic, and Outline OTFs.",
+    longDescription: "The signature display typeface used across Agnel Francis's main portfolio. Engineered for bold architectural headers, high-impact hero typography, and sharp brutalist posters.",
+    author: "Agnel Vault",
+    format: "OTF • 4 Styles",
+    fileSize: "87 KB",
+    downloadUrl: "/resources/downloads/intranet-font-family.zip",
     isTypographyCard: true,
-    previewMain: "/resources/images/lumina-detail-main.png",
-    gallery: [
-      { label: "01. Regular Specimen", img: "/resources/images/lumina-detail-thumb1.png" },
-      { label: "02. Italic Highlight", img: "/resources/images/lumina-detail-thumb2.png" },
-      { label: "03. Display Bold", img: "/resources/images/lumina-detail-thumb3.png" },
-    ],
+    fontPreviewFamily: "VaultPreviewIntraNet",
+    fontSampleText: "DESIGN & CODE",
+    fontStylesList: ["Regular", "Bold", "Italic", "Outline"],
+    featured: true,
+    tags: ["Display Font", "OTF", "Portfolio Font", "Geometric", "Headings"],
+    packageCommand: "curl -O https://agnelfrancis.com/resources/downloads/intranet-font-family.zip",
+    updatedAt: "Portfolio Production Font",
+    releaseTag: "Active Portfolio Typeface",
+    license: "Free Personal & Web Use",
     features: [
       {
-        title: "3 Master Styles",
-        desc: "Regular (400), True Italic (400i), and Display Bold (700) with complete Latin extended character sets.",
-        icon: "font_download",
-        tag: "Full diacritics support",
+        title: "4 Distinct OTF Weights",
+        desc: "Includes IntraNet-Regular.otf, IntraNet-Bold.otf, IntraNet-Italic.otf, and IntraNet-Outline.otf for layered display compositions.",
+        icon: "type",
+        tag: "OpenType (.otf)",
       },
       {
-        title: "High-Density Kerning",
-        desc: "Over 1,200 optical kerning pairs manually tuned for razor-sharp legibility at massive display scale.",
-        icon: "format_letter_spacing",
-        tag: "Optically calibrated",
-      },
-      {
-        title: "Web Font Binaries",
-        desc: "Optimized WOFF2 and WOFF formats with variable font axes for ultra-lightweight web downloads (28KB).",
-        icon: "language",
-        tag: "WOFF2 + Variable TTF",
-      },
-      {
-        title: "Editorial OpenType Features",
-        desc: "Includes discretionary ligatures, tabular numbers, historical alternates, and proportional oldstyle figures.",
-        icon: "auto_awesome",
-        tag: "OpenType accessible",
+        title: "Built for Display Scale",
+        desc: "Wide geometric proportions calibrated for hero headlines, section markers, and dark-mode contrast.",
+        icon: "layers",
+        tag: "Used on agnelfrancis.com",
       },
     ],
     filesIncluded: [
-      { name: "MonoType_Serif_OTF_Desktop.zip", size: "8.2 MB", icon: "folder_zip" },
-      { name: "MonoType_Serif_WOFF2_Web.zip", size: "2.1 MB", icon: "folder_zip" },
-      { name: "Typographic_Specimen_Guide.pdf", size: "2.0 MB", icon: "menu_book" },
+      { name: "IntraNet-Regular.otf", size: "71.6 KB", icon: "type" },
+      { name: "IntraNet-Bold.otf", size: "66.7 KB", icon: "type" },
+      { name: "IntraNet-Italic.otf", size: "38.5 KB", icon: "type" },
+      { name: "IntraNet-Outline.otf", size: "103.9 KB", icon: "type" },
     ],
-    featured: false,
-    tags: ["Typography", "Serif", "Editorial", "Web Fonts", "Luxury"],
-    sha256: "a159f8021cbb6920ad83492ee146ba88f9103822",
-    downloadCount: "17,630 downloads",
-    updatedAt: "Updated 4 days ago",
-    releaseTag: "Typographic Foundry • Specimen № 08",
+  },
+  {
+    id: "ppsupply-typeface",
+    title: "PP Supply Mono & Sans",
+    version: "4 Styles",
+    category: "fonts",
+    categoryLabel: "Fonts",
+    description: "Technical Swiss monospace & neo-grotesque sans pair used for UI labels, navigation, metadata, and code blocks across the portfolio.",
+    longDescription: "A precision technical typeface pairing Mono and Sans weights in Regular and Ultralight cuts. Used extensively throughout Agnel Francis's portfolio for navigation, tags, terminal readouts, and system labels.",
+    author: "Agnel Vault",
+    format: "OTF • Mono & Sans",
+    fileSize: "85 KB",
+    downloadUrl: "/resources/downloads/ppsupply-typeface.zip",
+    isTypographyCard: true,
+    fontPreviewFamily: "VaultPreviewPPSupply",
+    fontSampleText: "01.SYSTEM_READY",
+    fontStylesList: ["Mono Regular", "Mono Ultralight", "Sans Regular", "Sans Ultralight"],
+    featured: true,
+    tags: ["Monospace", "Sans", "OTF", "UI Font", "Developer"],
+    packageCommand: "curl -O https://agnelfrancis.com/resources/downloads/ppsupply-typeface.zip",
+    updatedAt: "Portfolio UI Font",
+    releaseTag: "Mono + Sans Bundle",
+    license: "Free Personal & Evaluation",
+    features: [
+      {
+        title: "Monospace & Sans Pair",
+        desc: "Combines fixed-width PPSupplyMono for telemetry/code with clean PPSupplySans for crisp interface copy.",
+        icon: "code",
+        tag: "Dual-family archive",
+      },
+      {
+        title: "Ultralight & Regular Cuts",
+        desc: "Includes both Regular and Ultralight weights for subtle hierarchy in dark minimalist UIs.",
+        icon: "type",
+        tag: "4 OTF files",
+      },
+    ],
+    filesIncluded: [
+      { name: "PPSupplyMono-Regular.otf", size: "23.4 KB", icon: "type" },
+      { name: "PPSupplyMono-Ultralight.otf", size: "24.2 KB", icon: "type" },
+      { name: "PPSupplySans-Regular.otf", size: "44.6 KB", icon: "type" },
+      { name: "PPSupplySans-Ultralight.otf", size: "47.0 KB", icon: "type" },
+    ],
+  },
+  {
+    id: "aise-display",
+    title: "Aise Body & Display",
+    version: "v1.0 OTF",
+    category: "fonts",
+    categoryLabel: "Fonts",
+    description: "Clean contemporary sans-serif font used for portfolio body copy, descriptions, and readable long-form layouts.",
+    longDescription: "A balanced sans-serif typeface tailored for clean screen legibility, portfolio case studies, and minimal editorial layouts.",
+    author: "Agnel Vault",
+    format: "OTF • Single Cut",
+    fileSize: "21 KB",
+    downloadUrl: "/resources/downloads/aise-display.zip",
+    isTypographyCard: true,
+    fontPreviewFamily: "VaultPreviewAise",
+    fontSampleText: "Minimal Clarity",
+    fontStylesList: ["Regular OTF"],
+    tags: ["Sans-Serif", "Body Font", "OTF", "Portfolio"],
+    packageCommand: "curl -O https://agnelfrancis.com/resources/downloads/aise-display.zip",
+    updatedAt: "Portfolio Body Font",
+    releaseTag: "Clean Screen Sans",
+    license: "Free Personal & Web Use",
+    features: [
+      {
+        title: "Lightweight Web Footprint",
+        desc: "Compact single OTF binary optimized for fast loading in web applications and design mockups.",
+        icon: "type",
+        tag: "20.6 KB compressed",
+      },
+      {
+        title: "High Screen Legibility",
+        desc: "Open apertures and balanced x-height designed for dark-on-light and light-on-dark reading.",
+        icon: "layers",
+        tag: "Editorial & UI",
+      },
+    ],
+    filesIncluded: [
+      { name: "Aise.otf", size: "56.8 KB", icon: "type" },
+    ],
+  },
+  {
+    id: "kochi-transit-go",
+    title: "Kochi Transit Go",
+    version: "MIT Open Source",
+    category: "open-source",
+    categoryLabel: "Open Source",
+    description: "Offline Kochi Metro route planner, fare calculator, and GTFS schedule engine built in Kotlin & Next.js.",
+    longDescription: "Privacy-first transit companion for Kochi Metro. Bundles official open GTFS schedules locally in SQLite so commuters can calculate fares, locate nearest stations, and plan routes completely offline.",
+    author: "Agnel Francis",
+    format: "Kotlin • GTFS • GitHub",
+    fileSize: "GitHub Repo",
+    downloadUrl: "https://github.com/agnelfranciso/Kochi-Transit-Go/archive/refs/heads/main.zip",
+    githubUrl: "https://github.com/agnelfranciso/Kochi-Transit-Go",
+    liveUrl: "https://kochitransitgo.vercel.app/",
+    image: "/images/projects/kochi-transit-go/1.png",
+    previewMain: "/images/projects/kochi-transit-go/1.png",
+    gallery: [
+      { label: "01. Route Planner", img: "/images/projects/kochi-transit-go/1.png" },
+      { label: "02. Fare Matrix", img: "/images/projects/kochi-transit-go/2.png" },
+      { label: "03. Station Locator", img: "/images/projects/kochi-transit-go/3.png" },
+    ],
+    featured: true,
+    tags: ["Kotlin", "Android", "GTFS", "Open Source", "F-Droid"],
+    packageCommand: "git clone https://github.com/agnelfranciso/Kochi-Transit-Go.git",
+    updatedAt: "Active on GitHub & F-Droid",
+    releaseTag: "Open Source • MIT License",
+    license: "MIT License",
+    features: [
+      {
+        title: "100% Offline GTFS Engine",
+        desc: "Parses and queries official Kochi Metro open GTFS feeds locally using SQLite with zero network dependency.",
+        icon: "smartphone",
+        tag: "Zero trackers",
+      },
+      {
+        title: "Open Android + Web Source",
+        desc: "Available on GitHub and F-Droid with clean Kotlin architecture and companion Next.js web portal.",
+        icon: "code",
+        tag: "MIT Licensed",
+      },
+    ],
+    filesIncluded: [
+      { name: "Kochi-Transit-Go-main.zip", size: "GitHub Archive", icon: "folder" },
+      { name: "app/src/main/kotlin/*", size: "Android Source", icon: "code" },
+      { name: "gtfs-data/*.txt", size: "Open GTFS Feed", icon: "file" },
+    ],
+  },
+  {
+    id: "cineseat-api",
+    title: "CineSeat Intelligence API",
+    version: "Open Source",
+    category: "open-source",
+    categoryLabel: "Open Source",
+    description: "SMPTE-based spatial cinema seat scoring engine and auditorium geometry intelligence REST API.",
+    longDescription: "A spatial computing API that scores cinema auditorium seats using viewing-angle geometry, SMPTE screen-distance ratios, and ergonomic neck-tilt thresholds instead of flat 2D seat grids.",
+    author: "Agnel Francis",
+    format: "REST API • GitHub",
+    fileSize: "GitHub Repo",
+    downloadUrl: "https://github.com/agnelfranciso/cineseat-api/archive/refs/heads/main.zip",
+    githubUrl: "https://github.com/agnelfranciso/cineseat-api",
+    image: "/images/projects/cineseat/01_scalar_overview.png",
+    previewMain: "/images/projects/cineseat/01_scalar_overview.png",
+    gallery: [
+      { label: "01. Scalar Overview", img: "/images/projects/cineseat/01_scalar_overview.png" },
+      { label: "02. SMPTE Formulation", img: "/images/projects/cineseat/02_smpte_formulation.png" },
+      { label: "03. Best Seats Engine", img: "/images/projects/cineseat/03_best_seats_engine.png" },
+    ],
+    featured: true,
+    tags: ["API", "Spatial Math", "SMPTE", "Open Source", "Cinema"],
+    packageCommand: "git clone https://github.com/agnelfranciso/cineseat-api.git",
+    updatedAt: "Open Source API",
+    releaseTag: "Spatial Seat Engine",
+    license: "MIT License",
+    features: [
+      {
+        title: "SMPTE Viewing Angle Math",
+        desc: "Computes horizontal and vertical viewing angles per seat row against auditorium rake and screen width.",
+        icon: "cpu",
+        tag: "Geometric scoring",
+      },
+      {
+        title: "RESTful JSON Endpoints",
+        desc: "Drop-in endpoints for ranking best seats, auditorium layout normalization, and geo-city lookup.",
+        icon: "globe",
+        tag: "Open Source API",
+      },
+    ],
+    filesIncluded: [
+      { name: "cineseat-api-main.zip", size: "GitHub Archive", icon: "folder" },
+      { name: "scoring-engine/*", size: "SMPTE Solver", icon: "code" },
+    ],
+  },
+  {
+    id: "aerisiq-app",
+    title: "AerisIQ Safety & AI",
+    version: "v1.0 APK",
+    category: "apps",
+    categoryLabel: "Apps & APKs",
+    description: "Privacy-first disaster risk intelligence & local emergency utility for Android featuring an offline on-device LLM.",
+    longDescription: "Built in 48 hours for offline resilience during disasters. Runs an on-device LLM locally on Android to answer survival, first-aid, and emergency preparedness questions with zero internet connectivity.",
+    author: "Agnel Francis",
+    format: "Android APK • GitHub",
+    fileSize: "26.5 MB",
+    downloadUrl: "/project-files/aerisiq/AerisIQ-release.apk",
+    githubUrl: "https://github.com/agnelfranciso/AerisIQ",
+    image: "/images/projects/aerisiq/13.png",
+    previewMain: "/images/projects/aerisiq/13.png",
+    gallery: [
+      { label: "01. Risk Dashboard", img: "/images/projects/aerisiq/13.png" },
+      { label: "02. Offline AI Assistant", img: "/images/projects/aerisiq/15.png" },
+      { label: "03. Safety Protocols", img: "/images/projects/aerisiq/16.png" },
+    ],
+    tags: ["Android", "APK", "Offline LLM", "Jetpack Compose", "Open Source"],
+    packageCommand: "git clone https://github.com/agnelfranciso/AerisIQ.git",
+    updatedAt: "Signed Release APK",
+    releaseTag: "Direct APK + Source",
+    license: "Open Source",
+    features: [
+      {
+        title: "On-Device Offline LLM",
+        desc: "Runs local AI inference directly on Android hardware so guidance works even when cellular networks fail.",
+        icon: "cpu",
+        tag: "100% Offline AI",
+      },
+      {
+        title: "Direct APK & Full Source",
+        desc: "Download the signed AerisIQ-release.apk directly or inspect and build the Jetpack Compose source on GitHub.",
+        icon: "smartphone",
+        tag: "26.5 MB APK",
+      },
+    ],
+    filesIncluded: [
+      { name: "AerisIQ-release.apk", size: "26.5 MB", icon: "smartphone" },
+    ],
+  },
+  {
+    id: "kerala-holiday-api",
+    title: "Kerala Holiday API",
+    version: "REST API",
+    category: "open-source",
+    categoryLabel: "Open Source",
+    description: "Open-source JSON API providing official Kerala public, bank, and gazetted holiday calendars for developers.",
+    longDescription: "A lightweight, zero-config open-source REST API delivering structured Kerala government and public holiday datasets for calendars, transit apps, and college utilities.",
+    author: "Agnel Francis",
+    format: "JSON • Node • GitHub",
+    fileSize: "GitHub Repo",
+    downloadUrl: "https://github.com/agnelfranciso/kerala-holiday-api/archive/refs/heads/main.zip",
+    githubUrl: "https://github.com/agnelfranciso/kerala-holiday-api",
+    image: "/images/projects/velurpedia/1.png",
+    previewMain: "/images/projects/velurpedia/1.png",
+    tags: ["API", "JSON", "Kerala", "Open Source", "Backend"],
+    packageCommand: "git clone https://github.com/agnelfranciso/kerala-holiday-api.git",
+    updatedAt: "Open Source Repo",
+    releaseTag: "Open Data Utility",
+    license: "MIT License",
+    features: [
+      {
+        title: "Structured Holiday Feeds",
+        desc: "Clean date, holiday category, and regional observance flags ready for direct consumption in web and mobile apps.",
+        icon: "code",
+        tag: "JSON REST",
+      },
+      {
+        title: "Self-Hostable & Forkable",
+        desc: "Clone from GitHub and deploy to Vercel or Cloudflare Workers in seconds.",
+        icon: "terminal",
+        tag: "MIT License",
+      },
+    ],
+    filesIncluded: [
+      { name: "kerala-holiday-api-main.zip", size: "GitHub Archive", icon: "folder" },
+    ],
+  },
+  {
+    id: "personal-form-creator",
+    title: "Personal Form Creator",
+    version: "Next.js Template",
+    category: "open-source",
+    categoryLabel: "Open Source",
+    description: "Open-source custom form builder template with instant shareable links and clean dark/light UI.",
+    longDescription: "A self-hostable Next.js form creator template built as an open-source alternative to bloated form SaaS tools. Clone, customize, and deploy your own personal form backend.",
+    author: "Agnel Francis",
+    format: "Next.js • GitHub",
+    fileSize: "GitHub Repo",
+    downloadUrl: "https://github.com/agnelfranciso/Personal-Form-Creator-Template/archive/refs/heads/main.zip",
+    githubUrl: "https://github.com/agnelfranciso/Personal-Form-Creator-Template",
+    liveUrl: "https://agnel-forms.vercel.app/",
+    image: "/images/projects/forms/1.png",
+    previewMain: "/images/projects/forms/1.png",
+    gallery: [
+      { label: "01. Form Builder", img: "/images/projects/forms/1.png" },
+      { label: "02. Live Preview", img: "/images/projects/forms/2.png" },
+    ],
+    tags: ["Next.js", "Template", "Forms", "Open Source", "React"],
+    packageCommand: "git clone https://github.com/agnelfranciso/Personal-Form-Creator-Template.git",
+    updatedAt: "Open Source Template",
+    releaseTag: "Next.js Starter",
+    license: "MIT License",
+    features: [
+      {
+        title: "Zero Vendor Lock-In",
+        desc: "Own your form schemas and submissions without monthly SaaS limits.",
+        icon: "shield",
+        tag: "Self-hostable",
+      },
+      {
+        title: "Modern React Architecture",
+        desc: "Clean Next.js App Router starter ready for Vercel deployment.",
+        icon: "code",
+        tag: "Open Source",
+      },
+    ],
+    filesIncluded: [
+      { name: "Personal-Form-Creator-Template-main.zip", size: "GitHub Archive", icon: "folder" },
+    ],
+  },
+  {
+    id: "campuscrave-app",
+    title: "CampusCrave Android",
+    version: "v1.0.0 APK",
+    category: "apps",
+    categoryLabel: "Apps & APKs",
+    description: "Campus food ordering, live runner tracking, and student canteen utility built for fast college pickups.",
+    longDescription: "A complete campus food discovery and doorstep/canteen ordering Android application with live order tracking, search filters, and student access flows.",
+    author: "Agnel Francis",
+    format: "Android APK • GitHub",
+    fileSize: "19.6 MB",
+    downloadUrl: "/project-files/campuscrave/CampusCrave-v1.0.0.apk",
+    githubUrl: "https://github.com/agnelfranciso/CampusCrave",
+    image: "/images/projects/campuscrave/03_home_feed.png",
+    previewMain: "/images/projects/campuscrave/03_home_feed.png",
+    gallery: [
+      { label: "01. Home Feed", img: "/images/projects/campuscrave/03_home_feed.png" },
+      { label: "02. Food Detail", img: "/images/projects/campuscrave/06_food_detail.png" },
+      { label: "03. Live Tracking", img: "/images/projects/campuscrave/12_live_tracking_inflight.png" },
+    ],
+    tags: ["Android", "APK", "Campus", "Open Source"],
+    packageCommand: "git clone https://github.com/agnelfranciso/CampusCrave.git",
+    updatedAt: "v1.0.0 Release",
+    releaseTag: "Android APK + Source",
+    license: "Open Source",
+    features: [
+      {
+        title: "Live Order Tracking",
+        desc: "Real-time inflight status and runner handoff screens tailored for campus hostels and blocks.",
+        icon: "smartphone",
+        tag: "Android Native",
+      },
+      {
+        title: "Full Source Available",
+        desc: "Inspect the complete project repository on GitHub or install the v1.0.0 APK directly.",
+        icon: "code",
+        tag: "19.6 MB APK",
+      },
+    ],
+    filesIncluded: [
+      { name: "CampusCrave-v1.0.0.apk", size: "19.6 MB", icon: "smartphone" },
+    ],
   },
 ];
