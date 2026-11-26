@@ -1,8 +1,23 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import VideoPlayer from "./VideoPlayer";
 
-export default function HorizontalScrollGallery({ images, title }: { images: string[], title: string }) {
+export interface GalleryVideo {
+  src: string;
+  title?: string;
+  poster?: string;
+}
+
+export default function HorizontalScrollGallery({
+  images,
+  videos,
+  title,
+}: {
+  images: string[];
+  videos?: GalleryVideo[];
+  title: string;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(true); // default true for hydration safety, or false
@@ -169,6 +184,27 @@ export default function HorizontalScrollGallery({ images, title }: { images: str
           <style>{`
             .hide-scroll::-webkit-scrollbar { display: none; }
           `}</style>
+          {videos?.map((vid, index) => (
+            <div
+              key={`vid-${index}`}
+              style={{
+                flex: "0 0 560px",
+                borderRadius: "16px",
+                overflow: "hidden",
+                border: "1px solid rgba(0,0,0,0.08)",
+                boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+                backgroundColor: "#09090b",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <VideoPlayer
+                src={vid.src}
+                title={vid.title || `${title} Demo`}
+                poster={vid.poster}
+              />
+            </div>
+          ))}
           {images.map((src, index) => (
             <div 
               key={index} 
@@ -234,6 +270,27 @@ export default function HorizontalScrollGallery({ images, title }: { images: str
             alignItems: "stretch"
           }}
         >
+          {videos?.map((vid, index) => (
+            <div
+              key={`vid-mob-${index}`}
+              style={{
+                flex: "0 0 min(360px, 84vw)",
+                borderRadius: "16px",
+                overflow: "hidden",
+                border: "1px solid rgba(0,0,0,0.08)",
+                boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+                backgroundColor: "#09090b",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <VideoPlayer
+                src={vid.src}
+                title={vid.title || `${title} Demo`}
+                poster={vid.poster}
+              />
+            </div>
+          ))}
           {images.map((src, index) => (
             <div 
               key={index} 

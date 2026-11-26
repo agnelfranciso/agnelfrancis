@@ -60,7 +60,7 @@ export default function BussilerCaseStudyPage() {
           {/* Action Bar */}
           <div className="fp-case-action-bar">
             <a
-              href="/project-files/bussiler/Bussiler.apk"
+              href="/downloads/bussiler/Bussiler.apk"
               download="Bussiler.apk"
               className="fp-btn-primary"
             >

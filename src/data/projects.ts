@@ -29,6 +29,7 @@ export interface Project {
   keyHighlights?: { title: string; description: string }[];
   liveLink?: string;
   screenshots?: string[];
+  videos?: { src: string; title?: string; poster?: string }[];
 }
 
 export const projectsData: Project[] = [
@@ -52,6 +53,13 @@ export const projectsData: Project[] = [
       "/images/projects/gridwiser/2.png",
       "/images/projects/gridwiser/3.png",
       "/images/projects/gridwiser/4.png"
+    ],
+    videos: [
+      {
+        src: "/videos/projects/gridwiser.mp4",
+        title: "GridWiser Launch Film",
+        poster: "/images/projects/gridwiser/1.png"
+      }
     ],
 
     role: "Sole Developer",
@@ -125,7 +133,7 @@ export const projectsData: Project[] = [
     isMobileApp: true,
     links: [
       { url: "https://github.com/agnelfranciso/AerisIQ", label: "View Source Code", type: "github" },
-      { url: "/project-files/aerisiq/AerisIQ-release.apk", label: "Download App", type: "download", fileName: "AerisIQ-release.apk", fileSize: "26.5 MB" }
+      { url: "/downloads/aerisiq/AerisIQ-release.apk", label: "Download App", type: "download", fileName: "AerisIQ-release.apk", fileSize: "26.5 MB" }
     ],
     screenshots: [
       "/images/projects/aerisiq/13.png",
@@ -200,7 +208,7 @@ export const projectsData: Project[] = [
     isMobileApp: true,
     links: [
       {
-        url: "/project-files/bussiler/Bussiler.apk",
+        url: "/downloads/bussiler/Bussiler.apk",
         label: "Download Bussiler APK",
         type: "download",
         fileName: "Bussiler.apk",
@@ -300,7 +308,7 @@ export const projectsData: Project[] = [
     size: "large",
     isMobileApp: true,
     links: [
-      { url: "/project-files/campuscrave/CampusCrave-v1.0.0.apk", label: "Download Demo APK (v1.0.0)", type: "download", fileName: "CampusCrave-v1.0.0.apk", fileSize: "20.5 MB" },
+      { url: "/downloads/campuscrave/CampusCrave-v1.0.0.apk", label: "Download Demo APK (v1.0.0)", type: "download", fileName: "CampusCrave-v1.0.0.apk", fileSize: "20.5 MB" },
       { url: "https://github.com/agnelfranciso/CampusCrave", label: "View Source Code", type: "github" }
     ],
     screenshots: [
@@ -421,7 +429,7 @@ export const projectsData: Project[] = [
     category: "Game & Entertainment",
     title: "OSImposter",
     description: "A fast, 100% free, fully open-source party game with infinite variety.",
-    image: "/images/osimposter/1.png",
+    image: "/images/projects/osimposter/1.png",
     bgClass: "bg-purple",
     tags: ["React", "Next.js", "Local-first", "Open Source"],
     size: "normal",
@@ -431,8 +439,8 @@ export const projectsData: Project[] = [
       { url: "https://github.com/agnelfranciso/osimposter", label: "View Source Code", type: "github" }
     ],
     screenshots: [
-      "/images/osimposter/1.png",
-      "/images/osimposter/2.png"
+      "/images/projects/osimposter/1.png",
+      "/images/projects/osimposter/2.png"
     ],
     role: "Creator",
     timeline: "2026",
@@ -575,7 +583,7 @@ export const projectsData: Project[] = [
     category: "Web Development",
     title: "Opcode Impact 2026",
     description: "Official website for the National Level 24-Hour Cybersecurity Hackathon.",
-    image: "/images/opcode/1.png",
+    image: "/images/projects/opcode/1.png",
     bgClass: "bg-green",
     tags: ["Frontend", "Web Development", "UI/UX"],
     size: "normal",
@@ -584,8 +592,8 @@ export const projectsData: Project[] = [
       { url: "https://opcode-impact-2026.vercel.app/", label: "Visit Live Site", type: "live" }
     ],
     screenshots: [
-      "/images/opcode/1.png",
-      "/images/opcode/2.png"
+      "/images/projects/opcode/1.png",
+      "/images/projects/opcode/2.png"
     ],
     client: "Jyothi Engineering College",
     role: "Website Refiner",

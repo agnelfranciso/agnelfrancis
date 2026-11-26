@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const pathname = usePathname();
-  if (pathname === "/links" || pathname.startsWith("/games") || pathname.startsWith("/framepixel") || pathname.startsWith("/resources") || pathname.startsWith("/resoources")) return null;
+  if (pathname === "/links" || pathname.startsWith("/games") || pathname.startsWith("/framepixel")) return null;
 
   return (
     <section id="contact" className="footer">
@@ -24,7 +24,6 @@ export default function Footer() {
         </div>
         <div className="socials">
           <Link href="/framepixel">FramePixel</Link>
-          <Link href="/resources">Resources</Link>
           <Link href="/education">Education</Link>
           <a href="https://github.com/agnelfranciso" target="_blank" rel="noopener noreferrer">Github</a>
           <a href="https://www.linkedin.com/in/agnel-francis-olakkengil/" target="_blank" rel="noopener noreferrer">LinkedIn</a>

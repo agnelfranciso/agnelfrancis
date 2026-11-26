@@ -156,7 +156,7 @@ export default function FramePixelClient() {
                         View App Case Study &rarr;
                       </Link>
                       <a
-                        href="/project-files/bussiler/Bussiler.apk"
+                        href="/downloads/bussiler/Bussiler.apk"
                         download="Bussiler.apk"
                         className="fp-btn-outline"
                       >

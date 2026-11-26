@@ -13,7 +13,7 @@ export default function ResumeFAB() {
   }, []);
 
   // Don't show on the links page or until mounted to prevent hydration mismatch
-  if (!mounted || pathname === '/links' || pathname.startsWith('/framepixel') || pathname.startsWith('/resources') || pathname.startsWith('/resoources')) return null;
+  if (!mounted || pathname === '/links' || pathname.startsWith('/framepixel')) return null;
 
   return (
     <a 

@@ -254,8 +254,12 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
                 </section>
             )}
 
-            {project.screenshots && project.screenshots.length > 0 && (
-                <HorizontalScrollGallery images={[...project.screenshots].sort()} title={project.title} />
+            {((project.screenshots && project.screenshots.length > 0) || (project.videos && project.videos.length > 0)) && (
+                <HorizontalScrollGallery
+                    images={project.screenshots ? [...project.screenshots].sort() : []}
+                    videos={project.videos}
+                    title={project.title}
+                />
             )}
         </div>
       </div>

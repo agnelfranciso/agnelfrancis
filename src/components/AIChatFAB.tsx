@@ -24,7 +24,7 @@ export default function AIChatFAB() {
     }, 100);
   };
 
-  if (!mounted || pathname === '/links' || pathname.startsWith('/framepixel') || pathname.startsWith('/resources') || pathname.startsWith('/resoources')) return null;
+  if (!mounted || pathname === '/links' || pathname.startsWith('/framepixel')) return null;
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;

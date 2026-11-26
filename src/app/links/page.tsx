@@ -19,12 +19,6 @@ export default function LinksPage() {
       external: false 
     },
     { 
-      name: "Resources Vault", 
-      url: "/resources", 
-      icon: <FontAwesomeIcon icon={faGlobe} width={20} />, 
-      external: false 
-    },
-    { 
       name: "GitHub", 
       url: "https://github.com/agnelfranciso", 
       icon: <FontAwesomeIcon icon={faGithub} width={20} />, 
@@ -95,7 +89,7 @@ export default function LinksPage() {
             position: 'relative'
           }}>
             <Image 
-              src="/images/agnel_cropped.png" 
+              src="/images/profile/agnel_cropped.png" 
               alt="Agnel Francis Olakkengil" 
               fill
               style={{ objectFit: 'cover' }}
