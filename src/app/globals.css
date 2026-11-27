@@ -3199,6 +3199,8 @@ button,
 
   margin-top: 4rem;
 
+  overflow-x: hidden;
+
 }
 
 
@@ -3215,7 +3217,7 @@ button,
 
 .footer-content .text-outline-light {
 
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.55);
 
   color: transparent;
 
@@ -3305,7 +3307,7 @@ button,
 
   font-family: 'Aise', sans-serif;
 
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.72);
 
   font-size: 1rem;
 
@@ -3317,7 +3319,11 @@ button,
 
   display: flex;
 
-  gap: 2.5rem;
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 1.25rem 2.5rem;
 
 }
 
@@ -3637,7 +3643,9 @@ button,
   }
 
   .email-link {
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 4.4vw, 1.4rem);
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .footer-bottom {
@@ -3645,6 +3653,15 @@ button,
     gap: 1.5rem;
     margin-top: 4rem;
     text-align: center;
+  }
+
+  .socials {
+    gap: 0.9rem 1.4rem;
+    justify-content: center;
+  }
+
+  .socials a {
+    font-size: 1rem;
   }
 
 

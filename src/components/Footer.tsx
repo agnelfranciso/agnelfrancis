@@ -20,7 +20,7 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="footer-copyright-container">
           <p>© 2026 Agnel Francis Olakkengil. All rights reserved.</p>
-          <a href="/legal" style={{ fontSize: "0.9rem", color: "var(--text-muted)", textDecoration: "underline", display: "inline-block", marginTop: "0.5rem" }}>Legal & Disclaimer</a>
+          <a href="/legal" style={{ fontSize: "0.9rem", color: "rgba(255, 255, 255, 0.72)", textDecoration: "underline", display: "inline-block", marginTop: "0.5rem" }}>Legal & Disclaimer</a>
         </div>
         <div className="socials">
           <Link href="/framepixel">FramePixel</Link>
@@ -31,7 +31,7 @@ export default function Footer() {
           <a href="https://www.instagram.com/oslohaz_e/" target="_blank" rel="noopener noreferrer">Instagram</a>
         </div>
       </div>
-      <div style={{ textAlign: 'center', marginTop: '2rem', padding: '1rem', opacity: 0.7, fontSize: '0.9rem' }}>
+      <div style={{ textAlign: 'center', marginTop: '2rem', padding: '1rem', color: 'rgba(255, 255, 255, 0.78)', fontSize: '0.9rem' }}>
         <p>Not Loading? <a href="/simple" style={{ textDecoration: 'underline', color: 'inherit' }}>Load a simpler page!</a></p>
         <p style={{ marginTop: '0.5rem' }}>Bored of my portfolio? <a href="/games" style={{ textDecoration: 'underline', color: 'inherit' }}>Let&apos;s play a game with my portfolio.</a></p>
       </div>
