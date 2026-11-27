@@ -14,29 +14,57 @@ type CardData = {
   isMatched: boolean;
 };
 
+type Difficulty = "easy" | "medium" | "hard";
+
+const DIFFICULTY_CONFIG: Record<Difficulty, { label: string; pairs: number; cols: number }> = {
+  easy: { label: "4×3 (6 Pairs)", pairs: 6, cols: 4 },
+  medium: { label: "4×4 (8 Pairs)", pairs: 8, cols: 4 },
+  hard: { label: "5×4 (10 Pairs)", pairs: 10, cols: 5 },
+};
+
 export default function ProjectMemoryMatch() {
+  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [cards, setCards] = useState<CardData[]>([]);
   const [moves, setMoves] = useState(0);
+  const [elapsed, setElapsed] = useState(0);
+  const [isActive, setIsActive] = useState(false);
   const [firstChoice, setFirstChoice] = useState<CardData | null>(null);
   const [secondChoice, setSecondChoice] = useState<CardData | null>(null);
   const [disabled, setDisabled] = useState(false);
   const [isWon, setIsWon] = useState(false);
+  const [bestMoves, setBestMoves] = useState<Record<Difficulty, number | null>>({
+    easy: null,
+    medium: null,
+    hard: null,
+  });
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("memory-match-best");
+      if (saved) setBestMoves(JSON.parse(saved));
+    } catch { /* ignore */ }
+  }, []);
+
+  // Live timer
+  useEffect(() => {
+    if (!isActive || isWon) return;
+    const interval = setInterval(() => setElapsed((t) => t + 1), 1000);
+    return () => clearInterval(interval);
+  }, [isActive, isWon]);
 
   // Initialize game
-  const shuffleCards = () => {
-    // Get projects that have images
+  const shuffleCards = (level: Difficulty = difficulty) => {
     const projectsWithImages = projectsData.filter(p => p.image);
-    
-    // Pick exactly 6 random projects, or fewer if not enough exist
+    const pairCount = Math.min(DIFFICULTY_CONFIG[level].pairs, projectsWithImages.length);
+
     const shuffledProjects = [...projectsWithImages]
       .sort(() => 0.5 - Math.random())
-      .slice(0, 6);
+      .slice(0, pairCount);
 
-    // Duplicate them to make pairs and shuffle again
     const shuffledCards = [...shuffledProjects, ...shuffledProjects]
       .sort(() => 0.5 - Math.random())
       .map((project) => ({
-        id: Math.random().toString(36).substring(7), // Generate unique instance ID
+        id: Math.random().toString(36).substring(7),
         projectId: project.id,
         image: project.image!,
         title: project.title,
@@ -46,8 +74,11 @@ export default function ProjectMemoryMatch() {
 
     setCards(shuffledCards);
     setMoves(0);
+    setElapsed(0);
+    setIsActive(false);
     setFirstChoice(null);
     setSecondChoice(null);
+    setDisabled(false);
     setIsWon(false);
   };
 
@@ -58,6 +89,7 @@ export default function ProjectMemoryMatch() {
   // Handle a choice
   const handleChoice = (card: CardData) => {
     if (!disabled && !card.isMatched && card.id !== firstChoice?.id) {
+      if (!isActive) setIsActive(true);
       firstChoice ? setSecondChoice(card) : setFirstChoice(card);
     }
   };
@@ -86,9 +118,21 @@ export default function ProjectMemoryMatch() {
   // Check win condition
   useEffect(() => {
     if (cards.length > 0 && cards.every(card => card.isMatched)) {
-      setTimeout(() => setIsWon(true), 500);
+      const timer = setTimeout(() => {
+        setIsWon(true);
+        setBestMoves(prev => {
+          const currentBest = prev[difficulty];
+          if (currentBest === null || moves < currentBest) {
+            const updated = { ...prev, [difficulty]: moves };
+            try { localStorage.setItem("memory-match-best", JSON.stringify(updated)); } catch { /* ignore */ }
+            return updated;
+          }
+          return prev;
+        });
+      }, 500);
+      return () => clearTimeout(timer);
     }
-  }, [cards]);
+  }, [cards, difficulty, moves]);
 
   // Reset choices & increase turn
   const resetTurn = () => {
@@ -98,25 +142,61 @@ export default function ProjectMemoryMatch() {
     setDisabled(false);
   };
 
+  const formatTime = (sec: number) => `${Math.floor(sec / 60)}:${(sec % 60).toString().padStart(2, "0")}`;
+
+  const handleDifficultyChange = (level: Difficulty) => {
+    setDifficulty(level);
+    shuffleCards(level);
+  };
+
   return (
-    <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 1rem" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
+    <div style={{ maxWidth: "850px", margin: "0 auto", padding: "0 1rem" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem", marginBottom: "1.5rem" }}>
         <Link href="/games" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", color: "var(--text-muted)", textDecoration: "none", fontFamily: "'PPSupplyMono', monospace", textTransform: "uppercase", letterSpacing: "0.1em" }}>
           <ArrowLeft size={16} /> Quit Game
         </Link>
-        <div style={{ fontFamily: "'PPSupplyMono', monospace", fontSize: "1.2rem" }}>
-          Moves: <span style={{ color: "var(--accent-primary)", fontWeight: "bold" }}>{moves}</span>
+        <div style={{ display: "flex", gap: "1.25rem", alignItems: "center", fontFamily: "'PPSupplyMono', monospace", fontSize: "1.05rem" }}>
+          <span>Time: <strong style={{ color: "var(--text-main)" }}>{formatTime(elapsed)}</strong></span>
+          <span>Moves: <strong style={{ color: "var(--accent-primary)" }}>{moves}</strong></span>
+          {bestMoves[difficulty] !== null && (
+            <span style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>Best: {bestMoves[difficulty]}</span>
+          )}
         </div>
+      </div>
+
+      {/* Difficulty Selector */}
+      <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", flexWrap: "wrap", marginBottom: "2rem" }}>
+        {(Object.keys(DIFFICULTY_CONFIG) as Difficulty[]).map((level) => {
+          const active = difficulty === level;
+          return (
+            <button
+              key={level}
+              onClick={() => handleDifficultyChange(level)}
+              style={{
+                padding: "0.5rem 1rem",
+                borderRadius: "999px",
+                border: active ? "1px solid var(--text-main)" : "1px solid rgba(0,0,0,0.1)",
+                background: active ? "var(--text-main)" : "var(--surface)",
+                color: active ? "var(--bg-color)" : "var(--text-main)",
+                fontFamily: "'PPSupplyMono', monospace",
+                fontSize: "0.85rem",
+                cursor: "pointer",
+              }}
+            >
+              {DIFFICULTY_CONFIG[level].label}
+            </button>
+          );
+        })}
       </div>
 
       {isWon ? (
         <div style={{ textAlign: "center", padding: "4rem 2rem", background: "var(--surface)", borderRadius: "24px", border: "1px solid rgba(0,0,0,0.05)", boxShadow: "0 10px 30px rgba(0,0,0,0.02)", animation: "fade-in 0.5s ease" }}>
           <h2 style={{ fontFamily: "'IntraNet', sans-serif", fontSize: "3rem", marginBottom: "1rem" }}>You Win!</h2>
           <p style={{ fontSize: "1.2rem", color: "var(--text-muted)", marginBottom: "2rem" }}>
-            You matched all projects in {moves} moves.
+            Matched all {DIFFICULTY_CONFIG[difficulty].pairs} pairs in {moves} moves ({formatTime(elapsed)}).
           </p>
           <button 
-            onClick={shuffleCards}
+            onClick={() => shuffleCards(difficulty)}
             style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "var(--text-main)", color: "var(--bg-color)", padding: "1rem 2rem", borderRadius: "50px", border: "none", fontSize: "1.1rem", fontFamily: "'IntraNet', sans-serif", cursor: "pointer", transition: "transform 0.2s" }}
             onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
             onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
@@ -127,8 +207,8 @@ export default function ProjectMemoryMatch() {
       ) : (
         <div className="memory-grid" style={{ 
           display: "grid", 
-          gridTemplateColumns: "repeat(4, 1fr)", 
-          gap: "1rem",
+          gridTemplateColumns: `repeat(${DIFFICULTY_CONFIG[difficulty].cols}, 1fr)`, 
+          gap: "0.85rem",
           perspective: "1000px" 
         }}>
           {cards.map(card => {

@@ -1,0 +1,67 @@
+---
+title: "Bauhaus: Teaching AI Agents to Design Like a Creative Director (Not a Prompt Box)"
+date: "2026-11-27"
+excerpt: "Why flattened AI-generated images fail real graphic design—and how I built Bauhaus (bhs), an open-source Agent Skill and live WebSocket design studio where AI agents and humans collaborate on editable scene graphs."
+tags: ["AI Agents", "Agent Skills", "Graphic Design", "MCP", "TypeScript", "Open Source"]
+---
+
+If you ask a typical AI tool to design an event poster, a social promo, or a multilingual college flyer, you get one of two outcomes: a flattened raster image with garbled text that you can never edit, or a wall of raw HTML that falls apart the moment you try to move a heading ten pixels to the left.
+
+Real graphic design is not a one-shot prompt—it is a workflow. A designer discovers the brief, explores current visual trends, establishes typographic hierarchy, builds on an editable canvas, inspects the rendered result, and refines every detail.
+
+That is why I built **[Bauhaus (`bhs`)](https://github.com/agnelfranciso/Bauhaus)**: an autonomous graphic design intelligence packaged as a portable [agentskills.io](https://agentskills.io) skill, paired with a local-first, real-time editable workspace called **Bauhaus Studio**.
+
+![Bauhaus Studio Mark](/images/blog/bauhaus/bauhaus-logo.png)
+
+---
+
+## The Problem With "Image-Only" AI Design
+
+Flattened image generation breaks down immediately in real production workflows:
+
+1. **Zero Editability**: If a client wants to change the event date, swap a sponsor name, or nudge a card by `16px`, you have to regenerate the entire image and hope the layout survives.
+2. **Broken Multilingual Typography**: Indic scripts like Malayalam and Hindi require proper HarfBuzz shaping and ligature handling—something most diffusion models and even standard HTML5 `<canvas>` `fillText()` pipelines struggle to render accurately.
+3. **No Design Reasoning**: Without a structured workflow, models recycle generic layouts instead of adapting typography, negative space, and contrast to the medium.
+
+---
+
+## The Architecture: Scene Graph + Live Portal + MCP
+
+Instead of generating static bitmaps, **Bauhaus** treats every poster, flyer, banner, and infographic as a **schema-validated `.bauhaus.json` scene graph** (`12` editable element types: `text`, `image`, `rect`, `ellipse`, `line`, `polygon`, `svg`, `icon`, `background`, `gradient`, `group`, and `imported_asset`).
+
+### 1. Live WebSocket Portal (`Bauhaus Studio`)
+
+Rather than trapping designs inside a chat window, **Bauhaus Studio** runs locally at `http://127.0.0.1:4820` with two dedicated routes:
+- **`/` (Dashboard)**: Browse agent-created projects and showcase designs with category filters.
+- **`/design/<id>` (Editor)**: A Figma-inspired dark studio featuring a `Layers` tree, `Projects` switcher, `Elements` & `Typography` drawers, inline on-canvas text editing, cursor-anchored `Ctrl+Wheel` zoom, `Space+Drag` panning, and a custom 27-icon geometric SVG pack.
+
+Every mutation made by the AI agent—whether through **MCP (`bauhaus-mcp.mjs`)**, **CLI**, **HTTP REST API**, or direct file edits watched via `fs.watch`—streams over WebSockets to the browser in real time.
+
+### 2. Human + AI Collaboration (`Right-Click → Ask AI`)
+
+Editing shouldn't be one-way. Inside the studio, you can drag, resize, rotate, or double-click any text to edit inline. Want the AI to rework a specific section? **Right-click any element or layer → `Ask AI`** to copy a structured reference token:
+
+```text
+[bauhaus:ref id="hero-title" name="Exhibition Title" type="text" design="bauhaus-architecture-exhibition"]
+```
+
+Paste it straight into your AI agent chat and describe what to change—the agent updates that exact node live on your screen.
+
+### 3. HarfBuzz Multilingual Rendering & 8-Format Export
+
+By compiling the scene graph to SVG/HTML and rendering through headless Chromium (`playwright-core`) + `sharp`, **Bauhaus** gets native HarfBuzz text shaping for **English, Malayalam, and Hindi** alongside automated dimension and header verification for **PNG, JPEG, WebP, SVG, PDF, Print-ready PDF (with bleed & crop marks), HTML/CSS, and `.bauhaus.json`**.
+
+| Cybersecurity Hackathon Poster | Multilingual College Flyer (EN / ML / HI) | Swiss Exhibition Poster |
+| :---: | :---: | :---: |
+| ![Cybersecurity Hackathon Poster](/images/blog/bauhaus/hackathon-poster.png) | ![Multilingual College Flyer](/images/blog/bauhaus/college-flyer.png) | ![Swiss Exhibition Poster](/images/blog/bauhaus/exhibition-poster.png) |
+
+---
+
+## Portable Across Every Major AI Agent
+
+Because **Bauhaus** follows the open [Agent Skills specification](https://agentskills.io) (`skills-ref validate ./bauhaus`) and ships a stdio MCP server, it works out of the box across **Antigravity, Claude Code, Cursor, OpenAI Codex, Gemini CLI, and GitHub Copilot**—and can be invoked as either **`Bauhaus`** or **`bhs`**.
+
+You can grab the `v1.0.0` release or install it with a single prompt from the repository:
+
+- **GitHub Repository**: [github.com/agnelfranciso/Bauhaus](https://github.com/agnelfranciso/Bauhaus)
+- **v1.0.0 Release**: [github.com/agnelfranciso/Bauhaus/releases/tag/v1.0.0](https://github.com/agnelfranciso/Bauhaus/releases/tag/v1.0.0)

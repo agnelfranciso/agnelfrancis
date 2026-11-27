@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { ArrowLeft, HelpCircle } from "lucide-react";
+import { ArrowLeft, HelpCircle, RotateCcw, Flame } from "lucide-react";
 
 const WORDS = [
   { word: "KOCHI", hint: "Location of the offline Metro project" },
@@ -55,7 +55,51 @@ const WORDS = [
   { word: "QUERY", hint: "A request for data from a database" },
   { word: "ASYNC", hint: "Non-blocking JavaScript functions" },
   { word: "AWAIT", hint: "Pauses async function execution" },
-  { word: "MOUNT", hint: "When a React component is inserted into the DOM" }
+  { word: "MOUNT", hint: "When a React component is inserted into the DOM" },
+  { word: "WISER", hint: "Grid_____ (AI-powered bento layout tool)" },
+  { word: "BENTO", hint: "Grid layout style popularized by modern UI" },
+  { word: "SWISS", hint: "Clean typographic design style" },
+  { word: "FRAME", hint: "_____Pixel studio or animation key_____" },
+  { word: "NOTES", hint: "SemFolder organizes lecture _____" },
+  { word: "GRAPH", hint: "Node and edge data structure" },
+  { word: "REGEX", hint: "Pattern matching for strings" },
+  { word: "REDIS", hint: "In-memory key-value data store" },
+  { word: "NGINX", hint: "High-performance web server & reverse proxy" },
+  { word: "SWIFT", hint: "Apple's programming language" },
+  { word: "TYPES", hint: "TypeScript enforces static _____" },
+  { word: "STYLE", hint: "CSS defines visual _____" },
+  { word: "FONTS", hint: "IntraNet and PPSupplyMono are custom _____" },
+  { word: "VIDEO", hint: "Media playback added to project galleries" },
+  { word: "AUDIO", hint: "Sound media stream" },
+  { word: "MODAL", hint: "Dialog overlay on top of a page" },
+  { word: "PANEL", hint: "UI section or dashboard container" },
+  { word: "CHART", hint: "Visual representation of data" },
+  { word: "BADGE", hint: "Small status or tag pill in UI" },
+  { word: "INPUT", hint: "HTML form element for user text" },
+  { word: "THEME", hint: "Dark or light visual appearance" },
+  { word: "LIGHT", hint: "Default bright UI mode" },
+  { word: "FLAGS", hint: "Feature toggles or CLI options" },
+  { word: "HOSTS", hint: "Networked machines or /etc/_____ file" },
+  { word: "HTTPS", hint: "Encrypted web protocol" },
+  { word: "CERTS", hint: "SSL/TLS digital certificates" },
+  { word: "SALTS", hint: "Random data added before hashing passwords" },
+  { word: "NONCE", hint: "Number used once in cryptography" },
+  { word: "VAULT", hint: "Secure secret storage" },
+  { word: "TIMER", hint: "Countdown or stopwatch component" },
+  { word: "MOVES", hint: "Counted in Memory Match and 2048" },
+  { word: "LEVEL", hint: "Difficulty stage in a game" },
+  { word: "SNAKE", hint: "Classic arcade grid game" },
+  { word: "MINES", hint: "Hidden hazards in CyberSweeper" },
+  { word: "QUEUE", hint: "FIFO data structure" },
+  { word: "ARRAY", hint: "Indexed list of elements" },
+  { word: "TUPLE", hint: "Fixed-length ordered collection" },
+  { word: "CLASS", hint: "Object-oriented blueprint" },
+  { word: "SCOPE", hint: "Visibility context of variables" },
+  { word: "PARSE", hint: "Convert raw text or JSON into data" },
+  { word: "CLONE", hint: "Copy a git repository locally" },
+  { word: "MERGE", hint: "Combine two git branches" },
+  { word: "STAGE", hint: "Prepare files before committing" },
+  { word: "TRACE", hint: "Follow execution or network path" },
 ];
 
 const WORD_LENGTH = 5;
@@ -78,6 +122,19 @@ export default function PortfolioWordle() {
   
   // Track keyboard state
   const [keyboardState, setKeyboardState] = useState<Record<string, LetterStatus>>({});
+  const [streak, setStreak] = useState(0);
+  const [bestStreak, setBestStreak] = useState(0);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("portfolio-wordle-stats");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setStreak(parsed.streak || 0);
+        setBestStreak(parsed.bestStreak || 0);
+      }
+    } catch { /* ignore */ }
+  }, []);
 
   // Initialize game
   useEffect(() => {
@@ -126,8 +183,19 @@ export default function PortfolioWordle() {
       if (currentGuess === targetWord) {
         setWin(true);
         setGameOver(true);
+        setStreak((prev) => {
+          const next = prev + 1;
+          setBestStreak((b) => {
+            const nextBest = Math.max(b, next);
+            try { localStorage.setItem("portfolio-wordle-stats", JSON.stringify({ streak: next, bestStreak: nextBest })); } catch { /* ignore */ }
+            return nextBest;
+          });
+          return next;
+        });
       } else if (newGuesses.length >= MAX_GUESSES) {
         setGameOver(true);
+        setStreak(0);
+        try { localStorage.setItem("portfolio-wordle-stats", JSON.stringify({ streak: 0, bestStreak })); } catch { /* ignore */ }
       }
       
       setCurrentGuess("");
@@ -206,16 +274,28 @@ export default function PortfolioWordle() {
 
   return (
     <div style={{ maxWidth: "500px", margin: "0 auto", padding: "0 1rem" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem", marginBottom: "2rem" }}>
         <Link href="/games" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", color: "var(--text-muted)", textDecoration: "none", fontFamily: "'PPSupplyMono', monospace", textTransform: "uppercase", letterSpacing: "0.1em" }}>
           <ArrowLeft size={16} /> Quit Game
         </Link>
-        <button 
-          onClick={() => setShowHint(true)}
-          style={{ background: "none", border: "none", color: "var(--accent-primary)", display: "flex", alignItems: "center", gap: "0.3rem", cursor: "pointer", fontFamily: "'PPSupplyMono', monospace", textTransform: "uppercase", fontSize: "0.9rem" }}
-        >
-          <HelpCircle size={16} /> Hint
-        </button>
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem", fontFamily: "'PPSupplyMono', monospace", fontSize: "0.85rem", color: "var(--text-muted)" }}>
+            <Flame size={15} color="#f97316" /> {streak} (Best {bestStreak})
+          </span>
+          <button 
+            onClick={() => setShowHint(true)}
+            style={{ background: "none", border: "none", padding: 0, color: "var(--accent-primary)", display: "flex", alignItems: "center", gap: "0.3rem", cursor: "pointer", fontFamily: "'PPSupplyMono', monospace", textTransform: "uppercase", fontSize: "0.9rem" }}
+          >
+            <HelpCircle size={16} /> Hint
+          </button>
+          <button
+            onClick={startNewGame}
+            title="Skip to a new word"
+            style={{ background: "none", border: "none", padding: 0, color: "var(--text-muted)", display: "flex", alignItems: "center", gap: "0.3rem", cursor: "pointer", fontFamily: "'PPSupplyMono', monospace", textTransform: "uppercase", fontSize: "0.9rem" }}
+          >
+            <RotateCcw size={15} /> New
+          </button>
+        </div>
       </div>
 
       {showHint && (
