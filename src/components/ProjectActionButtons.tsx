@@ -220,7 +220,7 @@ export default function ProjectActionButtons({ links, projectTitle }: Props) {
                 Download {projectTitle}
               </h3>
               <p style={{ margin: 0, fontSize: "0.92rem", color: "#6B6B6B" }}>
-                File: <strong>{activeDownload.fileName || `${projectTitle.replace(/\s+/g, "")}-release.apk`}</strong> {activeDownload.fileSize ? `(${activeDownload.fileSize})` : ""}
+                File: <strong>{activeDownload.fileName || activeDownload.url.split("/").pop() || `${projectTitle.replace(/\s+/g, "")}-release.apk`}</strong> {activeDownload.fileSize ? `(${activeDownload.fileSize})` : ""}
               </p>
             </div>
 
@@ -240,22 +240,33 @@ export default function ProjectActionButtons({ links, projectTitle }: Props) {
               }}
             >
               <p style={{ margin: 0, fontWeight: 600, color: "#1F1F1F" }}>
-                Please review the terms before downloading and installing:
+                Please review the terms before downloading:
               </p>
-              <ul style={{ margin: 0, paddingLeft: "1.25rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                <li>
-                  <strong>Direct Package Installation (APK):</strong> This app is packaged directly for Android. Installing it requires enabling <em>&ldquo;Install Unknown Apps&rdquo;</em> on your device.
-                </li>
-                <li>
-                  <strong>Safe & Secure:</strong> {projectTitle} is built with modern native Android standards, verified package builds, and clean architecture.
-                </li>
-                <li>
-                  <strong>Provided As-Is:</strong> This software is provided free and open-source for personal evaluation and use without commercial warranties.
-                </li>
-                <li>
-                  <strong>System Requirements:</strong> Requires Android 8.0 (API 26) through Android 14+ on compatible Android devices.
-                </li>
-              </ul>
+              {(activeDownload.fileName || activeDownload.url).toLowerCase().endsWith(".apk") ? (
+                <ul style={{ margin: 0, paddingLeft: "1.25rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                  <li>
+                    <strong>Direct Package Installation (APK):</strong> This app is packaged directly for Android. Installing it requires enabling <em>&ldquo;Install Unknown Apps&rdquo;</em> on your device.
+                  </li>
+                  <li>
+                    <strong>Safe &amp; Secure:</strong> {projectTitle} is built with modern native Android standards, verified package builds, and clean architecture.
+                  </li>
+                  <li>
+                    <strong>Provided As-Is:</strong> This software is provided free and open-source for personal evaluation and use without commercial warranties.
+                  </li>
+                  <li>
+                    <strong>System Requirements:</strong> Requires Android 8.0 (API 26) through Android 14+ on compatible Android devices.
+                  </li>
+                </ul>
+              ) : (
+                <ul style={{ margin: 0, paddingLeft: "1.25rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                  <li>
+                    <strong>Direct File Download:</strong> You are downloading an official release archive for {projectTitle}.
+                  </li>
+                  <li>
+                    <strong>Open-Source Software:</strong> Provided free and open-source for personal or commercial use without warranties; verify checksums or release notes on GitHub if needed.
+                  </li>
+                </ul>
+              )}
             </div>
 
             {/* Checkbox agreement */}

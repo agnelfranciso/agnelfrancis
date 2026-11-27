@@ -665,7 +665,7 @@ export const projectsData: Project[] = [
     size: "normal",
     links: [
       { url: "https://github.com/agnelfranciso/Bauhaus", label: "View Source Code", type: "github" },
-      { url: "https://github.com/agnelfranciso/Bauhaus/releases/latest", label: "Latest Release", type: "download" }
+      { url: "https://github.com/agnelfranciso/Bauhaus/releases/latest", label: "Latest Release", type: "live" }
     ],
     screenshots: [
       "/images/projects/bauhaus/studio-editor.png",
