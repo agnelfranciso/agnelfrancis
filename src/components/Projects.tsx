@@ -109,7 +109,24 @@ export default function Projects({ limit }: { limit?: number }) {
                   </span>
                 </div>
               )}
-              <h3 style={{ color: 'var(--text-main)', wordBreak: 'keep-all', overflowWrap: 'normal' }}>{project.title}</h3>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.35rem' }}>
+                {project.logo && (
+                  <img
+                    src={project.logo}
+                    alt={`${project.title} logo`}
+                    style={{
+                      width: '34px',
+                      height: '34px',
+                      borderRadius: '8px',
+                      objectFit: 'cover',
+                      flexShrink: 0,
+                      border: '1px solid rgba(255, 255, 255, 0.14)',
+                      backgroundColor: '#111114'
+                    }}
+                  />
+                )}
+                <h3 style={{ color: 'var(--text-main)', wordBreak: 'keep-all', overflowWrap: 'normal', margin: 0 }}>{project.title}</h3>
+              </div>
               <p style={{ color: 'var(--text-muted)' }}>{project.description}</p>
               <div className="tags">
                 {project.tags.map((tag) => (

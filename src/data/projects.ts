@@ -4,6 +4,7 @@ export interface Project {
   title: string;
   description: string;
   image?: string;
+  logo?: string;
   bgClass: string;
   tags: string[];
   size: "normal" | "large";
@@ -649,6 +650,55 @@ export const projectsData: Project[] = [
       { title: "Precise Sun Tracking", description: "SunCalc calculates exact solar coordinates at each timestamp." },
       { title: "Smart Recommendations", description: "Analyzes heading differentials to reserve sun-shielded seats." },
       { title: "Instant & Free", description: "100% free with no tracking, no ads, and no sign-up required." }
+    ]
+  },
+
+  {
+    id: "bauhaus",
+    category: "AI Agents · Design Tooling",
+    title: "Bauhaus",
+    logo: "/images/projects/bauhaus/logo.svg",
+    description: "Autonomous graphic design intelligence skill (agentskills.io) paired with a local-first WebSocket design studio, Ask AI layer referencing, and 8-format export.",
+    image: "/images/projects/bauhaus/studio-editor.png",
+    bgClass: "bg-dark",
+    tags: ["Agent Skills", "MCP", "Node.js", "Playwright", "SVG/PDF"],
+    size: "normal",
+    links: [
+      { url: "https://github.com/agnelfranciso/Bauhaus", label: "View Source Code", type: "github" },
+      { url: "https://github.com/agnelfranciso/Bauhaus/releases/latest", label: "Latest Release", type: "download" }
+    ],
+    screenshots: [
+      "/images/projects/bauhaus/studio-editor.png",
+      "/images/projects/bauhaus/studio-dashboard.png",
+      "/images/projects/bauhaus/hackathon-poster.png",
+      "/images/projects/bauhaus/college-flyer.png",
+      "/images/projects/bauhaus/exhibition-poster.png"
+    ],
+    videos: [
+      {
+        src: "/videos/projects/bauhaus-promo.mp4",
+        title: "Bauhaus Launch Film",
+        poster: "/images/projects/bauhaus/studio-editor.png"
+      }
+    ],
+    role: "Sole Architect & Developer",
+    timeline: "November 2026",
+    focus: "Agentic Graphic Design & Live Scene Graph Studio",
+    status: "Active · v1.0.0",
+    tech: "Node.js, TypeScript/ESM, WebSockets, Ajv JSON Schema, Playwright Core, Sharp, MCP SDK, Chromium HarfBuzz",
+
+    overview: "Bauhaus is an open-standard Agent Skill and local-first design studio that turns AI coding agents into autonomous graphic designers. Instead of generating flattened bitmaps, Bauhaus plans from first principles, constructs a schema-validated .bauhaus.json scene graph, streams live edits to a browser workspace, inspects rendered previews, and exports verified PNG, SVG, and 300 DPI Print-Ready PDFs.",
+    whyItExists: "AI image generators produce uneditable rasters with garbled text, while standard HTML5 Canvas2D libraries struggle with complex Indic scripts like Malayalam and Hindi. Bauhaus bridges that gap with a structured scene graph and Chromium HarfBuzz rendering.",
+    challenge: "Building a zero-database, portable design editor that works across Antigravity, Claude Code, Cursor, Codex, Gemini CLI, and Copilot while keeping live WebSocket sync, inline text editing, and print-grade exports rock solid.",
+    solution: "Designed a versioned JSON scene graph (12 element types) paired with a Node.js HTTP/WebSocket studio, a stdio MCP server with live sync and fs.watch external reload, and a Playwright + Sharp export verifier.",
+    impactDesc: "Validated against the official agentskills.io specification (skills-ref validate), tested end-to-end across English, Malayalam, and Hindi posters, and published as an open-source v1.0.0 release.",
+
+    keyHighlightsTitle: "Key Capabilities",
+    keyHighlights: [
+      { title: "Live WebSocket Studio", description: "Dedicated Dashboard (/) and Editor (/design/<id>) with Layers, Projects switcher, inline on-canvas text editing, cursor-anchored zoom, and a 27-icon geometric SVG pack." },
+      { title: "Right-Click → Ask AI", description: "Select or right-click any element on the canvas to copy a structured [bauhaus:ref] token and instruct your AI agent to modify that exact layer live." },
+      { title: "Multilingual HarfBuzz Engine", description: "Automatic Unicode script detection and Google/local font loading for English, Malayalam, Hindi, Tamil, and Arabic without missing-glyph boxes." },
+      { title: "8-Format Verified Export", description: "Direct browser download and CLI/MCP export for PNG, JPEG, WebP, SVG, PDF, Print-Ready PDF (bleed & crop marks), HTML/CSS, and .bauhaus.json." }
     ]
   }
 ];

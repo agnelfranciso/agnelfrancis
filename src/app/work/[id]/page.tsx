@@ -51,7 +51,25 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
             </span>
           )}
         </div>
-        <h1 className="page-title" style={{marginTop: "0.5rem", fontSize: "clamp(1.75rem, 4.5vw, 4.5rem)", marginBottom: "1.5rem", wordBreak: "keep-all", overflowWrap: "normal", lineHeight: "1.15"}}>{project.title}</h1>
+        <div style={{ display: "flex", alignItems: "center", gap: "1.25rem", marginTop: "0.5rem", marginBottom: "1.5rem" }}>
+          {project.logo && (
+            <img
+              src={project.logo}
+              alt={`${project.title} logo`}
+              style={{
+                width: "clamp(48px, 4.8vw, 76px)",
+                height: "clamp(48px, 4.8vw, 76px)",
+                borderRadius: "18px",
+                objectFit: "cover",
+                flexShrink: 0,
+                border: "1px solid rgba(0,0,0,0.08)",
+                boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+                backgroundColor: "#111114"
+              }}
+            />
+          )}
+          <h1 className="page-title" style={{margin: 0, fontSize: "clamp(1.75rem, 4.5vw, 4.5rem)", wordBreak: "keep-all", overflowWrap: "normal", lineHeight: "1.15"}}>{project.title}</h1>
+        </div>
         <p style={{fontSize: "1.4rem", color: "var(--text-muted)", maxWidth: "800px", lineHeight: "1.6"}}>{project.description}</p>
         
         <div className="tags" style={{marginTop: "2.5rem"}}>

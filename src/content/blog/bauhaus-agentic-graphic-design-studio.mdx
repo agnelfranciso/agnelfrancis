@@ -1,7 +1,7 @@
 ---
 title: "Bauhaus: Teaching AI Agents to Design Like a Creative Director (Not a Prompt Box)"
 date: "2026-11-27"
-excerpt: "Why flattened AI-generated images fail real graphic design—and how I built Bauhaus (bhs), an open-source Agent Skill and live WebSocket design studio where AI agents and humans collaborate on editable scene graphs."
+excerpt: "Why flattened AI-generated images fail real graphic design—and how I built Bauhaus, an open-source Agent Skill and live WebSocket design studio where AI agents and humans collaborate on editable scene graphs."
 tags: ["AI Agents", "Agent Skills", "Graphic Design", "MCP", "TypeScript", "Open Source"]
 ---
 
@@ -9,7 +9,7 @@ If you ask a typical AI tool to design an event poster, a social promo, or a mul
 
 Real graphic design is not a one-shot prompt—it is a workflow. A designer discovers the brief, explores current visual trends, establishes typographic hierarchy, builds on an editable canvas, inspects the rendered result, and refines every detail.
 
-That is why I built **[Bauhaus (`bhs`)](https://github.com/agnelfranciso/Bauhaus)**: an autonomous graphic design intelligence packaged as a portable [agentskills.io](https://agentskills.io) skill, paired with a local-first, real-time editable workspace called **Bauhaus Studio**.
+That is why I built **[Bauhaus](https://github.com/agnelfranciso/Bauhaus)**: an autonomous graphic design intelligence packaged as a portable [agentskills.io](https://agentskills.io) skill, paired with a local-first, real-time editable workspace called **Bauhaus Studio**.
 
 ![Bauhaus Studio Mark](/images/blog/bauhaus/bauhaus-logo.png)
 
@@ -59,7 +59,7 @@ By compiling the scene graph to SVG/HTML and rendering through headless Chromium
 
 ## Portable Across Every Major AI Agent
 
-Because **Bauhaus** follows the open [Agent Skills specification](https://agentskills.io) (`skills-ref validate ./bauhaus`) and ships a stdio MCP server, it works out of the box across **Antigravity, Claude Code, Cursor, OpenAI Codex, Gemini CLI, and GitHub Copilot**—and can be invoked as either **`Bauhaus`** or **`bhs`**.
+Because **Bauhaus** follows the open [Agent Skills specification](https://agentskills.io) (`skills-ref validate ./bauhaus`) and ships a stdio MCP server, it works out of the box across **Antigravity, Claude Code, Cursor, OpenAI Codex, Gemini CLI, and GitHub Copilot**—and can be invoked as either **`Bauhaus`**.
 
 You can grab the `v1.0.0` release or install it with a single prompt from the repository:
 
